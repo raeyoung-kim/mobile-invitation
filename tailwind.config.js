@@ -12,6 +12,7 @@ module.exports = {
     },
     fontFamily: {
       nanum: 'Nanum Brush Script',
+      gaegu: 'Gaegu',
     },
   },
   plugins: [],
