@@ -14,9 +14,13 @@ const Header: React.FC = () => {
       </Head>
       <header className="sticky top-0 px-5 lg:px-0 bg-white h-[70px] border-b border-[#e5e7eb]">
         <div className="max-w-[1400px] h-full m-auto flex items-center justify-between">
-          <h1 className="font-nanum text-[30px] whitespace-nowrap">
-            모바일 초대장
-          </h1>
+          <Link href={'/'}>
+            <a>
+              <h1 className="font-nanum text-[30px] whitespace-nowrap">
+                모바일 초대장
+              </h1>
+            </a>
+          </Link>
 
           <div className="flex">
             <nav
