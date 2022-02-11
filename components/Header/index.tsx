@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import NavIcon from 'components/NavIcon';
+import Link from 'next/link';
 
 const Header: React.FC = () => {
   const [isNavBar, setIsNavBar] = useState(false);
@@ -27,13 +28,19 @@ const Header: React.FC = () => {
             >
               <ul className="flex font-gaegu text-[12px] lg:text-[16px]">
                 <li>
-                  <a>sample</a>
+                  <Link href={'/sample'}>
+                    <a>sample</a>
+                  </Link>
                 </li>
                 <li className="ml-5">
-                  <a>제작내역</a>
+                  <Link href="/history">
+                    <a>제작내역</a>
+                  </Link>
                 </li>
                 <li className="ml-5">
-                  <a>로그인</a>
+                  <Link href="/login">
+                    <a>로그인</a>
+                  </Link>
                 </li>
               </ul>
             </nav>

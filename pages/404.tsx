@@ -1,11 +1,9 @@
 import React from 'react';
-import { Header } from 'components';
 import Link from 'next/link';
 
 const NotFoundPage = () => {
   return (
     <div>
-      <Header />
       <div className="w-full h-[80vh] flex justify-center items-center">
         <div className="flex items-center flex-col">
           <div className="spaceship" />
