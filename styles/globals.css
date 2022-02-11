@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes spaceship_ani {
+  100% {
+    background-position: -1050px 0;
+  }
+}
+
+
 
 html,
 body {
@@ -22,4 +29,12 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.spaceship {
+  width: 150px;
+  height: 150px;
+  background: url('../public/images/assets/balloon_sprite.png') no-repeat 0 0 / auto 150px ;
+  animation: spaceship_ani 0.9s infinite steps(7);
+  border-radius: 74px;
 }
