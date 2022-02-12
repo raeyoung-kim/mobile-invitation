@@ -12,8 +12,8 @@ const Header: React.FC = () => {
         <meta name="description" content="모바일 초대장" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="sticky top-0 px-5 lg:px-0 bg-white h-[70px] border-b border-[#e5e7eb]">
-        <div className="max-w-[1400px] h-full m-auto flex items-center justify-between">
+      <header className="sticky top-0 px-5 lg:px-0 bg-white h-[70px] border-b border-[#e5e7eb] z-50">
+        <div className="max-w-[1200px] h-full m-auto flex items-center justify-between">
           <Link href={'/'}>
             <a>
               <h1 className="font-nanum text-[30px] whitespace-nowrap">
@@ -31,11 +31,6 @@ const Header: React.FC = () => {
               }`}
             >
               <ul className="flex font-gaegu text-[12px] lg:text-[16px]">
-                <li>
-                  <Link href={'/sample'}>
-                    <a>sample</a>
-                  </Link>
-                </li>
                 <li className="ml-5">
                   <Link href="/history">
                     <a>제작내역</a>

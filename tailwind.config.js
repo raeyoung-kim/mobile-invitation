@@ -8,11 +8,12 @@ module.exports = {
     screens: {
       sm: '576px',
       md: '960px',
-      lg: '1440px',
+      lg: '1200px',
     },
     fontFamily: {
       nanum: 'Nanum Brush Script',
       gaegu: 'Gaegu',
+      sanspro: 'Source Sans Pro',
     },
   },
   plugins: [],
