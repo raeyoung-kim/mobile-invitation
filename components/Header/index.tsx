@@ -16,27 +16,27 @@ const Header: React.FC = () => {
         <div className="max-w-[1200px] h-full m-auto flex items-center justify-between">
           <Link href={'/'}>
             <a>
-              <h1 className="font-nanum text-[30px] whitespace-nowrap">
+              <h1 className="font-nanum text-[28px] xs:text-[30px] whitespace-nowrap">
                 모바일 초대장
               </h1>
             </a>
           </Link>
 
-          <div className="flex">
+          <div className="flex items-center">
             <nav
-              className={`whitespace-nowrap px-5 transition-all ${
+              className={`whitespace-nowrap px-2 xs:px-5 transition-all ${
                 isNavBar
                   ? 'opacity-1 translate-x-[0px]'
                   : 'opacity-0 translate-x-[30px]'
               }`}
             >
-              <ul className="flex font-gaegu text-[12px] lg:text-[16px]">
-                <li className="ml-5">
+              <ul className="flex font-gaegu font-bold text-[14px] lg:text-[16px]">
+                <li className="ml-1 xs:ml-5">
                   <Link href="/history">
                     <a>제작내역</a>
                   </Link>
                 </li>
-                <li className="ml-5">
+                <li className="ml-1 xs:ml-5">
                   <Link href="/login">
                     <a>로그인</a>
                   </Link>
