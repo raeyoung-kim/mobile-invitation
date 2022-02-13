@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   return (
     <>
       <Head>
-        <title>모바일 초대장</title>
+        <title>모바일 청첩장</title>
         <meta name="description" content="모바일 초대장" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -16,8 +16,8 @@ const Header: React.FC = () => {
         <div className="max-w-[1200px] h-full m-auto flex items-center justify-between">
           <Link href={'/'}>
             <a>
-              <h1 className="font-nanum text-[28px] xs:text-[30px] whitespace-nowrap">
-                모바일 초대장
+              <h1 className="font-nanum font-bold text-[28px] xs:text-[30px] whitespace-nowrap">
+                모바일 청첩장
               </h1>
             </a>
           </Link>
@@ -30,13 +30,13 @@ const Header: React.FC = () => {
                   : 'opacity-0 translate-x-[30px]'
               }`}
             >
-              <ul className="flex font-gaegu font-bold text-[14px] lg:text-[16px]">
-                <li className="ml-1 xs:ml-5">
+              <ul className="flex font-gaegu font-bold text-[15px] xs:text-[17px]">
+                <li className="ml-[2px] xs:ml-5">
                   <Link href="/history">
                     <a>제작내역</a>
                   </Link>
                 </li>
-                <li className="ml-1 xs:ml-5">
+                <li className="ml-[2px] xs:ml-5">
                   <Link href="/login">
                     <a>로그인</a>
                   </Link>

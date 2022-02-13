@@ -12,7 +12,7 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Nanum+Brush+Script&family=Source+Sans+Pro:wght@200;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Jua&family=Nanum+Brush+Script&family=Source+Sans+Pro:wght@200;600&display=swap"
             rel="stylesheet"
           />
         </Head>

@@ -15,6 +15,7 @@ module.exports = {
       nanum: 'Nanum Brush Script',
       gaegu: 'Gaegu',
       sanspro: 'Source Sans Pro',
+      jua: 'Jua',
     },
   },
   plugins: [],
