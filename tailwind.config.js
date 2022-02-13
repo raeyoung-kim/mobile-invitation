@@ -16,6 +16,7 @@ module.exports = {
       gaegu: 'Gaegu',
       sanspro: 'Source Sans Pro',
       jua: 'Jua',
+      myeongjo: 'Nanum Myeongjo',
     },
   },
   plugins: [],

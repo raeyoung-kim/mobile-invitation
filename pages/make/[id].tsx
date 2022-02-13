@@ -1,8 +1,20 @@
 import { CheckInfo, TargetInfo } from 'components';
+import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 
 const MakeSamplePage: NextPage = () => {
+  const [modal, setModal] = useState({
+    isGreetingSample: false,
+  });
+
+  const onGreetingModal = () => {
+    setModal({
+      ...modal,
+      isGreetingSample: !modal.isGreetingSample,
+    });
+  };
+
   return (
     <div className="max-w-[1200px] m-auto px-5 pb-[120px] lg:pt-[40px] lg:pb-[280px] lg:px-0">
       {/* 메인사진 */}
@@ -28,22 +40,33 @@ const MakeSamplePage: NextPage = () => {
         <TargetInfo target={'신부'} />
       </section>
 
-      {/* 인삿말 정보 */}
+      {/* 인사말 정보 */}
       <section className="mt-10">
-        <strong className="font-jua text-[19px]">인삿말을 알려주세요 📝</strong>
+        <strong className="font-jua text-[19px]">인사말을 알려주세요 📝</strong>
         <p className="font-sanspro text-gray-500 text-xs">
-          원하시는 인삿말으로 직접 추가도 가능합니다.
+          원하시는 인사말으로 직접 추가도 가능합니다.
         </p>
         <div className="mt-4">
           <textarea
             className="w-full lg:w-[40%] min-h-[200px] max-h-[200px] border rounded py-2 px-3"
-            placeholder={'인삿말'}
+            placeholder={'인사말'}
           />
         </div>
         <div className="mt-4">
-          <button className="bg-black text-white text-center p-3 shadow rounded-md">
-            샘플 인삿말 보기
+          <button
+            onClick={onGreetingModal}
+            className="bg-black text-white text-center p-3 shadow rounded-md"
+          >
+            샘플 인사말 보기
           </button>
+          {modal.isGreetingSample && (
+            <GreetingSampleModal
+              onClose={onGreetingModal}
+              onClick={() => {
+                console.log('샘플 선택');
+              }}
+            />
+          )}
         </div>
       </section>
 
