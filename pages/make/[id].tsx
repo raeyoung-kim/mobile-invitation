@@ -1,4 +1,4 @@
-import { CheckInfo, TargetInfo } from 'components';
+import { CheckInfo, InputTextarea, TargetInfo } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
 import React, { useState } from 'react';
@@ -129,10 +129,38 @@ const MakeSamplePage: NextPage = () => {
 
       <section className=" mt-6 lg:w-[40%]">
         <CheckInfo title={'오시는길 🚶 🏃'}>
-          <div>test</div>
+          <div>
+            {[...Array(3)].map((el, i) => {
+              return <InputTextarea key={i} inputValue="" TextareaValue="" />;
+            })}
+          </div>
         </CheckInfo>
         <CheckInfo title={'공지사항 📃'}>
-          <div>test</div>
+          <>
+            <p className="mt-2 font-sanspro text-gray-500 text-xs">
+              코로나 안내, 전세버스 안내, 라이브 안내 등 필요하신 공지사항을
+              추가하실 수 있습니다.
+              <br /> (링크를 추가하시면 공지사항 아래에 버튼이 생성됩니다)
+            </p>
+            <InputTextarea inputValue="" TextareaValue="" />
+            <p className="mt-4 font-sanspro text-gray-500 text-xs">
+              (선택) 링크를 추가하시면 공지사항 아래에 링크로 이동가능한 버튼이
+              생성됩니다.
+              <br /> (예. https://www.youtube.com)
+            </p>
+            <div className="mt-4">
+              <input
+                className="w-full border rounded py-2 px-3"
+                type={'text'}
+              />
+            </div>{' '}
+            <div className="mt-4">
+              <input
+                className="w-full border rounded py-2 px-3"
+                type={'text'}
+              />
+            </div>
+          </>
         </CheckInfo>
         <CheckInfo title={'갤러리 사진 🖼'}>
           <div>test</div>

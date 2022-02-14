@@ -6,3 +6,4 @@ export { default as TargetInfo } from './TargetInfo';
 export { default as CheckInfo } from './CheckInfo';
 export { default as ModalLayout } from './ModalLayout';
 export { default as GreetingSample } from './GreetingSample';
+export { default as InputTextarea } from './InputTextarea';
