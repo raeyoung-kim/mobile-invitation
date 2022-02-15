@@ -7,3 +7,4 @@ export { default as CheckInfo } from './CheckInfo';
 export { default as ModalLayout } from './ModalLayout';
 export { default as GreetingSample } from './GreetingSample';
 export { default as InputTextarea } from './InputTextarea';
+export { default as AccountNumberForm } from './AccountNumberForm';

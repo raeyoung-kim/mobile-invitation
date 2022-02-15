@@ -1,10 +1,19 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        gray500: colors.gray['500'],
+      },
+    },
     screens: {
       xs: '375px',
       sm: '576px',
@@ -19,5 +28,23 @@ module.exports = {
       myeongjo: 'Nanum Myeongjo',
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addComponents, theme }) {
+      addComponents({
+        '.description': {
+          fontFamily: theme('fontFamily.font-sanspro'),
+          fontSize: theme('fontSize.xs'),
+          color: theme('colors.gray500'),
+        },
+        '.button': {
+          display: 'block',
+          paddingTop: '14px',
+          paddingBottom: '14px',
+          fontFamily: theme('fontFamily.font-sanspro'),
+          borderRadius: '5px',
+          border: '1px solid black',
+        },
+      });
+    }),
+  ],
 };
