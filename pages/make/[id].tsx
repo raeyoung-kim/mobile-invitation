@@ -3,12 +3,77 @@ import {
   CheckInfo,
   InputTextarea,
   TargetInfo,
+  Input,
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 const MakeSamplePage: NextPage = () => {
+  const [data, setData] = useState<ProductInfo>({
+    mainPhoto: '',
+    male: {
+      lastName: '',
+      firstName: '',
+      rank: '',
+      fatherName: '',
+      isFather: true,
+      fatherNumber: '',
+      motherName: '',
+      isMother: true,
+      motherNumber: '',
+    },
+    female: {
+      lastName: '',
+      firstName: '',
+      rank: '',
+      fatherName: '',
+      isFather: true,
+      fatherNumber: '',
+      motherName: '',
+      isMother: true,
+      motherNumber: '',
+    },
+    greetingMessage: '',
+    isMonth: false,
+    isD_day: false,
+    weddingDate: '',
+    weddingTime: '',
+    weddingAddress: '',
+    weddingAddressName: '',
+    DetailWeddingAddress: '',
+    weddingContact: '',
+    wayToComeTitle: '',
+    wayToComeDescription: '',
+    noticeTitle: '',
+    noticeDescription: '',
+    noticeURL: '',
+    noticeButtonName: '',
+    galleryPictures: [''],
+    accountNumberList: [
+      {
+        target: '',
+        targetBank: '',
+        targetAccountNumber: '',
+        accountHolder: '',
+      },
+    ],
+    wayToComeList: [
+      {
+        title: '',
+        description: '',
+      },
+    ],
+    isGuestBook: false,
+    videoUrl: '',
+    kakaoThumbnail: '',
+    kakaoThumbnailTitle: '',
+    kakaoThumbnailDescription: '',
+    URLThumbnail: '',
+    URLThumbnailTitle: '',
+    URLThumbnailDescription: '',
+  });
+
   const [modal, setModal] = useState({
     isGreetingSample: false,
   });
@@ -35,12 +100,30 @@ const MakeSamplePage: NextPage = () => {
 
       {/* 신랑측 정보 */}
       <section className="mt-10 lg:w-[40%]">
-        <TargetInfo target={'신랑'} />
+        <TargetInfo
+          target={'신랑'}
+          data={data.male}
+          setData={(value) => {
+            setData({
+              ...data,
+              male: value,
+            });
+          }}
+        />
       </section>
 
       {/* 신부측 정보 */}
       <section className="mt-10 lg:w-[40%]">
-        <TargetInfo target={'신부'} />
+        <TargetInfo
+          target={'신부'}
+          data={data.female}
+          setData={(value) => {
+            setData({
+              ...data,
+              female: value,
+            });
+          }}
+        />
       </section>
 
       {/* 인사말 정보 */}
@@ -53,6 +136,13 @@ const MakeSamplePage: NextPage = () => {
           <textarea
             className="w-full lg:w-[40%] min-h-[200px] max-h-[200px] border rounded py-2 px-3"
             placeholder={'인사말'}
+            value={data.greetingMessage}
+            onChange={(e) => {
+              setData({
+                ...data,
+                greetingMessage: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="mt-4">
@@ -81,10 +171,25 @@ const MakeSamplePage: NextPage = () => {
         <div className="mt-4">
           <p className="description">예식 일자</p>
           <div className="mt-4">
-            <input className="border rounded py-2 px-3 mr-4" type={'month'} />
+            <input
+              className="border rounded py-2 px-3 mr-4"
+              type={'month'}
+              onChange={(e) => {
+                setData({
+                  ...data,
+                  weddingDate: e.target.value,
+                });
+              }}
+            />
             <input
               className="mt-3 lg:mt-0 border rounded py-2 px-3"
               type={'time'}
+              onChange={(e) => {
+                setData({
+                  ...data,
+                  weddingTime: e.target.value,
+                });
+              }}
             />
           </div>
         </div>
@@ -99,31 +204,51 @@ const MakeSamplePage: NextPage = () => {
           </div>
         </div>
         <div className="mt-4">
-          <input
-            className="w-full border rounded py-2 px-3"
-            type={'text'}
-            placeholder={`예식장 주소`}
+          <Input
+            placeholder={'예식장 주소'}
+            value={data.weddingAddress}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setData({
+                ...data,
+                weddingAddress: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="mt-4">
-          <input
-            className="w-full border rounded py-2 px-3"
-            type={'text'}
-            placeholder={`예식장 명`}
+          <Input
+            placeholder={'예식장 명'}
+            value={data.weddingAddressName}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setData({
+                ...data,
+                weddingAddressName: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="mt-4">
-          <input
-            className="w-full border rounded py-2 px-3"
-            type={'text'}
-            placeholder={`예식장 층과 홀`}
+          <Input
+            placeholder={'예식장 층과 홀'}
+            value={data.DetailWeddingAddress}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setData({
+                ...data,
+                DetailWeddingAddress: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="mt-4">
-          <input
-            className="w-full border rounded py-2 px-3"
-            type={'tel'}
-            placeholder={`예식장 연락처`}
+          <Input
+            placeholder={'예식장 연락처'}
+            value={data.weddingContact}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setData({
+                ...data,
+                weddingContact: e.target.value,
+              });
+            }}
           />
         </div>
       </section>
@@ -162,17 +287,27 @@ const MakeSamplePage: NextPage = () => {
               <br /> (예. https://www.youtube.com)
             </p>
             <div className="mt-4">
-              <input
-                className="w-full border rounded py-2 px-3"
-                type={'text'}
-                placeholder="링크 URL"
+              <Input
+                placeholder={'링크 URL'}
+                value={data.noticeURL}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setData({
+                    ...data,
+                    noticeURL: e.target.value,
+                  });
+                }}
               />
             </div>{' '}
             <div className="mt-4">
-              <input
-                className="w-full border rounded py-2 px-3"
-                type={'text'}
-                placeholder="링크 버튼 제목"
+              <Input
+                placeholder={'링크 버튼 제목'}
+                value={data.noticeTitle}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setData({
+                    ...data,
+                    noticeTitle: e.target.value,
+                  });
+                }}
               />
             </div>
           </>
@@ -213,10 +348,7 @@ const MakeSamplePage: NextPage = () => {
               됩니다.
             </p>
             <div className="mt-4">
-              <input
-                className="w-full border rounded py-2 px-3"
-                type={'text'}
-              />
+              <Input placeholder={''} />
             </div>
           </div>
         </CheckInfo>

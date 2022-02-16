@@ -2,9 +2,11 @@ import React from 'react';
 
 interface Props {
   target: string;
+  data: BasicInfo;
+  setData: (val: BasicInfo) => void;
 }
 
-const TargetInfo: React.FC<Props> = ({ target }) => {
+const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
   return (
     <div>
       <strong className="font-jua text-[19px]">
@@ -18,32 +20,60 @@ const TargetInfo: React.FC<Props> = ({ target }) => {
           <div>
             <input
               type={'text'}
-              className="w-full border rounded py-2 px-3"
+              className="text-input"
               placeholder={`${target} 성`}
+              value={data.lastName}
+              onChange={(e) => {
+                setData({
+                  ...data,
+                  lastName: e.target.value,
+                });
+              }}
             />
           </div>
           <div>
             <input
-              className="w-full border rounded py-2 px-3"
+              className="text-input"
               type={'text'}
               placeholder={`${target} 이름`}
+              value={data.firstName}
+              onChange={(e) => {
+                setData({
+                  ...data,
+                  firstName: e.target.value,
+                });
+              }}
             />
           </div>
         </div>
 
         <div className="mt-4">
           <input
-            className="w-full border rounded py-2 px-3"
+            className="text-input"
             type={'text'}
             placeholder={`${target} 서열 (장남, 차남, 아들)`}
+            value={data.rank}
+            onChange={(e) => {
+              setData({
+                ...data,
+                rank: e.target.value,
+              });
+            }}
           />
         </div>
 
         <div className="mt-4">
           <input
-            className="w-full border rounded py-2 px-3"
+            className="text-input"
             type={'text'}
             placeholder={`${target} 이버님 성함`}
+            value={data.fatherName}
+            onChange={(e) => {
+              setData({
+                ...data,
+                fatherName: e.target.value,
+              });
+            }}
           />
         </div>
 
@@ -56,16 +86,30 @@ const TargetInfo: React.FC<Props> = ({ target }) => {
 
         <div className="mt-4">
           <input
-            className="w-full border rounded py-2 px-3"
+            className="text-input"
             type={'text'}
             placeholder={`${target} 아버님 연락처`}
+            value={data.fatherNumber}
+            onChange={(e) => {
+              setData({
+                ...data,
+                fatherNumber: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="mt-4">
           <input
-            className="w-full border rounded py-2 px-3"
+            className="text-input"
             type={'text'}
             placeholder={`${target} 어머님 성함`}
+            value={data.motherNumber}
+            onChange={(e) => {
+              setData({
+                ...data,
+                motherName: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="mt-2 flex">
@@ -76,9 +120,16 @@ const TargetInfo: React.FC<Props> = ({ target }) => {
         </div>
         <div className="mt-4">
           <input
-            className="w-full border rounded py-2 px-3"
+            className="text-input"
             type={'tel'}
             placeholder={`${target} 어머님 연락처`}
+            value={data.motherNumber}
+            onChange={(e) => {
+              setData({
+                ...data,
+                motherNumber: e.target.value,
+              });
+            }}
           />
         </div>
       </div>

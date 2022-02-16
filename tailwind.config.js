@@ -44,6 +44,12 @@ module.exports = {
           borderRadius: '5px',
           border: '1px solid black',
         },
+        '.text-input': {
+          width: '100%',
+          border: '1px solid #e5e7eb',
+          borderRadius: '0.25rem',
+          padding: '8px 12px',
+        },
       });
     }),
   ],
