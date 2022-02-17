@@ -9,6 +9,7 @@ import {
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
 import React, { ChangeEvent, useState } from 'react';
+import classnames from 'classnames';
 
 const MakeSamplePage: NextPage = () => {
   const [data, setData] = useState<ProductInfo>({
@@ -83,6 +84,15 @@ const MakeSamplePage: NextPage = () => {
     URLThumbnailDescription: '',
   });
 
+  const [selectButtons, setSelectButtons] = useState([
+    { title: '신랑', isCheck: true },
+    { title: '신부', isCheck: false },
+    { title: '신랑측 아버지', isCheck: false },
+    { title: '신랑측 어머니', isCheck: false },
+    { title: '신부측 아버지', isCheck: false },
+    { title: '신부측 어머니', isCheck: false },
+  ]);
+
   const [modal, setModal] = useState({
     isGreetingSample: false,
   });
@@ -101,8 +111,6 @@ const MakeSamplePage: NextPage = () => {
     });
     onGreetingModal();
   };
-
-  console.log('------', data);
 
   return (
     <div className="max-w-[1200px] m-auto px-5 pb-[120px] lg:pt-[40px] lg:pb-[280px] lg:px-0">
@@ -391,16 +399,40 @@ const MakeSamplePage: NextPage = () => {
           <>
             <div>
               <div className="grid grid-cols-2 gap-4 py-5">
-                <button className="button">신랑</button>
-                <button className="button">신부</button>
-                <button className="button">신랑측 아버지</button>
-                <button className="button">신랑측 어머니</button>
-                <button className="button">신부측 아버지</button>
-                <button className="button">신부측 어머니</button>
+                {selectButtons?.map((button, i) => {
+                  return (
+                    <button
+                      onClick={() => {
+                        const targetList = JSON.parse(
+                          JSON.stringify(selectButtons)
+                        );
+                        targetList.splice(i, 1, {
+                          title: selectButtons[i].title,
+                          isCheck: !selectButtons[i].isCheck,
+                        });
+                        setSelectButtons(targetList);
+                      }}
+                      key={button.title}
+                      className={classnames('button', {
+                        'bg-black text-white': button.isCheck,
+                      })}
+                    >
+                      {button.title}
+                    </button>
+                  );
+                })}
               </div>
             </div>
             <div>
-              <AccountNumberForm target={'신랑'} />
+              {selectButtons?.map((el) => {
+                return (
+                  <AccountNumberForm
+                    key={el.title}
+                    target={el.title}
+                    isCheck={el.isCheck}
+                  />
+                );
+              })}
             </div>
           </>
         </CheckInfo>
@@ -410,11 +442,20 @@ const MakeSamplePage: NextPage = () => {
         <CheckInfo title={'식전 영상 📽'}>
           <div className="pt-2">
             <p className="description">
-              식전영상은 유튜브에 업로드 후 <br /> URL을 복사하여 추가해주시면
+              식전영상은 유투브에 업로드 후 <br /> URL을 복사하여 추가해주시면
               됩니다.
             </p>
             <div className="mt-4">
-              <Input placeholder={''} />
+              <Input
+                placeholder={'유투부 URL'}
+                value={data.videoUrl}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setData({
+                    ...data,
+                    videoUrl: e.target.value,
+                  });
+                }}
+              />
             </div>
           </div>
         </CheckInfo>

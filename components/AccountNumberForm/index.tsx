@@ -1,12 +1,18 @@
+import classnames from 'classnames';
 import React from 'react';
 
 interface Props {
   target: string;
+  isCheck: boolean;
 }
 
-const AccountNumberForm: React.FC<Props> = ({ target }) => {
+const AccountNumberForm: React.FC<Props> = ({ target, isCheck }) => {
   return (
-    <div className="pt-5 border-t">
+    <div
+      className={classnames('pt-5 border-t', {
+        hidden: !isCheck,
+      })}
+    >
       <div className="w-full border rounded py-2 px-3">{target}</div>
       <div className="mt-4">
         <input
