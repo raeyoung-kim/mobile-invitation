@@ -9,7 +9,7 @@ interface Props {
 const AccountNumberForm: React.FC<Props> = ({ target, isCheck }) => {
   return (
     <div
-      className={classnames('pt-5 border-t', {
+      className={classnames('pt-5 pb-10 border-t', {
         hidden: !isCheck,
       })}
     >
