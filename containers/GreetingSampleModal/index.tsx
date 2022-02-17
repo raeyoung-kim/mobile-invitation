@@ -5,7 +5,7 @@ import { BiX } from 'react-icons/bi';
 
 interface Props {
   onClose: () => void;
-  onClick: () => void;
+  onClick: (val: string) => void;
 }
 
 const GreetingSampleModal: React.FC<Props> = ({ onClose, onClick }) => {
@@ -24,7 +24,7 @@ const GreetingSampleModal: React.FC<Props> = ({ onClose, onClick }) => {
           <div className="px-5">
             {greetingSample.map((value) => {
               return (
-                <div key={value}>
+                <div key={value} onClick={() => onClick(value)}>
                   <GreetingSample data={value} />
                 </div>
               );

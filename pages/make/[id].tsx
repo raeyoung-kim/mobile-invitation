@@ -4,6 +4,7 @@ import {
   InputTextarea,
   TargetInfo,
   Input,
+  FileInput,
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
@@ -63,6 +64,14 @@ const MakeSamplePage: NextPage = () => {
         title: '',
         description: '',
       },
+      {
+        title: '',
+        description: '',
+      },
+      {
+        title: '',
+        description: '',
+      },
     ],
     isGuestBook: false,
     videoUrl: '',
@@ -85,6 +94,16 @@ const MakeSamplePage: NextPage = () => {
     });
   };
 
+  const setGreetingMessage = (val: string) => {
+    setData({
+      ...data,
+      greetingMessage: val,
+    });
+    onGreetingModal();
+  };
+
+  console.log('------', data);
+
   return (
     <div className="max-w-[1200px] m-auto px-5 pb-[120px] lg:pt-[40px] lg:pb-[280px] lg:px-0">
       {/* 메인사진 */}
@@ -93,9 +112,7 @@ const MakeSamplePage: NextPage = () => {
           메인사진을 선택해주세요 📸
         </strong>
         <p className="description">가로, 세로에 상관 없이 추가 가능합니다.</p>
-        <div className="cursor-pointer border-dashed text-[40px] w-[200px] h-[200px] border border-gray-200 mt-5 flex items-center justify-center font-jua text-gray-300">
-          +
-        </div>
+        <FileInput />
       </section>
 
       {/* 신랑측 정보 */}
@@ -155,9 +172,7 @@ const MakeSamplePage: NextPage = () => {
           {modal.isGreetingSample && (
             <GreetingSampleModal
               onClose={onGreetingModal}
-              onClick={() => {
-                console.log('샘플 선택');
-              }}
+              onClick={setGreetingMessage}
             />
           )}
         </div>
@@ -173,7 +188,7 @@ const MakeSamplePage: NextPage = () => {
           <div className="mt-4">
             <input
               className="border rounded py-2 px-3 mr-4"
-              type={'month'}
+              type={'date'}
               onChange={(e) => {
                 setData({
                   ...data,
@@ -195,11 +210,29 @@ const MakeSamplePage: NextPage = () => {
         </div>
         <div className="mt-4 flex items-center">
           <div className="flex items-center">
-            <input type={'checkbox'} />
+            <input
+              type={'checkbox'}
+              defaultChecked={data.isMonth}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  isMonth: e.target.checked,
+                })
+              }
+            />
             <p className="ml-2 description">달력 표시</p>
           </div>
           <div className="flex items-center ml-4">
-            <input type={'checkbox'} />
+            <input
+              type={'checkbox'}
+              defaultChecked={data.isD_day}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  isD_day: e.target.checked,
+                })
+              }
+            />
             <p className="ml-2 description">디데이 표시</p>
           </div>
         </div>
@@ -256,13 +289,36 @@ const MakeSamplePage: NextPage = () => {
       <section className=" mt-6 lg:w-[40%]">
         <CheckInfo title={'오시는길 🚶 🏃'}>
           <div>
-            {[...Array(3)].map((el, i) => {
+            {data?.wayToComeList.map((el, i) => {
               return (
                 <InputTextarea
                   key={i}
-                  inputValue=""
-                  inputPlaceholder="교통수단(지하철, 자가용, 버스)"
-                  textareaValue="오시는길 내용"
+                  inputValue={el.title}
+                  inputPlaceholder={`교통수단 ${i + 1} (지하철, 자가용, 버스)`}
+                  textareaValue={el.description}
+                  textareaPlaceholder={'오시는길 내용'}
+                  onChageInput={(e) => {
+                    const result = data.wayToComeList;
+                    result.splice(i, 1, {
+                      title: e.target.value,
+                      description: result[i].description,
+                    });
+                    setData({
+                      ...data,
+                      wayToComeList: result,
+                    });
+                  }}
+                  onChangeTextarea={(e) => {
+                    const result = data.wayToComeList;
+                    result.splice(i, 1, {
+                      title: result[i].title,
+                      description: e.target.value,
+                    });
+                    setData({
+                      ...data,
+                      wayToComeList: result,
+                    });
+                  }}
                 />
               );
             })}
@@ -276,10 +332,22 @@ const MakeSamplePage: NextPage = () => {
               <br /> (링크를 추가하시면 공지사항 아래에 버튼이 생성됩니다)
             </p>
             <InputTextarea
-              inputValue=""
+              inputValue={data.noticeTitle}
               inputPlaceholder="공지사항 제목"
-              textareaValue=""
+              textareaValue={data.noticeDescription}
               textareaPlaceholder="공지사항 내용"
+              onChageInput={(e) =>
+                setData({
+                  ...data,
+                  noticeTitle: e.target.value,
+                })
+              }
+              onChangeTextarea={(e) => {
+                setData({
+                  ...data,
+                  noticeDescription: e.target.value,
+                });
+              }}
             />
             <p className="mt-4 description">
               (선택) 링크를 추가하시면 공지사항 아래에 링크로 이동가능한 버튼이
@@ -297,15 +365,15 @@ const MakeSamplePage: NextPage = () => {
                   });
                 }}
               />
-            </div>{' '}
+            </div>
             <div className="mt-4">
               <Input
                 placeholder={'링크 버튼 제목'}
-                value={data.noticeTitle}
+                value={data.noticeButtonName}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   setData({
                     ...data,
-                    noticeTitle: e.target.value,
+                    noticeButtonName: e.target.value,
                   });
                 }}
               />
@@ -315,9 +383,7 @@ const MakeSamplePage: NextPage = () => {
         <CheckInfo title={'갤러리 사진 🖼 (최대 15장)'}>
           <div>
             <section className="mt-5">
-              <div className="cursor-pointer border-dashed text-[40px] w-[200px] h-[200px] border border-gray-200 mt-5 flex items-center justify-center font-jua text-gray-300">
-                +
-              </div>
+              <FileInput />
             </section>
           </div>
         </CheckInfo>
@@ -362,10 +428,22 @@ const MakeSamplePage: NextPage = () => {
               </div>
             </section>
             <InputTextarea
-              inputValue=""
+              inputValue={data.kakaoThumbnailTitle}
               inputPlaceholder="카카오톡 제목 (철수 💗 영희 결혼합니다)"
-              textareaValue=""
+              textareaValue={data.kakaoThumbnailDescription}
               textareaPlaceholder="카카오톡 내용 (ex. 식장명, 예식일자)"
+              onChageInput={(e) =>
+                setData({
+                  ...data,
+                  kakaoThumbnailTitle: e.target.value,
+                })
+              }
+              onChangeTextarea={(e) =>
+                setData({
+                  ...data,
+                  kakaoThumbnailDescription: e.target.value,
+                })
+              }
             />
           </div>
         </CheckInfo>
@@ -379,10 +457,22 @@ const MakeSamplePage: NextPage = () => {
               </div>
             </section>
             <InputTextarea
-              inputValue=""
+              inputValue={data.URLThumbnail}
               inputPlaceholder="URL 제목 (철수 💗 영희 결혼합니다)"
-              textareaValue=""
+              textareaValue={data.URLThumbnailDescription}
               textareaPlaceholder="URL 내용 (ex. 식장명, 예식일자)"
+              onChageInput={(e) =>
+                setData({
+                  ...data,
+                  URLThumbnail: e.target.value,
+                })
+              }
+              onChangeTextarea={(e) =>
+                setData({
+                  ...data,
+                  URLThumbnailDescription: e.target.value,
+                })
+              }
             />
           </div>
         </CheckInfo>

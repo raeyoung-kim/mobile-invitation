@@ -103,7 +103,7 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
             className="text-input"
             type={'text'}
             placeholder={`${target} 어머님 성함`}
-            value={data.motherNumber}
+            value={data.motherName}
             onChange={(e) => {
               setData({
                 ...data,
