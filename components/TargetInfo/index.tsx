@@ -1,4 +1,5 @@
-import React from 'react';
+import { Input } from 'components';
+import React, { ChangeEvent } from 'react';
 
 interface Props {
   target: string;
@@ -18,12 +19,10 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
       <div>
         <div className="mt-4 grid grid-cols-2 gap-2">
           <div>
-            <input
-              type={'text'}
-              className="text-input"
+            <Input
               placeholder={`${target} 성`}
               value={data.lastName}
-              onChange={(e) => {
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setData({
                   ...data,
                   lastName: e.target.value,
@@ -32,12 +31,10 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
             />
           </div>
           <div>
-            <input
-              className="text-input"
-              type={'text'}
+            <Input
               placeholder={`${target} 이름`}
               value={data.firstName}
-              onChange={(e) => {
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setData({
                   ...data,
                   firstName: e.target.value,
@@ -48,12 +45,10 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
         </div>
 
         <div className="mt-4">
-          <input
-            className="text-input"
-            type={'text'}
+          <Input
             placeholder={`${target} 서열 (장남, 차남, 아들)`}
             value={data.rank}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setData({
                 ...data,
                 rank: e.target.value,
@@ -63,12 +58,10 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
         </div>
 
         <div className="mt-4">
-          <input
-            className="text-input"
-            type={'text'}
+          <Input
             placeholder={`${target} 이버님 성함`}
             value={data.fatherName}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setData({
                 ...data,
                 fatherName: e.target.value,
@@ -85,12 +78,11 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
         </div>
 
         <div className="mt-4">
-          <input
-            className="text-input"
-            type={'text'}
+          <Input
+            type="number"
             placeholder={`${target} 아버님 연락처`}
             value={data.fatherNumber}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setData({
                 ...data,
                 fatherNumber: e.target.value,
@@ -99,12 +91,10 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
           />
         </div>
         <div className="mt-4">
-          <input
-            className="text-input"
-            type={'text'}
+          <Input
             placeholder={`${target} 어머님 성함`}
             value={data.motherName}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setData({
                 ...data,
                 motherName: e.target.value,
@@ -119,12 +109,11 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
           </p>
         </div>
         <div className="mt-4">
-          <input
-            className="text-input"
-            type={'tel'}
+          <Input
+            type={'number'}
             placeholder={`${target} 어머님 연락처`}
             value={data.motherNumber}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setData({
                 ...data,
                 motherNumber: e.target.value,

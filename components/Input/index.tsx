@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChangeEvent } from 'react';
 
 interface Props {
@@ -14,17 +14,32 @@ const Input: React.FC<Props> = ({
   placeholder = '',
   onChange,
 }) => {
+  const [isFocus, setIsFocus] = useState(false);
+
   return (
-    <div>
-      <input
-        type={type}
-        className={'text-input'}
-        value={value}
-        placeholder={placeholder}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          onChange && onChange(e);
-        }}
-      />
+    <div className="relative">
+      <div className="absolute">
+        {isFocus && (
+          <label className="relative bg-white -top-3 text-xs font-sanspro">
+            {placeholder}
+          </label>
+        )}
+      </div>
+      <div className="focus-within:border-2 focus-within:rounded focus-within:border-black ">
+        <input
+          type={type}
+          className={
+            'text-input focus:outline-none focus:border-none focus:placeholder-white'
+          }
+          value={value}
+          placeholder={placeholder}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            onChange && onChange(e);
+          }}
+          onFocus={() => setIsFocus(!isFocus)}
+          onBlur={() => setIsFocus(!isFocus)}
+        />
+      </div>
     </div>
   );
 };
