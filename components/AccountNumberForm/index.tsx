@@ -1,12 +1,28 @@
 import classnames from 'classnames';
-import React from 'react';
+import { Input } from 'components';
+import React, { ChangeEvent } from 'react';
 
 interface Props {
   target: string;
   isCheck: boolean;
+  targetBank?: string;
+  targetAccountNumber?: string;
+  accountHolder?: string;
+  onChangeTagetBank?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeTagetAccountNumber?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChageAccountHolder?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const AccountNumberForm: React.FC<Props> = ({ target, isCheck }) => {
+const AccountNumberForm: React.FC<Props> = ({
+  target,
+  isCheck,
+  targetBank,
+  targetAccountNumber,
+  accountHolder,
+  onChangeTagetBank,
+  onChangeTagetAccountNumber,
+  onChageAccountHolder,
+}) => {
   return (
     <div
       className={classnames('pt-5 pb-10 border-t', {
@@ -15,24 +31,27 @@ const AccountNumberForm: React.FC<Props> = ({ target, isCheck }) => {
     >
       <div className="w-full border rounded py-2 px-3">{target}</div>
       <div className="mt-4">
-        <input
-          className="w-full border rounded py-2 px-3"
+        <Input
           type={'text'}
           placeholder={`은행`}
+          value={targetBank}
+          onChange={onChangeTagetBank}
         />
       </div>
       <div className="mt-4">
-        <input
-          className="w-full border rounded py-2 px-3"
+        <Input
           type={'text'}
           placeholder={`계좌번호`}
+          value={targetAccountNumber}
+          onChange={onChangeTagetAccountNumber}
         />
       </div>
       <div className="mt-4">
-        <input
-          className="w-full border rounded py-2 px-3"
+        <Input
           type={'text'}
           placeholder={`예금주`}
+          value={accountHolder}
+          onChange={onChageAccountHolder}
         />
       </div>
     </div>

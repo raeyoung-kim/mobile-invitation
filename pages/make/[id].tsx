@@ -55,7 +55,43 @@ const MakeSamplePage: NextPage = () => {
     galleryPictures: [''],
     accountNumberList: [
       {
-        target: '',
+        target: '신랑',
+        isCheck: true,
+        targetBank: '',
+        targetAccountNumber: '',
+        accountHolder: '',
+      },
+      {
+        target: '신부',
+        isCheck: false,
+        targetBank: '',
+        targetAccountNumber: '',
+        accountHolder: '',
+      },
+      {
+        target: '신랑측 아버지',
+        isCheck: false,
+        targetBank: '',
+        targetAccountNumber: '',
+        accountHolder: '',
+      },
+      {
+        target: '신랑측 어머니',
+        isCheck: false,
+        targetBank: '',
+        targetAccountNumber: '',
+        accountHolder: '',
+      },
+      {
+        target: '신부측 아버지',
+        isCheck: false,
+        targetBank: '',
+        targetAccountNumber: '',
+        accountHolder: '',
+      },
+      {
+        target: '신부측 어머니',
+        isCheck: false,
         targetBank: '',
         targetAccountNumber: '',
         accountHolder: '',
@@ -85,18 +121,63 @@ const MakeSamplePage: NextPage = () => {
     URLThumbnailDescription: '',
   });
 
-  const [selectButtons, setSelectButtons] = useState([
-    { title: '신랑', isCheck: true },
-    { title: '신부', isCheck: false },
-    { title: '신랑측 아버지', isCheck: false },
-    { title: '신랑측 어머니', isCheck: false },
-    { title: '신부측 아버지', isCheck: false },
-    { title: '신부측 어머니', isCheck: false },
-  ]);
-
   const [modal, setModal] = useState({
     isGreetingSample: false,
   });
+
+  const onTargetClick = (i: number) => {
+    const targetList = JSON.parse(JSON.stringify(data.accountNumberList));
+    targetList.splice(i, 1, {
+      ...data.accountNumberList[i],
+      isCheck: !data.accountNumberList[i].isCheck,
+    });
+    setData({
+      ...data,
+      accountNumberList: targetList,
+    });
+  };
+
+  const onChangeTagetBank = (e: ChangeEvent<HTMLInputElement>, i: number) => {
+    const targetList = JSON.parse(JSON.stringify(data.accountNumberList));
+    targetList.splice(i, 1, {
+      ...data.accountNumberList[i],
+      targetBank: e.target.value,
+    });
+    setData({
+      ...data,
+      accountNumberList: targetList,
+    });
+  };
+
+  const onChangeTagetAccountNumber = (
+    e: ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    const targetList = JSON.parse(JSON.stringify(data.accountNumberList));
+    targetList.splice(i, 1, {
+      ...data.accountNumberList[i],
+      targetAccountNumber: e.target.value,
+    });
+    setData({
+      ...data,
+      accountNumberList: targetList,
+    });
+  };
+
+  const onChageAccountHolder = (
+    e: ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    const targetList = JSON.parse(JSON.stringify(data.accountNumberList));
+    targetList.splice(i, 1, {
+      ...data.accountNumberList[i],
+      accountHolder: e.target.value,
+    });
+    setData({
+      ...data,
+      accountNumberList: targetList,
+    });
+  };
 
   const onGreetingModal = () => {
     setModal({
@@ -399,37 +480,46 @@ const MakeSamplePage: NextPage = () => {
           <>
             <div>
               <div className="grid grid-cols-2 gap-4 py-5">
-                {selectButtons?.map((button, i) => {
+                {data.accountNumberList?.map((button, i) => {
                   return (
                     <button
                       onClick={() => {
-                        const targetList = JSON.parse(
-                          JSON.stringify(selectButtons)
-                        );
-                        targetList.splice(i, 1, {
-                          title: selectButtons[i].title,
-                          isCheck: !selectButtons[i].isCheck,
-                        });
-                        setSelectButtons(targetList);
+                        onTargetClick(i);
                       }}
-                      key={button.title}
+                      key={button.target}
                       className={classnames('button', {
                         'bg-black text-white': button.isCheck,
                       })}
                     >
-                      {button.title}
+                      {button.target}
                     </button>
                   );
                 })}
               </div>
             </div>
             <div>
-              {selectButtons?.map((el) => {
+              {data.accountNumberList?.map((el, i) => {
                 return (
                   <AccountNumberForm
-                    key={el.title}
-                    target={el.title}
+                    key={el.target}
+                    target={el.target}
                     isCheck={el.isCheck}
+                    targetBank={el.targetBank}
+                    onChangeTagetBank={(e: ChangeEvent<HTMLInputElement>) => {
+                      onChangeTagetBank(e, i);
+                    }}
+                    targetAccountNumber={el.targetAccountNumber}
+                    onChangeTagetAccountNumber={(
+                      e: ChangeEvent<HTMLInputElement>
+                    ) => {
+                      onChangeTagetAccountNumber(e, i);
+                    }}
+                    accountHolder={el.accountHolder}
+                    onChageAccountHolder={(
+                      e: ChangeEvent<HTMLInputElement>
+                    ) => {
+                      onChageAccountHolder(e, i);
+                    }}
                   />
                 );
               })}

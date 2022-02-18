@@ -17,6 +17,7 @@ type BasicInfo = {
 
 type AccountNumberInfo = {
   target: string,
+  isCheck: boolean,
   targetBank: string,
   targetAccountNumber: string,
   accountHolder: string,
