@@ -46,8 +46,6 @@ const MakeSamplePage: NextPage = () => {
     weddingAddressName: '',
     DetailWeddingAddress: '',
     weddingContact: '',
-    wayToComeTitle: '',
-    wayToComeDescription: '',
     noticeTitle: '',
     noticeDescription: '',
     noticeURL: '',
@@ -275,26 +273,30 @@ const MakeSamplePage: NextPage = () => {
         <div className="mt-4">
           <p className="description">예식 일자</p>
           <div className="mt-4">
-            <input
-              className="border rounded py-2 px-3 mr-4"
-              type={'date'}
-              onChange={(e) => {
-                setData({
-                  ...data,
-                  weddingDate: e.target.value,
-                });
-              }}
-            />
-            <input
-              className="mt-3 lg:mt-0 border rounded py-2 px-3"
-              type={'time'}
-              onChange={(e) => {
-                setData({
-                  ...data,
-                  weddingTime: e.target.value,
-                });
-              }}
-            />
+            <div className="mt-3">
+              <Input
+                type={'date'}
+                value={data.weddingDate}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setData({
+                    ...data,
+                    weddingDate: e.target.value,
+                  });
+                }}
+              />
+            </div>
+            <div className="mt-3">
+              <Input
+                type={'time'}
+                value={data.weddingTime}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setData({
+                    ...data,
+                    weddingTime: e.target.value,
+                  });
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className="mt-4 flex items-center">
@@ -588,14 +590,14 @@ const MakeSamplePage: NextPage = () => {
               </div>
             </section>
             <InputTextarea
-              inputValue={data.URLThumbnail}
+              inputValue={data.URLThumbnailTitle}
               inputPlaceholder="URL 제목 (철수 💗 영희 결혼합니다)"
               textareaValue={data.URLThumbnailDescription}
               textareaPlaceholder="URL 내용 (ex. 식장명, 예식일자)"
               onChageInput={(e) =>
                 setData({
                   ...data,
-                  URLThumbnail: e.target.value,
+                  URLThumbnailTitle: e.target.value,
                 })
               }
               onChangeTextarea={(e) =>

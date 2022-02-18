@@ -41,8 +41,6 @@ type ProductInfo = {
   weddingAddressName: string,
   DetailWeddingAddress: string,
   weddingContact: string,
-  wayToComeTitle: string,
-  wayToComeDescription: string,
   noticeTitle: string,
   noticeDescription: string,
   noticeURL: string,
