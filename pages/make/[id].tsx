@@ -5,6 +5,7 @@ import {
   TargetInfo,
   Input,
   FileInput,
+  Textarea,
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
@@ -158,11 +159,10 @@ const MakeSamplePage: NextPage = () => {
           원하시는 인사말으로 직접 추가도 가능합니다.
         </p>
         <div className="mt-4">
-          <textarea
-            className="w-full lg:w-[40%] min-h-[200px] max-h-[200px] border rounded py-2 px-3"
+          <Textarea
             placeholder={'인사말'}
             value={data.greetingMessage}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
               setData({
                 ...data,
                 greetingMessage: e.target.value,

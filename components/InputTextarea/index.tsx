@@ -1,3 +1,4 @@
+import { Input, Textarea } from 'components';
 import React from 'react';
 
 interface Props {
@@ -20,8 +21,7 @@ const InputTextarea: React.FC<Props> = ({
   return (
     <div>
       <div className="mt-4">
-        <input
-          className="w-full border rounded py-2 px-3"
+        <Input
           type={'text'}
           value={inputValue}
           placeholder={inputPlaceholder}
@@ -29,8 +29,7 @@ const InputTextarea: React.FC<Props> = ({
         />
       </div>
       <div className="mt-4">
-        <textarea
-          className="w-full min-h-[200px] max-h-[200px] border rounded py-2 px-3"
+        <Textarea
           value={textareaValue}
           placeholder={textareaPlaceholder}
           onChange={onChangeTextarea}

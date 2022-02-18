@@ -10,3 +10,4 @@ export { default as InputTextarea } from './InputTextarea';
 export { default as AccountNumberForm } from './AccountNumberForm';
 export { default as Input } from './Input';
 export { default as FileInput } from './FileInput';
+export { default as Textarea } from './Textarea';

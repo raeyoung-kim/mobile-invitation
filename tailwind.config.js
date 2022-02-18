@@ -49,6 +49,7 @@ module.exports = {
           border: '1px solid #e5e7eb',
           borderRadius: '0.25rem',
           padding: '8px 12px',
+          fontSize: theme('fontSize.font-sm'),
         },
       });
     }),
