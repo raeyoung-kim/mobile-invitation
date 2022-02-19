@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import React, { useState } from 'react';
 import { ChangeEvent } from 'react';
 
@@ -6,6 +7,7 @@ interface Props {
   type?: string;
   placeholder?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: () => void;
 }
 
 const Input: React.FC<Props> = ({
@@ -13,6 +15,7 @@ const Input: React.FC<Props> = ({
   type = 'text',
   placeholder = '',
   onChange,
+  onFocus,
 }) => {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -20,7 +23,14 @@ const Input: React.FC<Props> = ({
     <div className="relative">
       <div className="absolute">
         {isFocus && (
-          <label className="relative bg-white -top-3 text-xs font-sanspro">
+          <label
+            className={classnames(
+              'relative bg-white -top-3 text-xs font-sanspro',
+              {
+                'text-gray-500': value && isFocus,
+              }
+            )}
+          >
             {placeholder}
           </label>
         )}
@@ -36,8 +46,13 @@ const Input: React.FC<Props> = ({
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             onChange && onChange(e);
           }}
-          onFocus={() => setIsFocus(!isFocus)}
-          onBlur={() => setIsFocus(!isFocus)}
+          onFocus={() => {
+            onFocus && onFocus();
+            setIsFocus(!isFocus);
+          }}
+          onBlur={() => {
+            !value && setIsFocus(!isFocus);
+          }}
         />
       </div>
     </div>

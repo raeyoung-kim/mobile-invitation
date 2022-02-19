@@ -6,11 +6,13 @@ import {
   Input,
   FileInput,
   Textarea,
+  ModalLayout,
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
 import React, { ChangeEvent, useState } from 'react';
 import classnames from 'classnames';
+import DaumPostcode from 'react-daum-postcode';
 
 const MakeSamplePage: NextPage = () => {
   const [data, setData] = useState<ProductInfo>({
@@ -121,6 +123,7 @@ const MakeSamplePage: NextPage = () => {
 
   const [modal, setModal] = useState({
     isGreetingSample: false,
+    isPostcode: false,
   });
 
   const onTargetClick = (i: number) => {
@@ -331,13 +334,39 @@ const MakeSamplePage: NextPage = () => {
           <Input
             placeholder={'예식장 주소'}
             value={data.weddingAddress}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              setData({
-                ...data,
-                weddingAddress: e.target.value,
-              });
-            }}
+            onFocus={() =>
+              setModal({
+                ...modal,
+                isPostcode: true,
+              })
+            }
           />
+          {/* 주소 검색 */}
+          {modal.isPostcode && (
+            <ModalLayout
+              onClose={() => {
+                setModal({
+                  ...modal,
+                  isPostcode: false,
+                });
+              }}
+            >
+              <DaumPostcode
+                style={{ height: '100vh' }}
+                onComplete={(resData) => {
+                  setData({
+                    ...data,
+                    weddingAddress: resData.address,
+                  });
+
+                  setModal({
+                    ...modal,
+                    isPostcode: false,
+                  });
+                }}
+              />
+            </ModalLayout>
+          )}
         </div>
         <div className="mt-4">
           <Input
