@@ -18,11 +18,11 @@ const Textarea: React.FC<Props> = ({
   return (
     <div className="relative">
       <div className="absolute">
-        {isFocus && (
+        {isFocus || value ? (
           <label className="relative bg-white -top-3 text-xs font-sanspro">
             {placeholder}
           </label>
-        )}
+        ) : null}
       </div>
       <div className="focus-within:border-2 focus-within:rounded focus-within:border-black ">
         <textarea

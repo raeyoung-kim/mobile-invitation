@@ -22,18 +22,18 @@ const Input: React.FC<Props> = ({
   return (
     <div className="relative">
       <div className="absolute">
-        {isFocus && (
+        {isFocus || value ? (
           <label
             className={classnames(
               'relative bg-white -top-3 text-xs font-sanspro',
               {
-                'text-gray-500': value && isFocus,
+                'text-gray-500': value || isFocus,
               }
             )}
           >
             {placeholder}
           </label>
-        )}
+        ) : null}
       </div>
       <div className="focus-within:border-2 focus-within:rounded focus-within:border-black ">
         <input
@@ -51,7 +51,7 @@ const Input: React.FC<Props> = ({
             setIsFocus(!isFocus);
           }}
           onBlur={() => {
-            !value && setIsFocus(!isFocus);
+            setIsFocus(!isFocus);
           }}
         />
       </div>

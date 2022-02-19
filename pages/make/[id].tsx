@@ -7,6 +7,7 @@ import {
   FileInput,
   Textarea,
   ModalLayout,
+  Map,
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
@@ -367,6 +368,11 @@ const MakeSamplePage: NextPage = () => {
               />
             </ModalLayout>
           )}
+          {data?.weddingAddress ? (
+            <div className="mt-4">
+              <Map address={data.weddingAddress} />
+            </div>
+          ) : null}
         </div>
         <div className="mt-4">
           <Input

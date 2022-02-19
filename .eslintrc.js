@@ -20,7 +20,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'prettier/prettier': ['error', { singleQuote: true, parser: 'flow' }],
+    'prettier/prettier': ['error', { singleQuote: true }],
     'react/jsx-filename-extension': [
       1,
       { extensions: ['.js', '.jsx', '.tsx', '.ts'] },
