@@ -400,6 +400,7 @@ const MakeSamplePage: NextPage = () => {
         </div>
         <div className="mt-4">
           <Input
+            type="tel"
             placeholder={'예식장 연락처'}
             value={data.weddingContact}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {

@@ -46,7 +46,11 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
 
         <div className="mt-4">
           <Input
-            placeholder={`${target} 서열 (장남, 차남, 아들)`}
+            placeholder={`${target} ${
+              target === '신랑'
+                ? '서열 (장남, 차남, 아들)'
+                : '서열 (장녀, 차녀, 딸)'
+            }`}
             value={data.rank}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setData({
@@ -79,7 +83,7 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
 
         <div className="mt-4">
           <Input
-            type="number"
+            type="tel"
             placeholder={`${target} 아버님 연락처`}
             value={data.fatherNumber}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -110,7 +114,7 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
         </div>
         <div className="mt-4">
           <Input
-            type={'number'}
+            type={'tel'}
             placeholder={`${target} 어머님 연락처`}
             value={data.motherNumber}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
