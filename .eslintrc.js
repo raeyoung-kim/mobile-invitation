@@ -25,5 +25,6 @@ module.exports = {
       1,
       { extensions: ['.js', '.jsx', '.tsx', '.ts'] },
     ],
+    '@next/next/no-img-element': 'off',
   },
 };
