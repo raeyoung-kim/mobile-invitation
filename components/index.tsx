@@ -12,3 +12,4 @@ export { default as Input } from './Input';
 export { default as FileInput } from './FileInput';
 export { default as Textarea } from './Textarea';
 export { default as Map } from './Map';
+export { default as Greetings } from './Greetings';

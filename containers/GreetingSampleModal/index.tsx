@@ -1,7 +1,7 @@
 import { GreetingSample, ModalLayout } from 'components';
 import React from 'react';
-import { greetingSample } from './data';
 import { BiX } from 'react-icons/bi';
+import { GREETING_SAMPLE } from 'services';
 
 interface Props {
   onClose: () => void;
@@ -22,7 +22,7 @@ const GreetingSampleModal: React.FC<Props> = ({ onClose, onClick }) => {
             </button>
           </div>
           <div className="px-5">
-            {greetingSample.map((value) => {
+            {GREETING_SAMPLE.map((value) => {
               return (
                 <div key={value} onClick={() => onClick(value)}>
                   <GreetingSample data={value} />
