@@ -31,6 +31,13 @@ const BasicSample: React.FC = () => {
           className={'font-sanspro text-sm'}
         />
       </Fade>
+      <Fade direction="up">{/* 갤러리 이미지 */}</Fade>
+      <Fade direction="up">{/* 달력 */}</Fade>
+      <Fade direction="up">{/* 예식 장소 및 지도 */}</Fade>
+      <Fade direction="up">{/* 오시는 길 */}</Fade>
+      <Fade direction="up">{/* 드리는 말씀 */}</Fade>
+      <Fade direction="up">{/* 방명록 */}</Fade>
+      <Fade direction="up">{/* 마음 전하실 곳 */}</Fade>
     </div>
   );
 };
