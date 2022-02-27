@@ -1,7 +1,9 @@
-import { Greetings, Month } from 'components';
+import { Greetings, GreetingSample, Map, Month, WayToCome } from 'components';
 import React from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { GREETING_SAMPLE } from 'services';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import { IoMdCall } from 'react-icons/io';
 
 const BasicSample: React.FC = () => {
   return (
@@ -26,18 +28,51 @@ const BasicSample: React.FC = () => {
         </div>
       </div>
       <Fade direction="up">
-        <Greetings
-          data={GREETING_SAMPLE[1]}
-          className={'font-sanspro text-sm'}
-        />
+        <div className="pt-20 pb-16">
+          <Greetings
+            data={GREETING_SAMPLE[1]}
+            className={'font-sanspro text-sm'}
+          />
+        </div>
       </Fade>
       <Fade direction="up">{/* 갤러리 이미지 */}</Fade>
       <Fade direction="up">
+        {/* 달력 */}
         <Month date={'2022-04-30'} time={'14:30'} />
       </Fade>
-      <Fade direction="up">{/* 예식 장소 및 지도 */}</Fade>
-      <Fade direction="up">{/* 오시는 길 */}</Fade>
-      <Fade direction="up">{/* 드리는 말씀 */}</Fade>
+      <Fade direction="up">
+        {/* 예식 장소 및 지도 */}
+        <div className="p-11">
+          <div className="flex justify-center">
+            <FaMapMarkerAlt className="text-3xl" />
+          </div>
+          <p className="py-5 text-center text-lg">웨딩홀 2층 클래식홀</p>
+          <p className="text-center text-xs">강남구 선릉로 100길</p>
+          <div className="flex items-center justify-center text-xs mt-2">
+            <IoMdCall />
+            <p className="text-xs">{'02-333-3333'}</p>
+          </div>
+          <div className="pt-9">
+            <Map address="강남구 선릉로 100길" />
+          </div>
+        </div>
+      </Fade>
+      <Fade direction="up">
+        {/* 오시는 길 */}
+        <div className="pb-9">
+          <WayToCome
+            title={'버스'}
+            description={'영동고교 앞 하차 후 학동사거리 방면 100M내 건물'}
+          />
+          <WayToCome title={'지하철'} description={'선릉역 11번 출구'} />
+        </div>
+      </Fade>
+      <Fade direction="up">
+        {/* 드리는 말씀 */}
+        <div className="px-12">
+          <GreetingSample isTitle={true} data={GREETING_SAMPLE[1]} />
+        </div>
+      </Fade>
       <Fade direction="up">{/* 방명록 */}</Fade>
       <Fade direction="up">{/* 마음 전하실 곳 */}</Fade>
     </div>

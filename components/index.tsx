@@ -14,3 +14,4 @@ export { default as Textarea } from './Textarea';
 export { default as Map } from './Map';
 export { default as Greetings } from './Greetings';
 export { default as Month } from './Month';
+export { default as WayToCome } from './WayToCome';
