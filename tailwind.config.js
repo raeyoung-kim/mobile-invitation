@@ -7,6 +7,7 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './containers/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -50,6 +51,15 @@ module.exports = {
           borderRadius: '0.25rem',
           padding: '8px 12px',
           fontSize: theme('fontSize.font-sm'),
+        },
+        '.date': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '40px',
+          width: '40px',
+          fontSize: '14px',
+          lineHeight: '20px',
         },
       });
     }),

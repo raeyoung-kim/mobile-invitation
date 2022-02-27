@@ -1,4 +1,4 @@
-import { Greetings } from 'components';
+import { Greetings, Month } from 'components';
 import React from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { GREETING_SAMPLE } from 'services';
@@ -20,7 +20,7 @@ const BasicSample: React.FC = () => {
             <div className="mx-auto flex justify-around max-w-[200px] py-8 text-xl">
               <p>박수찬</p>|<p>김연희</p>
             </div>
-            <p className="text-center">2022.04.30 SAT 2:30PM</p>
+            <p className="text-center">2022.04.30 SUN 2:30PM</p>
             <p className="text-center">웨딩홀 클래식홀</p>
           </Fade>
         </div>
@@ -32,7 +32,9 @@ const BasicSample: React.FC = () => {
         />
       </Fade>
       <Fade direction="up">{/* 갤러리 이미지 */}</Fade>
-      <Fade direction="up">{/* 달력 */}</Fade>
+      <Fade direction="up">
+        <Month date={'2022-04-30'} time={'14:30'} />
+      </Fade>
       <Fade direction="up">{/* 예식 장소 및 지도 */}</Fade>
       <Fade direction="up">{/* 오시는 길 */}</Fade>
       <Fade direction="up">{/* 드리는 말씀 */}</Fade>
