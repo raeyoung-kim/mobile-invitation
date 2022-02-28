@@ -21,6 +21,7 @@ const MakeSamplePage: NextPage = () => {
     male: {
       lastName: '',
       firstName: '',
+      targetNumber: '',
       rank: '',
       fatherName: '',
       isFather: true,
@@ -32,6 +33,7 @@ const MakeSamplePage: NextPage = () => {
     female: {
       lastName: '',
       firstName: '',
+      targetNumber: '',
       rank: '',
       fatherName: '',
       isFather: true,

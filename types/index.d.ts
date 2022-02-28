@@ -6,6 +6,7 @@ type Sample = {
 type BasicInfo = {
   lastName: string;
   firstName: string;
+  targetNumber: string;
   rank: string;
   fatherName: string;
   isFather: boolean;
@@ -56,4 +57,12 @@ type ProductInfo = {
   URLThumbnail: string;
   URLThumbnailTitle: string;
   URLThumbnailDescription: string;
+};
+
+type AccountNumber = {
+  target: string;
+  isCheck: boolean;
+  targetBank: string;
+  targetAccountNumber: string;
+  accountHolder: string;
 };

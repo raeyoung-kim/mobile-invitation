@@ -46,6 +46,19 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
 
         <div className="mt-4">
           <Input
+            placeholder={`${target} 연락처`}
+            value={data.targetNumber}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setData({
+                ...data,
+                targetNumber: e.target.value,
+              });
+            }}
+          />
+        </div>
+
+        <div className="mt-4">
+          <Input
             placeholder={`${target} ${
               target === '신랑'
                 ? '서열 (장남, 차남, 아들)'
