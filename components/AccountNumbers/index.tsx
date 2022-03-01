@@ -40,6 +40,7 @@ const AccountNumbers: FC<Props> = ({ data, male, female }) => {
                     ? male.targetNumber
                     : female.targetNumber,
                 accountNumber: el,
+                isChecked: el.isCheck,
               }}
             />
           );
@@ -72,6 +73,7 @@ const AccountNumbers: FC<Props> = ({ data, male, female }) => {
                           ? male.fatherNumber
                           : male.motherNumber,
                       accountNumber: el,
+                      isChecked: el.isCheck,
                     }}
                   />
                 </div>
@@ -93,13 +95,14 @@ const AccountNumbers: FC<Props> = ({ data, male, female }) => {
                         : '어머니',
                       name:
                         el.target === '신부측 아버지'
-                          ? male.fatherName
-                          : male.motherName,
+                          ? female.fatherName
+                          : female.motherName,
                       number:
                         el.target === '신부측 아버지'
-                          ? male.fatherNumber
-                          : male.motherNumber,
+                          ? female.fatherNumber
+                          : female.motherNumber,
                       accountNumber: el,
+                      isChecked: el.isCheck,
                     }}
                   />
                 </div>

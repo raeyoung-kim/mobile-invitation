@@ -25,7 +25,7 @@ const BasicSample: React.FC = () => {
             src="https://picsum.photos/480/650"
             className="w-full h-auto"
           />
-          <Fade direction="up">
+          <Fade>
             <div className="mx-auto flex justify-around max-w-[200px] py-8 text-xl">
               <p>박수찬</p>|<p>김연희</p>
             </div>
@@ -34,7 +34,7 @@ const BasicSample: React.FC = () => {
           </Fade>
         </div>
       </div>
-      <Fade direction="up">
+      <Fade>
         <div className="pt-20 pb-16">
           <Greetings
             data={GREETING_SAMPLE[1]}
@@ -42,14 +42,14 @@ const BasicSample: React.FC = () => {
           />
         </div>
       </Fade>
-      <Fade direction="up">{/* 갤러리 이미지 */}</Fade>
-      <Fade direction="up">
+      <Fade>{/* 갤러리 이미지 */}</Fade>
+      <Fade>
         {/* 달력 */}
         <Month date={'2022-04-30'} time={'14:30'} />
       </Fade>
-      <Fade direction="up">
+      <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="p-5">
+        <div className="px-5 pt-32 pb-8">
           <div className="flex justify-center">
             <FaMapMarkerAlt className="text-3xl" />
           </div>
@@ -64,9 +64,9 @@ const BasicSample: React.FC = () => {
           </div>
         </div>
       </Fade>
-      <Fade direction="up">
+      <Fade>
         {/* 오시는 길 */}
-        <div className="pb-9">
+        <div className="pb-12">
           <WayToCome
             title={'버스'}
             description={'영동고교 앞 하차 후 학동사거리 방면 100M내 건물'}
@@ -74,14 +74,14 @@ const BasicSample: React.FC = () => {
           <WayToCome title={'지하철'} description={'선릉역 11번 출구'} />
         </div>
       </Fade>
-      <Fade direction="up">
+      <Fade>
         {/* 드리는 말씀 */}
         <div className="px-5">
           <GreetingSample isTitle={true} data={GREETING_SAMPLE[1]} />
         </div>
       </Fade>
-      <Fade direction="up">{/* 방명록 */}</Fade>
-      <Fade direction="up">
+      <Fade>{/* 방명록 */}</Fade>
+      <Fade>
         <div className="px-5 py-[100px]">
           <AccountNumbers
             male={{
@@ -118,17 +118,17 @@ const BasicSample: React.FC = () => {
               },
               {
                 target: '신부',
-                isCheck: false,
+                isCheck: true,
                 targetBank: '카카오뱅크',
                 targetAccountNumber: '3333-3333-3333',
                 accountHolder: '김연희',
               },
               {
                 target: '신랑측 아버지',
-                isCheck: false,
-                targetBank: '',
-                targetAccountNumber: '',
-                accountHolder: '',
+                isCheck: true,
+                targetBank: '신한',
+                targetAccountNumber: '3333-3333-3333',
+                accountHolder: '방정식',
               },
               {
                 target: '신랑측 어머니',
@@ -139,10 +139,10 @@ const BasicSample: React.FC = () => {
               },
               {
                 target: '신부측 아버지',
-                isCheck: false,
-                targetBank: '',
-                targetAccountNumber: '',
-                accountHolder: '',
+                isCheck: true,
+                targetBank: '농협',
+                targetAccountNumber: '3333-3333-3333',
+                accountHolder: '김만식',
               },
               {
                 target: '신부측 어머니',
