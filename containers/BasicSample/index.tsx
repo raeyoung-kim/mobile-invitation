@@ -2,6 +2,7 @@ import {
   AccountNumbers,
   Greetings,
   GreetingSample,
+  ImageGallery,
   Map,
   Month,
   WayToCome,
@@ -35,14 +36,29 @@ const BasicSample: React.FC = () => {
         </div>
       </div>
       <Fade>
-        <div className="pt-20 pb-16">
+        <div className="pt-28 pb-16">
           <Greetings
             data={GREETING_SAMPLE[1]}
             className={'font-sanspro text-sm'}
           />
         </div>
       </Fade>
-      <Fade>{/* 갤러리 이미지 */}</Fade>
+      <Fade>
+        {/* 갤러리 이미지 */}
+        <div className="pt-16 pb-32 px-5">
+          <ImageGallery
+            data={[
+              'https://picsum.photos/480/650',
+              'https://picsum.photos/480/650',
+              'https://picsum.photos/480/650',
+              'https://picsum.photos/480/650',
+              'https://picsum.photos/480/650',
+              'https://picsum.photos/480/650',
+              'https://picsum.photos/480/650',
+            ]}
+          />
+        </div>
+      </Fade>
       <Fade>
         {/* 달력 */}
         <Month date={'2022-04-30'} time={'14:30'} />
