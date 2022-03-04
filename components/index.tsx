@@ -18,3 +18,4 @@ export { default as WayToCome } from './WayToCome';
 export { default as AccountNumbers } from './AccountNumbers';
 export { default as AccountNumberItem } from './AccountNumberItem';
 export { default as ImageGallery } from './ImageGallery';
+export { default as SwiperImage } from './SwiperImage';

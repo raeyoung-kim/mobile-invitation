@@ -40,7 +40,7 @@ const ImageGallery: FC<Props> = ({ data }) => {
       >
         {isMore ? '사진 보기 닫기' : '더 많은 사진 보기 click'}
       </button>
-      {isModal && <ImageSliderModal onClose={onModal} />}
+      {isModal && <ImageSliderModal data={data} onClose={onModal} />}
     </div>
   );
 };
