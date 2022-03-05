@@ -30,7 +30,7 @@ type WayToComeInfo = {
 };
 
 type ProductInfo = {
-  mainPhoto: '';
+  mainPhoto: string;
   male: BasicInfo;
   female: BasicInfo;
   greetingMessage: string;

@@ -13,7 +13,11 @@ import { GREETING_SAMPLE } from 'services';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoMdCall } from 'react-icons/io';
 
-const BasicSample: React.FC = () => {
+interface Props {
+  data: ProductInfo;
+}
+
+const BasicSample: React.FC<Props> = ({ data }) => {
   return (
     <div className="bg-white min-h-screen min-w-[280px] max-w-[480px] mx-auto">
       <div className="relative w-full">

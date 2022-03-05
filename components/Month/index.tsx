@@ -4,11 +4,13 @@ import { useCallback } from 'react';
 import { getWeek } from 'services';
 
 interface Props {
+  isTitle?: boolean;
   date: string;
   time: string;
+  fontFamily?: string;
 }
 
-const Month: FC<Props> = ({ date, time }) => {
+const Month: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
   const title = date.split('-');
   const timeArr = time.split(':');
   const [dates, setDates] = useState<null | string[]>(null);
@@ -40,15 +42,22 @@ const Month: FC<Props> = ({ date, time }) => {
 
   return (
     <div className="px-12">
-      <div className="py-3 text-[#d69191]">
-        <p className="text-center text-2xl">{`${title[1]}월 ${title[2]}일`}</p>
-        <p className="text-center">{`${getWeek(date)}요일 ${
-          Number(timeArr[0]) > 12 ? '오후' : '오전'
-        } ${Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : timeArr[0]}시 ${
-          timeArr[1]
-        }분`}</p>
-      </div>
-      <div className="grid grid-cols-7">
+      {isTitle ? (
+        <div className="py-3 text-[#d69191]">
+          <p className="text-center text-2xl">{`${title[1]}월 ${title[2]}일`}</p>
+          <p className="text-center">{`${getWeek(date)}요일 ${
+            Number(timeArr[0]) > 12 ? '오후' : '오전'
+          } ${
+            Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : timeArr[0]
+          }시 ${timeArr[1]}분`}</p>
+        </div>
+      ) : null}
+
+      <div
+        className={classnames('grid grid-cols-7', {
+          'font-myeongjo': fontFamily === 'font-myeongjo',
+        })}
+      >
         <div className="date text-[#d69191]">SUN</div>
         <div className="date">MON</div>
         <div className="date">TUE</div>
