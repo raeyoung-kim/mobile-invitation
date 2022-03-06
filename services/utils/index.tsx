@@ -19,5 +19,15 @@ export const getWeek = (date: string) => {
       return '토';
     case 6:
       return '일';
+    default:
+      return '';
   }
+};
+
+export const getTime = (time: string): string => {
+  const timeArr = time.split(':');
+  const result = `${
+    Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : Number(timeArr[0])
+  }:${timeArr[1]}${Number(timeArr[0]) > 12 ? 'PM' : 'AM'}`;
+  return result;
 };

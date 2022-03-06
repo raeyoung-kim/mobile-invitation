@@ -7,7 +7,7 @@ import {
   Month,
   WayToCome,
 } from 'components';
-import React from 'react';
+import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoMdCall } from 'react-icons/io';
@@ -17,38 +17,47 @@ interface Props {
   data: ProductInfo;
 }
 
-const BasicSample: React.FC<Props> = ({ data }) => {
+const ModernSample: FC<Props> = ({ data }) => {
   return (
     <div className="bg-white min-h-screen min-w-[280px] max-w-[480px] mx-auto">
-      <div className="relative w-full">
-        <div className="absolute w-full h-[calc(100%+60px)] p-5">
-          <div className="w-full h-full border border-[#999]"></div>
+      <div className="mx-auto text-center w-[120px] py-8 px-5 font-myeongjo border border-black my-8">
+        <div className="relative">
+          <span className="px-1 text-2xl absolute left-0 -mt-2 ml-2">10</span>
+          <span className="w-[1px] h-[50px] bg-black absolute rotate-[45deg] block left-[50%] right-[50%]"></span>
+          <span className="px-1 text-2xl absolute right-0 mt-6 mr-1">10</span>
         </div>
+
+        <div className="mt-[80px]">
+          <p className="text-sm">{data.male.lastName + data.male.firstName}</p>
+          <p className="text-sm">
+            {data.female.lastName + data.female.firstName}
+          </p>
+        </div>
+      </div>
+
+      <div className="relative w-full">
         <div>
           <img
             alt="메인 이미지"
-            src="https://picsum.photos/480/650"
+            src="https://picsum.photos/480/350"
             className="w-full h-auto"
           />
-          <Fade>
-            <div className="mx-auto flex justify-around max-w-[200px] py-8 text-xl">
-              <p>{data.male.lastName + data.male.firstName}</p>|
-              <p>{data.female.lastName + data.female.firstName}</p>
-            </div>
-            <p className="text-center">
-              {data.weddingDate.split('-').join('.')}{' '}
-              {getWeek(data.weddingDate)}
-              요일 {getTime(data.weddingTime)}
-            </p>
-            <p className="text-center">{data.weddingAddressName}</p>
-          </Fade>
         </div>
       </div>
+      <Fade>
+        <div className="text-left mt-8 mx-5 pl-2 border-l border-black font-myeongjo">
+          <p>
+            {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
+            요일 {getTime(data.weddingTime)}
+          </p>
+          <p>{data.weddingAddressName}</p>
+        </div>
+      </Fade>
       <Fade>
         <div className="pt-28 pb-16">
           <Greetings
             data={data.greetingMessage}
-            className={'font-sanspro text-sm'}
+            className={'font-myeongjo text-sm'}
           />
         </div>
       </Fade>
@@ -70,7 +79,11 @@ const BasicSample: React.FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 달력 */}
-        <Month date={data.weddingDate} time={data.weddingTime} />
+        <Month
+          date={data.weddingDate}
+          time={data.weddingTime}
+          fontFamily={'font-myeongjo'}
+        />
       </Fade>
       <Fade>
         {/* 예식 장소 및 지도 */}
@@ -123,4 +136,4 @@ const BasicSample: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default BasicSample;
+export default ModernSample;

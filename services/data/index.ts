@@ -8,9 +8,9 @@ export const WHITE_SAMPLE = {
   title: '순백 스타일',
 };
 
-export const CHERRY_BLOSSOM_SAMPLE = {
+export const MYENGJO_SAMPLE = {
   id: 3,
-  title: '벛꽃 스타일',
+  title: '명조 스타일',
 };
 
 export const SIMPLE_SAMPLE = {
@@ -18,9 +18,9 @@ export const SIMPLE_SAMPLE = {
   title: '심플 스타일',
 };
 
-export const LETTER_SAMPLE = {
+export const MODERN_SAMPLE = {
   id: 5,
-  title: '편지 스타일',
+  title: '모던 스타일',
 };
 
 export const LILAC_SAMLE = {
@@ -31,9 +31,9 @@ export const LILAC_SAMLE = {
 export const MAIN_SAMPLE_LIST = [
   BASIC_SAMPLE,
   WHITE_SAMPLE,
-  CHERRY_BLOSSOM_SAMPLE,
+  MYENGJO_SAMPLE,
   SIMPLE_SAMPLE,
-  LETTER_SAMPLE,
+  MODERN_SAMPLE,
   LILAC_SAMLE,
 ];
 

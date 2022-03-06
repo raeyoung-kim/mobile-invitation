@@ -1,13 +1,13 @@
 import {
   AccountNumbers,
   Greetings,
-  GreetingSample,
   ImageGallery,
-  Map,
   Month,
+  Map,
   WayToCome,
+  GreetingSample,
 } from 'components';
-import React from 'react';
+import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoMdCall } from 'react-icons/io';
@@ -17,40 +17,58 @@ interface Props {
   data: ProductInfo;
 }
 
-const BasicSample: React.FC<Props> = ({ data }) => {
+const SimpleSample: FC<Props> = ({ data }) => {
   return (
     <div className="bg-white min-h-screen min-w-[280px] max-w-[480px] mx-auto">
-      <div className="relative w-full">
-        <div className="absolute w-full h-[calc(100%+60px)] p-5">
-          <div className="w-full h-full border border-[#999]"></div>
+      <div className="pt-8 pb-6 mx-auto">
+        <div className="font-thin text-[20px] text-center">
+          <span className="border-b border-[#999]">
+            {data.weddingDate.slice(0, 4).split('').join(' ')}
+          </span>
         </div>
+        <p className="font-thin text-[30px] text-center text-bold">
+          {data.weddingDate.slice(5, 7)}.{data.weddingDate.slice(8, 10)}
+        </p>
+      </div>
+      <div className="relative w-full">
         <div>
           <img
             alt="메인 이미지"
-            src="https://picsum.photos/480/650"
+            src="https://picsum.photos/480/350"
             className="w-full h-auto"
           />
-          <Fade>
-            <div className="mx-auto flex justify-around max-w-[200px] py-8 text-xl">
-              <p>{data.male.lastName + data.male.firstName}</p>|
-              <p>{data.female.lastName + data.female.firstName}</p>
-            </div>
-            <p className="text-center">
-              {data.weddingDate.split('-').join('.')}{' '}
-              {getWeek(data.weddingDate)}
-              요일 {getTime(data.weddingTime)}
-            </p>
-            <p className="text-center">{data.weddingAddressName}</p>
-          </Fade>
         </div>
       </div>
+      <div className="mx-auto flex justify-around max-w-[200px] py-8 text-2xl font-thin">
+        <p>{data.male.lastName + data.male.firstName}</p>
+        {'&'}
+        <p>{data.female.lastName + data.female.firstName}</p>
+      </div>
       <Fade>
-        <div className="pt-28 pb-16">
-          <Greetings
-            data={data.greetingMessage}
-            className={'font-sanspro text-sm'}
+        {/* 달력 */}
+        <div className="px-5">
+          <Month
+            isTitle={false}
+            date={data.weddingDate}
+            time={data.weddingTime}
+            fontFamily={'font-thin'}
           />
         </div>
+      </Fade>
+      <Fade>
+        <div className="pt-8 pb-16">
+          <Greetings
+            data={data.greetingMessage}
+            className={'font-thin text-sm'}
+          />
+        </div>
+      </Fade>
+      <Fade>
+        <p className="text-center font-thin">
+          {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
+          요일 {getTime(data.weddingTime)}
+        </p>
+        <p className="text-center font-thin">{data.weddingAddressName}</p>
       </Fade>
       <Fade>
         {/* 갤러리 이미지 */}
@@ -69,20 +87,20 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         </div>
       </Fade>
       <Fade>
-        {/* 달력 */}
-        <Month date={data.weddingDate} time={data.weddingTime} />
-      </Fade>
-      <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="px-5 pt-32 pb-8">
+        <div className="px-5 pt-8 pb-8">
           <div className="flex justify-center">
             <FaMapMarkerAlt className="text-3xl" />
           </div>
-          <p className="py-5 text-center text-lg">{data.weddingAddressName}</p>
-          <p className="text-center text-xs">{data.DetailWeddingAddress}</p>
+          <p className="py-5 text-center text-lg font-thin">
+            {data.weddingAddressName}
+          </p>
+          <p className="text-center text-xs font-thin">
+            {data.DetailWeddingAddress}
+          </p>
           <div className="flex items-center justify-center text-xs mt-2">
             <IoMdCall />
-            <p className="text-xs">{data.weddingContact}</p>
+            <p className="text-xs font-thin">{data.weddingContact}</p>
           </div>
           <div className="pt-9">
             <Map address={data.weddingAddress} />
@@ -106,7 +124,11 @@ const BasicSample: React.FC<Props> = ({ data }) => {
       <Fade>
         {/* 드리는 말씀 */}
         <div className="px-5">
-          <GreetingSample isTitle={true} data={data.greetingMessage} />
+          <GreetingSample
+            isTitle={true}
+            data={data.greetingMessage}
+            fontFamily={'font-thin'}
+          />
         </div>
       </Fade>
       <Fade>{/* 방명록 */}</Fade>
@@ -123,4 +145,4 @@ const BasicSample: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default BasicSample;
+export default SimpleSample;

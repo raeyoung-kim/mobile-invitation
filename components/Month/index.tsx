@@ -43,7 +43,12 @@ const Month: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
   return (
     <div className="px-12">
       {isTitle ? (
-        <div className="py-3 text-[#d69191]">
+        <div
+          className={classnames('py-3 text-[#d69191]', {
+            'font-myeongjo': fontFamily === 'font-myeongjo',
+            'font-thin': fontFamily === 'font-thin',
+          })}
+        >
           <p className="text-center text-2xl">{`${title[1]}월 ${title[2]}일`}</p>
           <p className="text-center">{`${getWeek(date)}요일 ${
             Number(timeArr[0]) > 12 ? '오후' : '오전'
@@ -56,6 +61,7 @@ const Month: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
       <div
         className={classnames('grid grid-cols-7', {
           'font-myeongjo': fontFamily === 'font-myeongjo',
+          'font-thin': fontFamily === 'font-thin',
         })}
       >
         <div className="date text-[#d69191]">SUN</div>

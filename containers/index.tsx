@@ -3,3 +3,7 @@ export { default as BasicSample } from './BasicSample';
 export { default as AccountNumberModal } from './AccountNumberModal';
 export { default as ImageSliderModal } from './ImageSliderModal';
 export { default as WhiteSample } from './WhiteSample';
+export { default as LilacSample } from './LilacSample';
+export { default as SimpleSample } from './SimpleSample';
+export { default as ModernSample } from './ModernSample';
+export { default as MyengjoSample } from './MyengjoSample';

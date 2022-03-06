@@ -11,6 +11,7 @@ import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoMdCall } from 'react-icons/io';
+import { getTime, getWeek } from 'services';
 
 interface Props {
   data: ProductInfo;
@@ -20,7 +21,9 @@ const WhiteSample: FC<Props> = ({ data }) => {
   return (
     <div className="bg-white min-h-screen min-w-[280px] max-w-[480px] mx-auto">
       <div className="max-w-[200px] pt-6 px-5">
-        <p className="font-nanum text-[40px]">{data.weddingDate.slice(5, 7)}</p>
+        <p className="font-nanum text-[40px]">
+          {data.weddingDate.slice(5, 7)}/{data.weddingDate.slice(8, 10)}
+        </p>
       </div>
       <div className="relative w-full px-5">
         <div>
@@ -51,7 +54,8 @@ const WhiteSample: FC<Props> = ({ data }) => {
       <Fade>
         <div className="pt-12">
           <p className="text-center font-nanum text-xl">
-            2022.04.30 SUN 2:30PM
+            {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
+            요일 {getTime(data.weddingTime)}
           </p>
           <p className="text-center font-nanum text-xl">
             {data.weddingAddressName}
@@ -106,7 +110,7 @@ const WhiteSample: FC<Props> = ({ data }) => {
           <p className="text-center text-xs">{data.DetailWeddingAddress}</p>
           <div className="flex items-center justify-center text-xs mt-2">
             <IoMdCall />
-            <p className="text-xs">{'02-333-3333'}</p>
+            <p className="text-xs">{data.weddingContact}</p>
           </div>
           <div className="pt-9">
             <Map address={data.weddingAddress} />
