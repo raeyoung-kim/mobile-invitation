@@ -20,11 +20,18 @@ interface Props {
 const WhiteSample: FC<Props> = ({ data }) => {
   return (
     <div className="bg-white min-h-screen min-w-[280px] max-w-[480px] mx-auto">
-      <div className="max-w-[200px] pt-6 px-5">
-        <p className="font-nanum text-[40px]">
+      {/* <div className="max-w-[200px] pt-6 px-5">
+        <p className="font-thin text-[40px]">
           {data.weddingDate.slice(5, 7)}/{data.weddingDate.slice(8, 10)}
         </p>
+      </div> */}
+
+      <div className="mx-auto text-right py-8 text-2xl font-myeongjo px-5">
+        <p>{data.male.lastName + data.male.firstName}</p>
+        <p className="text-xs">그리고,</p>
+        <p>{data.female.lastName + data.female.firstName}</p>
       </div>
+
       <div className="relative w-full px-5">
         <div>
           <img
@@ -32,51 +39,40 @@ const WhiteSample: FC<Props> = ({ data }) => {
             src="https://picsum.photos/480/250"
             className="w-full h-auto"
           />
-          <Fade>
-            <div className="mx-auto flex justify-around max-w-[200px] py-8 text-2xl font-nanum">
-              <p>{data.male.lastName + data.male.firstName}</p>|
-              <p>{data.female.lastName + data.female.firstName}</p>
-            </div>
-          </Fade>
         </div>
       </div>
       <Fade>
-        {/* 달력 */}
-        <div className="px-5">
-          <Month
-            isTitle={false}
-            date={data.weddingDate}
-            time={data.weddingTime}
-            fontFamily={'font-myeongjo'}
-          />
-        </div>
-      </Fade>
-      <Fade>
-        <div className="pt-12">
-          <p className="text-center font-nanum text-xl">
+        <div className="pt-8">
+          <p className="text-center font-myeongjo text-sm">
             {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
             요일 {getTime(data.weddingTime)}
           </p>
-          <p className="text-center font-nanum text-xl">
+          <p className="text-center font-myeongjo text-xs">
             {data.weddingAddressName}
           </p>
         </div>
       </Fade>
       <Fade>
-        <div className="pt-10 pb-16">
-          <Greetings
-            data={data.greetingMessage}
-            className={'font-myeongjo text-sm'}
+        {/* 달력 */}
+        <div className="flex justify-center pt-5 px-5">
+          <Month.BlackStyle
+            isTitle={false}
+            date={data.weddingDate}
+            time={data.weddingTime}
+            fontFamily={'font-thin'}
           />
         </div>
       </Fade>
+
       <Fade>
-        <AccountNumbers
-          male={data.male}
-          female={data.female}
-          data={data.accountNumberList}
-        />
+        <div className="pt-10 pb-16">
+          <Greetings
+            data={data.greetingMessage}
+            className={'font-myeongjo text-xs'}
+          />
+        </div>
       </Fade>
+
       <Fade>
         {/* 갤러리 이미지 */}
         <div className="pt-16 pb-32 px-5">
@@ -95,13 +91,13 @@ const WhiteSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 드리는 말씀 */}
-        <div className="px-5">
+        <div className="px-5 pb-32">
           <GreetingSample isTitle={true} data={data.greetingMessage} />
         </div>
       </Fade>
       <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="px-5 pt-12 pb-8">
+        <div className="px-5 pb-8">
           <div className="flex justify-center">
             <FaMapMarkerAlt className="text-3xl" />
           </div>
@@ -119,16 +115,19 @@ const WhiteSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 오시는 길 */}
-        <div className="pb-[160px]">
-          {data.wayToComeList?.map((el, i) => {
-            return (
-              <WayToCome
-                key={i}
-                title={el.title}
-                description={el.description}
-              />
-            );
-          })}
+        {data.wayToComeList?.map((el, i) => {
+          return (
+            <WayToCome key={i} title={el.title} description={el.description} />
+          );
+        })}
+      </Fade>
+      <Fade>
+        <div className="px-5 py-32">
+          <AccountNumbers
+            male={data.male}
+            female={data.female}
+            data={data.accountNumberList}
+          />
         </div>
       </Fade>
     </div>

@@ -33,7 +33,7 @@ const MyengjoSample: FC<Props> = ({ data }) => {
               <p>{data.female.lastName + data.female.firstName}</p>
               <p>결혼합니다</p>
             </div>
-            <div className="text-left mt-8 mx-5 pl-2 border-l border-black font-myeongjo">
+            <div className="text-left mt-8 mx-5 pl-2 border-l border-black font-myeongjo text-sm">
               <p>
                 {data.weddingDate.split('-').join('.')}{' '}
                 {getWeek(data.weddingDate)}
@@ -48,7 +48,7 @@ const MyengjoSample: FC<Props> = ({ data }) => {
         <div className="pt-28 pb-16">
           <Greetings
             data={data.greetingMessage}
-            className={'font-myeongjo text-sm'}
+            className={'font-myeongjo text-xs'}
           />
         </div>
       </Fade>
@@ -70,11 +70,13 @@ const MyengjoSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 달력 */}
-        <Month
-          date={data.weddingDate}
-          time={data.weddingTime}
-          fontFamily={'font-myeongjo'}
-        />
+        <div className="px-5">
+          <Month.BlackStyle
+            date={data.weddingDate}
+            time={data.weddingTime}
+            fontFamily={'font-myeongjo'}
+          />
+        </div>
       </Fade>
       <Fade>
         {/* 예식 장소 및 지도 */}

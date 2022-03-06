@@ -2,7 +2,6 @@ import classnames from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import { getWeek } from 'services';
-import BlackStyle from './BlackStyle';
 
 interface Props {
   isTitle?: boolean;
@@ -11,11 +10,7 @@ interface Props {
   fontFamily?: string;
 }
 
-interface IMonth extends FC<Props> {
-  BlackStyle: typeof BlackStyle;
-}
-
-const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
+const BlackStyle: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
   const title = date.split('-');
   const timeArr = time.split(':');
   const [dates, setDates] = useState<null | string[]>(null);
@@ -46,16 +41,16 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
   }, [getCalender]);
 
   return (
-    <div className="px-12">
+    <div>
       {isTitle ? (
         <div
-          className={classnames('py-3 text-[#d69191]', {
+          className={classnames('py-2 mb-2 pl-3 border-l border-black', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
           })}
         >
-          <p className="text-center text-2xl">{`${title[1]}월 ${title[2]}일`}</p>
-          <p className="text-center">{`${getWeek(date)}요일 ${
+          <p className="text-left text-sm">{`${title[1]}월 ${title[2]}일`}</p>
+          <p className="text-left text-xs">{`${getWeek(date)}요일 ${
             Number(timeArr[0]) > 12 ? '오후' : '오전'
           } ${
             Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : timeArr[0]
@@ -69,24 +64,24 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
           'font-thin': fontFamily === 'font-thin',
         })}
       >
-        <div className="date text-[#d69191]">SUN</div>
-        <div className="date">MON</div>
-        <div className="date">TUE</div>
-        <div className="date">WEN</div>
-        <div className="date">THU</div>
-        <div className="date">FRI</div>
-        <div className="date">SAT</div>
+        <div className="date text-[#616060] text-xs">SUN</div>
+        <div className="date text-xs">MON</div>
+        <div className="date text-xs">TUE</div>
+        <div className="date text-xs">WEN</div>
+        <div className="date text-xs">THU</div>
+        <div className="date text-xs">FRI</div>
+        <div className="date text-xs">SAT</div>
         {dates?.map((el, i) => {
           return (
             <div
               key={i}
-              className={classnames({
-                'text-[#d69191]': i % 7 === 0,
+              className={classnames('date text-xs', {
+                'text-[#616060]': i % 7 === 0,
               })}
             >
               <p
-                className={classnames('date', {
-                  ' border border-[#d69191] rounded-[40px] bg-[#d69191] text-white':
+                className={classnames('date text-xs', {
+                  'border border-[#1d1c1c] rounded-[40px] bg-[#1d1c1c] text-white':
                     el === title[2],
                 })}
               >
@@ -100,6 +95,4 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
   );
 };
 
-Month.BlackStyle = BlackStyle;
-
-export default Month;
+export default BlackStyle;

@@ -20,18 +20,22 @@ interface Props {
 const ModernSample: FC<Props> = ({ data }) => {
   return (
     <div className="bg-white min-h-screen min-w-[280px] max-w-[480px] mx-auto">
-      <div className="mx-auto text-center w-[120px] py-8 px-5 font-myeongjo border border-black my-8">
-        <div className="relative">
-          <span className="px-1 text-2xl absolute left-0 -mt-2 ml-2">10</span>
-          <span className="w-[1px] h-[50px] bg-black absolute rotate-[45deg] block left-[50%] right-[50%]"></span>
-          <span className="px-1 text-2xl absolute right-0 mt-6 mr-1">10</span>
-        </div>
+      <div className="py-8">
+        <div className="mx-auto text-center w-[120px] py-8 px-5 font-myeongjo border border-black">
+          <div className="relative">
+            <span className="px-1 text-2xl absolute left-0 -mt-2 ml-2">10</span>
+            <span className="w-[1px] h-[50px] bg-black absolute rotate-[45deg] block left-[50%] right-[50%]"></span>
+            <span className="px-1 text-2xl absolute right-0 mt-6 mr-1">10</span>
+          </div>
 
-        <div className="mt-[80px]">
-          <p className="text-sm">{data.male.lastName + data.male.firstName}</p>
-          <p className="text-sm">
-            {data.female.lastName + data.female.firstName}
-          </p>
+          <div className="mt-[80px]">
+            <p className="text-sm">
+              {data.male.lastName + data.male.firstName}
+            </p>
+            <p className="text-sm">
+              {data.female.lastName + data.female.firstName}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -45,7 +49,7 @@ const ModernSample: FC<Props> = ({ data }) => {
         </div>
       </div>
       <Fade>
-        <div className="text-left mt-8 mx-5 pl-2 border-l border-black font-myeongjo">
+        <div className="mx-auto text-center mt-8 py-4 border-t border-b border-[#999] w-[300px] font-myeongjo text-sm">
           <p>
             {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
             요일 {getTime(data.weddingTime)}
@@ -57,7 +61,7 @@ const ModernSample: FC<Props> = ({ data }) => {
         <div className="pt-28 pb-16">
           <Greetings
             data={data.greetingMessage}
-            className={'font-myeongjo text-sm'}
+            className={'font-myeongjo text-xs'}
           />
         </div>
       </Fade>
@@ -79,11 +83,13 @@ const ModernSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 달력 */}
-        <Month
-          date={data.weddingDate}
-          time={data.weddingTime}
-          fontFamily={'font-myeongjo'}
-        />
+        <div className="p-5">
+          <Month.BlackStyle
+            date={data.weddingDate}
+            time={data.weddingTime}
+            fontFamily={'font-myeongjo'}
+          />
+        </div>
       </Fade>
       <Fade>
         {/* 예식 장소 및 지도 */}
