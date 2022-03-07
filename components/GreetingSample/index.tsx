@@ -21,6 +21,7 @@ const GreetingSample: React.FC<Props> = ({
           className={classNames('text-center pb-5 font-bold text-[#d69191]', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
+            'font-stylish': fontFamily === 'font-stylish',
           })}
         >
           드리는 말씀
@@ -34,6 +35,7 @@ const GreetingSample: React.FC<Props> = ({
               className={classNames('text-xs lg:text-[14px]', {
                 'font-myeongjo': fontFamily === 'font-myeongjo',
                 'font-thin': fontFamily === 'font-thin',
+                'font-stylish': fontFamily === 'font-stylish',
               })}
             >
               {value}

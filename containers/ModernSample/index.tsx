@@ -23,9 +23,13 @@ const ModernSample: FC<Props> = ({ data }) => {
       <div className="py-8">
         <div className="mx-auto text-center w-[120px] py-8 px-5 font-myeongjo border border-black">
           <div className="relative">
-            <span className="px-1 text-2xl absolute left-0 -mt-2 ml-2">10</span>
+            <span className="px-1 text-2xl absolute left-0 -mt-2 ml-2">
+              {data.weddingDate.split('-')[1]}
+            </span>
             <span className="w-[1px] h-[50px] bg-black absolute rotate-[45deg] block left-[50%] right-[50%]"></span>
-            <span className="px-1 text-2xl absolute right-0 mt-6 mr-1">10</span>
+            <span className="px-1 text-2xl absolute right-0 mt-6 mr-1">
+              {data.weddingDate.split('-')[2]}
+            </span>
           </div>
 
           <div className="mt-[80px]">
@@ -62,6 +66,18 @@ const ModernSample: FC<Props> = ({ data }) => {
           <Greetings
             data={data.greetingMessage}
             className={'font-myeongjo text-xs'}
+            male={{
+              fatheName: data.male.fatherName,
+              motherName: data.male.motherName,
+              rank: data.male.rank,
+              name: data.male.lastName + data.male.firstName,
+            }}
+            female={{
+              fatheName: data.female.fatherName,
+              motherName: data.female.motherName,
+              rank: data.female.rank,
+              name: data.female.lastName + data.female.firstName,
+            }}
           />
         </div>
       </Fade>

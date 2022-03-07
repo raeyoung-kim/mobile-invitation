@@ -27,6 +27,7 @@ module.exports = {
       sanspro: 'Source Sans Pro',
       jua: 'Jua',
       myeongjo: 'Nanum Myeongjo',
+      stylish: 'Stylish',
     },
   },
   plugins: [
@@ -58,8 +59,8 @@ module.exports = {
           alignItems: 'center',
           height: '40px',
           width: '40px',
-          fontSize: '14px',
-          lineHeight: '20px',
+          fontSize: '12px',
+          lineHeight: '16px',
         },
       });
     }),

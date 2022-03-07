@@ -49,6 +49,18 @@ const MyengjoSample: FC<Props> = ({ data }) => {
           <Greetings
             data={data.greetingMessage}
             className={'font-myeongjo text-xs'}
+            male={{
+              fatheName: data.male.fatherName,
+              motherName: data.male.motherName,
+              rank: data.male.rank,
+              name: data.male.lastName + data.male.firstName,
+            }}
+            female={{
+              fatheName: data.female.fatherName,
+              motherName: data.female.motherName,
+              rank: data.female.rank,
+              name: data.female.lastName + data.female.firstName,
+            }}
           />
         </div>
       </Fade>

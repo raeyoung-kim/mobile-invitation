@@ -26,9 +26,14 @@ const SimpleSample: FC<Props> = ({ data }) => {
             {data.weddingDate.slice(0, 4).split('').join(' ')}
           </span>
         </div>
-        <p className="font-thin text-[30px] text-center text-bold">
-          {data.weddingDate.slice(5, 7)}.{data.weddingDate.slice(8, 10)}
-        </p>
+        <div className="font-thin text-[30px] text-center text-bold">
+          <span className="border-b border-[#999]">
+            {data.weddingDate.slice(5, 7)}.{data.weddingDate.slice(8, 10)}
+          </span>
+        </div>
+        <p className="font-thin text-center text-[20px]">{`${
+          data.male.lastName + data.male.firstName
+        }·${data.female.lastName + data.female.firstName}`}</p>
       </div>
       <div className="relative w-full">
         <div>
@@ -39,14 +44,24 @@ const SimpleSample: FC<Props> = ({ data }) => {
           />
         </div>
       </div>
-      <div className="mx-auto flex justify-around max-w-[200px] py-8 text-2xl font-thin">
-        <p>{data.male.lastName + data.male.firstName}</p>
-        {'&'}
-        <p>{data.female.lastName + data.female.firstName}</p>
+      <div className=" pt-2 pb-8">
+        {/* <div className="mx-auto flex justify-around max-w-[200px] text-2xl font-thin">
+          <p>{data.male.lastName + data.male.firstName}</p>
+          {'&'}
+          <p>{data.female.lastName + data.female.firstName}</p>
+        </div> */}
+
+        <p className="text-center font-thin text-sm mt-8">
+          {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
+          요일 {getTime(data.weddingTime)}
+        </p>
+        <p className="text-center font-thin text-sm">
+          {data.weddingAddressName}
+        </p>
       </div>
       <Fade>
         {/* 달력 */}
-        <div className="px-5">
+        <div className="px-5 flex justify-center">
           <Month
             isTitle={false}
             date={data.weddingDate}
@@ -60,16 +75,22 @@ const SimpleSample: FC<Props> = ({ data }) => {
           <Greetings
             data={data.greetingMessage}
             className={'font-thin text-sm'}
+            male={{
+              fatheName: data.male.fatherName,
+              motherName: data.male.motherName,
+              rank: data.male.rank,
+              name: data.male.lastName + data.male.firstName,
+            }}
+            female={{
+              fatheName: data.female.fatherName,
+              motherName: data.female.motherName,
+              rank: data.female.rank,
+              name: data.female.lastName + data.female.firstName,
+            }}
           />
         </div>
       </Fade>
-      <Fade>
-        <p className="text-center font-thin">
-          {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
-          요일 {getTime(data.weddingTime)}
-        </p>
-        <p className="text-center font-thin">{data.weddingAddressName}</p>
-      </Fade>
+
       <Fade>
         {/* 갤러리 이미지 */}
         <div className="pt-16 pb-32 px-5">

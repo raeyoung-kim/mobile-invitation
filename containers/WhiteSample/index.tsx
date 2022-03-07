@@ -20,12 +20,6 @@ interface Props {
 const WhiteSample: FC<Props> = ({ data }) => {
   return (
     <div className="bg-white min-h-screen min-w-[280px] max-w-[480px] mx-auto">
-      {/* <div className="max-w-[200px] pt-6 px-5">
-        <p className="font-thin text-[40px]">
-          {data.weddingDate.slice(5, 7)}/{data.weddingDate.slice(8, 10)}
-        </p>
-      </div> */}
-
       <div className="mx-auto text-right py-8 text-2xl font-myeongjo px-5">
         <p>{data.male.lastName + data.male.firstName}</p>
         <p className="text-xs">그리고,</p>
@@ -42,7 +36,7 @@ const WhiteSample: FC<Props> = ({ data }) => {
         </div>
       </div>
       <Fade>
-        <div className="pt-8">
+        <div className="py-12">
           <p className="text-center font-myeongjo text-sm">
             {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
             요일 {getTime(data.weddingTime)}
@@ -54,7 +48,7 @@ const WhiteSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 달력 */}
-        <div className="flex justify-center pt-5 px-5">
+        <div className="flex justify-center px-5">
           <Month.BlackStyle
             isTitle={false}
             date={data.weddingDate}
@@ -69,6 +63,18 @@ const WhiteSample: FC<Props> = ({ data }) => {
           <Greetings
             data={data.greetingMessage}
             className={'font-myeongjo text-xs'}
+            male={{
+              fatheName: data.male.fatherName,
+              motherName: data.male.motherName,
+              rank: data.male.rank,
+              name: data.male.lastName + data.male.firstName,
+            }}
+            female={{
+              fatheName: data.female.fatherName,
+              motherName: data.female.motherName,
+              rank: data.female.rank,
+              name: data.female.lastName + data.female.firstName,
+            }}
           />
         </div>
       </Fade>

@@ -46,12 +46,13 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
   }, [getCalender]);
 
   return (
-    <div className="px-12">
+    <div>
       {isTitle ? (
         <div
           className={classnames('py-3 text-[#d69191]', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
+            'font-stylish': fontFamily === 'font-stylish',
           })}
         >
           <p className="text-center text-2xl">{`${title[1]}월 ${title[2]}일`}</p>
@@ -64,9 +65,10 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
       ) : null}
 
       <div
-        className={classnames('grid grid-cols-7', {
+        className={classnames('grid grid-cols-7 text-xs', {
           'font-myeongjo': fontFamily === 'font-myeongjo',
           'font-thin': fontFamily === 'font-thin',
+          'font-stylish': fontFamily === 'font-stylish',
         })}
       >
         <div className="date text-[#d69191]">SUN</div>
@@ -81,12 +83,12 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
             <div
               key={i}
               className={classnames({
-                'text-[#d69191]': i % 7 === 0,
+                'text-[#d69191] text-xs': i % 7 === 0,
               })}
             >
               <p
-                className={classnames('date', {
-                  ' border border-[#d69191] rounded-[40px] bg-[#d69191] text-white':
+                className={classnames('date text-xs', {
+                  'border border-[#d69191] rounded-[50px] bg-[#d69191] text-white':
                     el === title[2],
                 })}
               >

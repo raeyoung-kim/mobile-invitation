@@ -20,44 +20,47 @@ interface Props {
 const LilacSample: FC<Props> = ({ data }) => {
   return (
     <div className="bg-[#e7e7f5] min-h-screen min-w-[280px] max-w-[480px] mx-auto">
-      <div className="pt-8 pb-6 mx-auto">
-        <div className="font-thin text-[20px] text-center">
-          <span className="border-b border-[#999]">
-            {data.weddingDate.slice(0, 4).split('').join(' ')}
-          </span>
-        </div>
-        <p className="font-thin text-[30px] text-center text-bold">
-          {data.weddingDate.slice(5, 7)}.{data.weddingDate.slice(8, 10)}
-        </p>
-      </div>
+      <p className="font-stylish text-center text-3xl py-8">저희, 결혼합니다</p>
       <div className="relative w-full">
-        <div>
+        <div className="px-12">
           <img
             alt="메인 이미지"
-            src="https://picsum.photos/480/350"
+            src="https://picsum.photos/480/550"
             className="w-full h-auto"
           />
         </div>
       </div>
-      <div className="mx-auto flex justify-around max-w-[200px] py-8 text-2xl font-thin">
+      <div className="mx-auto text-right px-12 py-5 text-xl font-stylish">
         <p>{data.male.lastName + data.male.firstName}</p>
-        {'&'}
+        <p className="text-xs font-stylish">그리고,</p>
         <p>{data.female.lastName + data.female.firstName}</p>
       </div>
       <Fade>
         <div className="pt-8 pb-16">
           <Greetings
             data={data.greetingMessage}
-            className={'font-thin text-sm'}
+            className={'font-stylish text-sm'}
+            male={{
+              fatheName: data.male.fatherName,
+              motherName: data.male.motherName,
+              rank: data.male.rank,
+              name: data.male.lastName + data.male.firstName,
+            }}
+            female={{
+              fatheName: data.female.fatherName,
+              motherName: data.female.motherName,
+              rank: data.female.rank,
+              name: data.female.lastName + data.female.firstName,
+            }}
           />
         </div>
       </Fade>
       <Fade>
-        <p className="text-center font-thin">
+        <p className="text-center font-stylish">
           {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
           요일 {getTime(data.weddingTime)}
         </p>
-        <p className="text-center font-thin">{data.weddingAddressName}</p>
+        <p className="text-center font-stylish">{data.weddingAddressName}</p>
       </Fade>
       <Fade>
         {/* 갤러리 이미지 */}
@@ -77,11 +80,13 @@ const LilacSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 달력 */}
-        <Month
-          date={data.weddingDate}
-          time={data.weddingTime}
-          fontFamily={'font-thin'}
-        />
+        <div className="flex justify-center">
+          <Month
+            date={data.weddingDate}
+            time={data.weddingTime}
+            fontFamily={'font-stylish'}
+          />
+        </div>
       </Fade>
       <Fade>
         {/* 예식 장소 및 지도 */}
@@ -89,15 +94,15 @@ const LilacSample: FC<Props> = ({ data }) => {
           <div className="flex justify-center">
             <FaMapMarkerAlt className="text-3xl" />
           </div>
-          <p className="py-5 text-center text-lg font-thin">
+          <p className="py-5 text-center text-lg font-stylish">
             {data.weddingAddressName}
           </p>
-          <p className="text-center text-xs font-thin">
+          <p className="text-center text-xs font-stylish">
             {data.DetailWeddingAddress}
           </p>
           <div className="flex items-center justify-center text-xs mt-2">
             <IoMdCall />
-            <p className="text-xs font-thin">{data.weddingContact}</p>
+            <p className="text-xs font-stylish">{data.weddingContact}</p>
           </div>
           <div className="pt-9">
             <Map address={data.weddingAddress} />
@@ -124,7 +129,7 @@ const LilacSample: FC<Props> = ({ data }) => {
           <GreetingSample
             isTitle={true}
             data={data.greetingMessage}
-            fontFamily={'font-thin'}
+            fontFamily={'font-stylish'}
           />
         </div>
       </Fade>
