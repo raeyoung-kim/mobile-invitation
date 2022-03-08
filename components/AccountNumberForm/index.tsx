@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { Input } from 'components';
 import React, { ChangeEvent } from 'react';
 
@@ -25,7 +25,7 @@ const AccountNumberForm: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classnames('pt-5 pb-10 border-t', {
+      className={classNames('pt-5 pb-10 border-t', {
         hidden: !isCheck,
       })}
     >

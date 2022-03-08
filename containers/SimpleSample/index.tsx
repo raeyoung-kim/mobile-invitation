@@ -126,6 +126,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
                 key={i}
                 title={el.title}
                 description={el.description}
+                fontFamily={'font-thin'}
               />
             );
           })}
@@ -148,6 +149,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
             male={data.male}
             female={data.female}
             data={data.accountNumberList}
+            fontFamily={'font-thin'}
           />
         </div>
       </Fade>

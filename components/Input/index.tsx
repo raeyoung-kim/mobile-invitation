@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import React, { useState } from 'react';
 import { ChangeEvent } from 'react';
 
@@ -24,7 +24,7 @@ const Input: React.FC<Props> = ({
       <div className="absolute">
         {isFocus || value ? (
           <label
-            className={classnames(
+            className={classNames(
               'relative bg-white -top-3 text-xs font-sanspro',
               {
                 'text-gray-500': value || isFocus,

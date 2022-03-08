@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { ImageSliderModal } from 'containers';
 import React, { FC, useState } from 'react';
 
@@ -18,7 +18,7 @@ const ImageGallery: FC<Props> = ({ data }) => {
   return (
     <div>
       <div
-        className={classnames('grid grid-cols-2 gap-1 transition-all', {
+        className={classNames('grid grid-cols-2 gap-1 transition-all', {
           'overflow-hidden min-h-[280px] h-[calc(100vw*1.1)] max-h-[540px]':
             !isMore,
         })}

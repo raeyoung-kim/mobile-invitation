@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import classnames from 'classnames';
 import { AccountNumberModal } from 'containers';
 import React, { FC, useState } from 'react';
@@ -11,9 +12,10 @@ interface Props {
     isChecked: boolean;
   };
   fontSize?: string;
+  fontFamily?: string;
 }
 
-const AccountNumberItem: FC<Props> = ({ data, fontSize }) => {
+const AccountNumberItem: FC<Props> = ({ data, fontSize, fontFamily }) => {
   const [isAccountNumberModal, setIsAccountNumberModal] = useState(false);
 
   const onAccountNumberModal = () => {
@@ -24,8 +26,11 @@ const AccountNumberItem: FC<Props> = ({ data, fontSize }) => {
     <div className={'flex justify-center'}>
       <div>
         <div
-          className={classnames('text-base font-sanspro mt-9', {
+          className={classnames('text-base mt-9', {
             'text-sm': fontSize === 'text-sm',
+            'font-myeongjo': fontFamily === 'font-myeongjo',
+            'font-thin': fontFamily === 'font-thin',
+            'font-stylish': fontFamily === 'font-stylish',
           })}
         >
           <span>{data.target}</span> <strong>{data.name}</strong>
@@ -33,6 +38,9 @@ const AccountNumberItem: FC<Props> = ({ data, fontSize }) => {
         <div
           className={classnames('flex justify-around text-xl mt-4', {
             'text-sm': fontSize === 'text-sm',
+            'font-myeongjo': fontFamily === 'font-myeongjo',
+            'font-thin': fontFamily === 'font-thin',
+            'font-stylish': fontFamily === 'font-stylish',
           })}
         >
           <a href={`tel:${data.number}`}>
@@ -45,7 +53,14 @@ const AccountNumberItem: FC<Props> = ({ data, fontSize }) => {
         {data.isChecked && (
           <div className="text-center mt-4">
             <button
-              className="bg-black text-white text-xs rounded-lg py-1 px-2"
+              className={classNames(
+                'bg-black text-white text-xs rounded-lg py-1 px-2',
+                {
+                  'font-myeongjo': fontFamily === 'font-myeongjo',
+                  'font-thin': fontFamily === 'font-thin',
+                  'font-stylish': fontFamily === 'font-stylish',
+                }
+              )}
               onClick={onAccountNumberModal}
             >
               계좌번호

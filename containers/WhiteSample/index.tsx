@@ -96,7 +96,11 @@ const WhiteSample: FC<Props> = ({ data }) => {
       <Fade>
         {/* 드리는 말씀 */}
         <div className="px-5 pb-32">
-          <GreetingSample isTitle={true} data={data.greetingMessage} />
+          <GreetingSample
+            isTitle={true}
+            data={data.greetingMessage}
+            fontFamily={'font-myeongjo'}
+          />
         </div>
       </Fade>
       <Fade>
@@ -115,7 +119,12 @@ const WhiteSample: FC<Props> = ({ data }) => {
         {/* 오시는 길 */}
         {data.wayToComeList?.map((el, i) => {
           return (
-            <WayToCome key={i} title={el.title} description={el.description} />
+            <WayToCome
+              key={i}
+              title={el.title}
+              description={el.description}
+              fontFamily={'font-myeongjo'}
+            />
           );
         })}
       </Fade>
@@ -125,6 +134,7 @@ const WhiteSample: FC<Props> = ({ data }) => {
             male={data.male}
             female={data.female}
             data={data.accountNumberList}
+            fontFamily={'font-myeongjo'}
           />
         </div>
       </Fade>

@@ -12,7 +12,7 @@ import {
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
 import React, { ChangeEvent, useState } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import DaumPostcode from 'react-daum-postcode';
 
 const MakeSamplePage: NextPage = () => {
@@ -527,7 +527,7 @@ const MakeSamplePage: NextPage = () => {
                         onTargetClick(i);
                       }}
                       key={button.target}
-                      className={classnames('button', {
+                      className={classNames('button', {
                         'bg-black text-white': button.isCheck,
                       })}
                     >

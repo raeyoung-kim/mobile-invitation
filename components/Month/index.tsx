@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import { getWeek } from 'services';
@@ -49,7 +49,7 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
     <div>
       {isTitle ? (
         <div
-          className={classnames('py-3 text-[#d69191]', {
+          className={classNames('py-3 text-[#d69191]', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
             'font-stylish': fontFamily === 'font-stylish',
@@ -65,7 +65,7 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
       ) : null}
 
       <div
-        className={classnames('grid grid-cols-7 text-xs', {
+        className={classNames('grid grid-cols-7 text-xs', {
           'font-myeongjo': fontFamily === 'font-myeongjo',
           'font-thin': fontFamily === 'font-thin',
           'font-stylish': fontFamily === 'font-stylish',
@@ -82,12 +82,12 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
           return (
             <div
               key={i}
-              className={classnames('w-full', {
+              className={classNames('w-full', {
                 'text-[#d69191] text-xs': i % 7 === 0,
               })}
             >
               <p
-                className={classnames('date text-xs', {
+                className={classNames('date text-xs', {
                   'border border-[#d69191] rounded-[50px] bg-[#d69191] text-white':
                     el === title[2],
                 })}

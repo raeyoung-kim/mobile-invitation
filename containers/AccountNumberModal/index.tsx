@@ -34,7 +34,7 @@ const AccountNumberModal: FC<Props> = ({ onClose, data }) => {
           <CgClose />
         </button>
         <div className="flex justify-center items-center">
-          <div className="text-sm text-center">
+          <div className="text-sm text-center font-stylish">
             <p>{data.targetBank}</p>
             <p>{data.targetAccountNumber}</p>
             <p className="mt-1">예금주: {data.accountHolder}</p>
@@ -43,7 +43,7 @@ const AccountNumberModal: FC<Props> = ({ onClose, data }) => {
               className="bg-black text-white rounded py-1 px-2 mt-6 text-sm"
               onClick={onCopy}
             >
-              계좌 복사하기
+              계좌 복사
             </button>
           </div>
         </div>

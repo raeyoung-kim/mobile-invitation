@@ -107,6 +107,7 @@ const LilacSample: FC<Props> = ({ data }) => {
                 key={i}
                 title={el.title}
                 description={el.description}
+                fontFamily={'font-stylish'}
               />
             );
           })}
@@ -129,6 +130,7 @@ const LilacSample: FC<Props> = ({ data }) => {
             male={data.male}
             female={data.female}
             data={data.accountNumberList}
+            fontFamily={'font-stylish'}
           />
         </div>
       </Fade>

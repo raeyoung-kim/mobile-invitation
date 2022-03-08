@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import { getWeek } from 'services';
@@ -44,7 +44,7 @@ const BlackStyle: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
     <div>
       {isTitle ? (
         <div
-          className={classnames('ml-4 py-2 mb-2 pl-3 border-l border-black', {
+          className={classNames('ml-4 py-2 mb-2 pl-3 border-l border-black', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
           })}
@@ -59,7 +59,7 @@ const BlackStyle: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
       ) : null}
 
       <div
-        className={classnames('grid grid-cols-7', {
+        className={classNames('grid grid-cols-7', {
           'font-myeongjo': fontFamily === 'font-myeongjo',
           'font-thin': fontFamily === 'font-thin',
         })}
@@ -75,12 +75,12 @@ const BlackStyle: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
           return (
             <div
               key={i}
-              className={classnames('date text-xs w-full', {
+              className={classNames('date text-xs w-full', {
                 'text-[#616060]': i % 7 === 0,
               })}
             >
               <p
-                className={classnames('date text-xs', {
+                className={classNames('date text-xs', {
                   'border border-[#1d1c1c] rounded-[40px] bg-[#1d1c1c] text-white':
                     el === title[2],
                 })}

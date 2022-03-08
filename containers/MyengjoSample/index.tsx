@@ -109,6 +109,7 @@ const MyengjoSample: FC<Props> = ({ data }) => {
                 key={i}
                 title={el.title}
                 description={el.description}
+                fontFamily={'font-myeongjo'}
               />
             );
           })}
@@ -117,7 +118,11 @@ const MyengjoSample: FC<Props> = ({ data }) => {
       <Fade>
         {/* 드리는 말씀 */}
         <div className="px-5">
-          <GreetingSample isTitle={true} data={data.greetingMessage} />
+          <GreetingSample
+            isTitle={true}
+            data={data.greetingMessage}
+            fontFamily={'font-myeongjo'}
+          />
         </div>
       </Fade>
       <Fade>{/* 방명록 */}</Fade>
@@ -127,6 +132,7 @@ const MyengjoSample: FC<Props> = ({ data }) => {
             male={data.male}
             female={data.female}
             data={data.accountNumberList}
+            fontFamily={'font-myeongjo'}
           />
         </div>
       </Fade>
