@@ -71,18 +71,18 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
           'font-stylish': fontFamily === 'font-stylish',
         })}
       >
-        <div className="date text-[#d69191]">SUN</div>
-        <div className="date">MON</div>
-        <div className="date">TUE</div>
-        <div className="date">WEN</div>
-        <div className="date">THU</div>
-        <div className="date">FRI</div>
-        <div className="date">SAT</div>
+        <div className="date text-[#d69191] w-full">SUN</div>
+        <div className="date w-full">MON</div>
+        <div className="date w-full">TUE</div>
+        <div className="date w-full">WEN</div>
+        <div className="date w-full">THU</div>
+        <div className="date w-full">FRI</div>
+        <div className="date w-full">SAT</div>
         {dates?.map((el, i) => {
           return (
             <div
               key={i}
-              className={classnames({
+              className={classnames('w-full', {
                 'text-[#d69191] text-xs': i % 7 === 0,
               })}
             >

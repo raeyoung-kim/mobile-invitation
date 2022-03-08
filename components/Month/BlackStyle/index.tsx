@@ -44,7 +44,7 @@ const BlackStyle: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
     <div>
       {isTitle ? (
         <div
-          className={classnames('py-2 mb-2 pl-3 border-l border-black', {
+          className={classnames('ml-4 py-2 mb-2 pl-3 border-l border-black', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
           })}
@@ -64,18 +64,18 @@ const BlackStyle: FC<Props> = ({ isTitle = true, date, time, fontFamily }) => {
           'font-thin': fontFamily === 'font-thin',
         })}
       >
-        <div className="date text-[#616060] text-xs">SUN</div>
-        <div className="date text-xs">MON</div>
-        <div className="date text-xs">TUE</div>
-        <div className="date text-xs">WEN</div>
-        <div className="date text-xs">THU</div>
-        <div className="date text-xs">FRI</div>
-        <div className="date text-xs">SAT</div>
+        <div className="date text-[#616060] text-xs w-full">SUN</div>
+        <div className="date text-xs w-full">MON</div>
+        <div className="date text-xs w-full">TUE</div>
+        <div className="date text-xs w-full">WEN</div>
+        <div className="date text-xs w-full">THU</div>
+        <div className="date text-xs w-full">FRI</div>
+        <div className="date text-xs w-full">SAT</div>
         {dates?.map((el, i) => {
           return (
             <div
               key={i}
-              className={classnames('date text-xs', {
+              className={classnames('date text-xs w-full', {
                 'text-[#616060]': i % 7 === 0,
               })}
             >

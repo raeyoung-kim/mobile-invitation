@@ -3,14 +3,12 @@ import {
   Greetings,
   ImageGallery,
   Month,
-  Map,
   WayToCome,
   GreetingSample,
+  AddressLocation,
 } from 'components';
 import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
-import { FaMapMarkerAlt } from 'react-icons/fa';
-import { IoMdCall } from 'react-icons/io';
 import { getTime, getWeek } from 'services';
 
 interface Props {
@@ -110,22 +108,13 @@ const SimpleSample: FC<Props> = ({ data }) => {
       <Fade>
         {/* 예식 장소 및 지도 */}
         <div className="px-5 pt-8 pb-8">
-          <div className="flex justify-center">
-            <FaMapMarkerAlt className="text-3xl" />
-          </div>
-          <p className="py-5 text-center text-lg font-thin">
-            {data.weddingAddressName}
-          </p>
-          <p className="text-center text-xs font-thin">
-            {data.DetailWeddingAddress}
-          </p>
-          <div className="flex items-center justify-center text-xs mt-2">
-            <IoMdCall />
-            <p className="text-xs font-thin">{data.weddingContact}</p>
-          </div>
-          <div className="pt-9">
-            <Map address={data.weddingAddress} />
-          </div>
+          <AddressLocation
+            addressName={data.weddingAddressName}
+            address={data.weddingAddress}
+            detailAddress={data.DetailWeddingAddress}
+            contact={data.weddingContact}
+            fontFamily={'font-thin'}
+          />
         </div>
       </Fade>
       <Fade>
