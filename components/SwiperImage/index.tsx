@@ -1,67 +1,57 @@
 /* eslint-disable jsx-a11y/alt-text */
-import classNames from 'classnames';
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 interface Props {
   data: string[];
 }
 
 const SwiperImage: FC<Props> = ({ data }) => {
-  const [isDrag, setIsDrag] = useState(false);
-  const [mouseDownClientX, setMouseDownClientX] = useState<number>(0);
-  const [mouseUpClientX, setMouseUpClientX] = useState<number>(0);
+  const ref = useRef<HTMLDivElement>(null);
 
-  const moveRight = (): void => {
-    // right ...
-  };
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const moveLeft = (): void => {
-    // left ..
+  const nextSlide = () => {
+    if (currentSlide >= data?.length) {
+      setCurrentSlide(0);
+    } else {
+      setCurrentSlide(currentSlide + 1);
+    }
   };
-
-  const onDragStart = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setMouseDownClientX(e.clientX);
-    setIsDrag(true);
-  };
-  const onDragEnd = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setMouseUpClientX(e.clientX);
-    setIsDrag(false);
-  };
-
-  const onMouseMove = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if (isDrag) {
-      if (e.pageX > mouseDownClientX) {
-        console.log('right');
-        moveRight();
-      } else {
-        console.log('left');
-        moveLeft();
-      }
+  const prevSlide = () => {
+    if (currentSlide === 0) {
+      setCurrentSlide(data.length);
+    } else {
+      setCurrentSlide(currentSlide - 1);
     }
   };
 
   return (
-    <>
-      <div
-        className="relative flex overflow-hidden max-w-[480px] min-w-[280px] w-full h-[calc(100vw*1.1)]"
-        onMouseDown={onDragStart}
-        onMouseUp={onDragEnd}
-        onMouseMove={onMouseMove}
-      >
-        <div className={classNames('flex transition-all')}>
+    <div className="relative">
+      <div className="overflow-hidden max-w-[480px] min-w-[280px] w-full h-[calc(100vw*1.1)]">
+        <div
+          ref={ref}
+          style={{
+            transform: `translateX(-${currentSlide}00%)`,
+            transition: `all 0.4s ease-in-out`,
+          }}
+          className={`flex transition-all`}
+        >
           {data?.map((el, i) => {
-            return (
-              <img
-                key={i}
-                src={el}
-                className={'w-full h-full border border-black'}
-              />
-            );
+            return <img key={i} src={el} className={'w-full h-full'} />;
           })}
         </div>
       </div>
-      <div className="text-white mt-4">test</div>
-    </>
+      <div className="absolute w-full flex justify-between top-[45%]">
+        <button className="text-white" onClick={prevSlide}>
+          <IoIosArrowBack />
+        </button>
+        <button className="text-white" onClick={nextSlide}>
+          <IoIosArrowForward />
+        </button>
+      </div>
+      <div className="text-white mt-4 text-center">{currentSlide}</div>
+    </div>
   );
 };
 
