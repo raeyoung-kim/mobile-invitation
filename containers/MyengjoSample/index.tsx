@@ -3,8 +3,8 @@ import {
   AddressLocation,
   Greetings,
   GreetingSample,
-  ImageGallery,
   Month,
+  SwiperImage,
   WayToCome,
 } from 'components';
 import React, { FC } from 'react';
@@ -65,7 +65,7 @@ const MyengjoSample: FC<Props> = ({ data }) => {
       <Fade>
         {/* 갤러리 이미지 */}
         <div className="pt-16 pb-32 px-5">
-          <ImageGallery
+          <SwiperImage
             data={[
               'https://picsum.photos/480/650',
               'https://picsum.photos/480/650',
