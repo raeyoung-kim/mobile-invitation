@@ -18,19 +18,40 @@ const SwiperImage: FC<Props> = ({ data }) => {
     end: 0,
   });
 
+  const [style, setStyle] = useState({
+    transform: `translateX(-${currentSlide}00%)`,
+    transition: `all 0.4s ease-in-out`,
+  });
+
   const nextSlide = () => {
     if (currentSlide >= data?.length - 1) {
       setCurrentSlide(0);
+      setStyle({
+        transform: `translateX(${0}00%)`,
+        transition: `all 0.4s ease-in-out`,
+      });
     } else {
       setCurrentSlide(currentSlide + 1);
+      setStyle({
+        transform: `translateX(-${currentSlide + 1}00%)`,
+        transition: `all 0.4s ease-in-out`,
+      });
     }
   };
 
   const prevSlide = () => {
     if (currentSlide === 0) {
       setCurrentSlide(data.length - 1);
+      setStyle({
+        transform: `translateX(-${data.length - 1}00%)`,
+        transition: `all 0.4s ease-in-out`,
+      });
     } else {
       setCurrentSlide(currentSlide - 1);
+      setStyle({
+        transform: `translateX(-${currentSlide - 1}00%)`,
+        transition: `all 0.4s ease-in-out`,
+      });
     }
   };
 
@@ -46,24 +67,28 @@ const SwiperImage: FC<Props> = ({ data }) => {
         }}
         onTouchMove={(e) => {
           if (ref?.current) {
-            const result =
-              currentSlide * ref?.current?.clientWidth +
-              (e.targetTouches[0].pageX - touch.start);
-            console.log('touch move', result);
+            const current = ref.current.clientWidth * currentSlide;
+            const result = -current + (e.targetTouches[0].pageX - touch.start);
+            setStyle({
+              transform: `translate3d(${result}px, 0px, 0px)`,
+              transition: '0ms',
+            });
           }
         }}
         onTouchEnd={(e) => {
-          console.log('touch end', e.changedTouches[0].pageX);
+          const end = e.changedTouches[0].pageX;
+          if (touch.start > end) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+          setTouch({
+            ...touch,
+            end,
+          });
         }}
       >
-        <div
-          ref={ref}
-          style={{
-            transform: `translateX(-${currentSlide}00%)`,
-            transition: `all 0.4s ease-in-out`,
-          }}
-          className={`flex`}
-        >
+        <div ref={ref} style={style} className={`flex`}>
           {data?.map((el, i) => {
             return (
               <img
