@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import classNames from 'classnames';
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 interface Props {
@@ -10,7 +10,9 @@ interface Props {
 const SwiperImage: FC<Props> = ({ data }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageList] = useState([data[data?.length - 1], ...data, data[0]]);
+
+  const [currentSlide, setCurrentSlide] = useState(1);
 
   const [touch, setTouch] = useState({
     start: 0,
@@ -24,36 +26,49 @@ const SwiperImage: FC<Props> = ({ data }) => {
   });
 
   const nextSlide = () => {
-    if (currentSlide >= data?.length - 1) {
-      setCurrentSlide(0);
-      setStyle({
-        transform: `translateX(${0}00%)`,
-        transition: `all 0.4s ease-in-out`,
-      });
-    } else {
-      setCurrentSlide(currentSlide + 1);
-      setStyle({
-        transform: `translateX(-${currentSlide + 1}00%)`,
-        transition: `all 0.4s ease-in-out`,
-      });
-    }
+    setCurrentSlide(currentSlide + 1);
+    setStyle({
+      transform: `translateX(-${currentSlide + 1}00%)`,
+      transition: `all 0.4s ease-in-out`,
+    });
   };
 
   const prevSlide = () => {
-    if (currentSlide === 0) {
-      setCurrentSlide(data.length - 1);
-      setStyle({
-        transform: `translateX(-${data.length - 1}00%)`,
-        transition: `all 0.4s ease-in-out`,
-      });
-    } else {
-      setCurrentSlide(currentSlide - 1);
-      setStyle({
-        transform: `translateX(-${currentSlide - 1}00%)`,
-        transition: `all 0.4s ease-in-out`,
-      });
-    }
+    setCurrentSlide(currentSlide - 1);
+    setStyle({
+      transform: `translateX(-${currentSlide - 1}00%)`,
+      transition: `all 0.4s ease-in-out`,
+    });
   };
+
+  useEffect(() => {
+    if (currentSlide === 0) {
+      setCurrentSlide(imageList.length - 2);
+      setTimeout(function () {
+        setStyle({
+          transform: `translateX(-${imageList.length - 2}00%)`,
+          transition: '0ms',
+        });
+      }, 500);
+    }
+
+    if (currentSlide >= imageList?.length - 1) {
+      setCurrentSlide(1);
+      setTimeout(() => {
+        setStyle({
+          transform: `translateX(-${1}00%)`,
+          transition: '0ms',
+        });
+      }, 500);
+    }
+  }, [currentSlide, imageList.length]);
+
+  useEffect(() => {
+    setStyle({
+      transform: `translateX(-${1}00%)`,
+      transition: '0ms',
+    });
+  }, [imageList]);
 
   return (
     <div className="relative">
@@ -89,7 +104,7 @@ const SwiperImage: FC<Props> = ({ data }) => {
         }}
       >
         <div ref={ref} style={style} className={`flex`}>
-          {data?.map((el, i) => {
+          {imageList?.map((el, i) => {
             return (
               <img
                 key={i}
@@ -116,7 +131,7 @@ const SwiperImage: FC<Props> = ({ data }) => {
               className={classNames(
                 'bg-gray-200 h-[6px] w-[6px] mr-1 rounded',
                 {
-                  'bg-rose-200': i === currentSlide,
+                  'bg-rose-200': i + 1 === currentSlide,
                 }
               )}
             />
