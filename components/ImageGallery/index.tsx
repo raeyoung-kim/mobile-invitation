@@ -10,9 +10,11 @@ interface Props {
 const ImageGallery: FC<Props> = ({ data }) => {
   const [isMore, setIsMore] = useState(false);
   const [isModal, setIsModal] = useState(false);
+  const [selectedImgIndex, setSelectedImgIndex] = useState(0);
 
-  const onModal = () => {
+  const onModal = (index?: number) => {
     document.body.classList.toggle('stop-scrolling');
+    index !== undefined && setSelectedImgIndex(index);
     setIsModal(!isModal);
   };
 
@@ -26,7 +28,11 @@ const ImageGallery: FC<Props> = ({ data }) => {
       >
         {data.map((src, i) => {
           return (
-            <div key={i} className={'relative pb-[100%]'} onClick={onModal}>
+            <div
+              key={i}
+              className={'relative pb-[100%]'}
+              onClick={() => onModal(i)}
+            >
               <img
                 src={src}
                 className={'absolute w-full h-full rounded object-cover'}
@@ -41,7 +47,13 @@ const ImageGallery: FC<Props> = ({ data }) => {
       >
         {isMore ? '사진 보기 닫기' : '더 많은 사진 보기 click'}
       </button>
-      {isModal && <ImageSliderModal data={data} onClose={onModal} />}
+      {isModal && (
+        <ImageSliderModal
+          data={data}
+          onClose={onModal}
+          selectedImgIndex={selectedImgIndex}
+        />
+      )}
     </div>
   );
 };

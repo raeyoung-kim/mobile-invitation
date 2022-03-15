@@ -5,14 +5,15 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 interface Props {
   data: string[];
+  initialImgIndex?: number;
 }
 
-const SwiperImage: FC<Props> = ({ data }) => {
+const SwiperImage: FC<Props> = ({ data, initialImgIndex }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [imageList] = useState([data[data?.length - 1], ...data, data[0]]);
 
-  const [currentImgIndex, setCurrentImgIndex] = useState(1);
+  const [currentImgIndex, setCurrentImgIndex] = useState(initialImgIndex || 1);
 
   const [touch, setTouch] = useState({
     start: 0,
@@ -123,7 +124,7 @@ const SwiperImage: FC<Props> = ({ data }) => {
               className={classNames(
                 'bg-gray-200 h-[6px] w-[6px] mr-1 rounded',
                 {
-                  'bg-rose-200': i + 1 === currentImgIndex,
+                  ' bg-rose-300': i + 1 === currentImgIndex,
                 }
               )}
             />
