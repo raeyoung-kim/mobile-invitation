@@ -1,4 +1,5 @@
 import { Header, Footer } from 'components';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 interface Props {
@@ -6,11 +7,13 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children }) => {
+  const { pathname } = useRouter();
+
   return (
     <>
-      <Header />
+      {pathname !== '/sample/[id]' && <Header />}
       {children}
-      <Footer />
+      {pathname !== '/sample/[id]' && <Footer />}
     </>
   );
 };

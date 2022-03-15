@@ -62,6 +62,10 @@ module.exports = {
           fontSize: '12px',
           lineHeight: '16px',
         },
+        '.stop-scrolling': {
+          height: '100vh',
+          overflow: 'hidden',
+        },
       });
     }),
   ],

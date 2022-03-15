@@ -12,6 +12,7 @@ const ImageGallery: FC<Props> = ({ data }) => {
   const [isModal, setIsModal] = useState(false);
 
   const onModal = () => {
+    document.body.classList.toggle('stop-scrolling');
     setIsModal(!isModal);
   };
 

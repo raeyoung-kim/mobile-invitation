@@ -21,7 +21,10 @@ const SampleItem: React.FC<Props> = ({ data }) => {
       <p className="font-sanspro font-bold pt-3">{data.title}</p>
       <div className="grid grid-cols-2 gap-3 py-3">
         <Link href={`/sample/${data.id}`}>
-          <a className="bg-black text-white text-center py-2 rounded-md">
+          <a
+            target="_blank"
+            className="bg-black text-white text-center py-2 rounded-md"
+          >
             샘플 보기
           </a>
         </Link>

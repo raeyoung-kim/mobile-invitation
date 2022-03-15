@@ -3,8 +3,8 @@ import {
   AddressLocation,
   Greetings,
   GreetingSample,
-  ImageGallery,
   Month,
+  SwiperImage,
   WayToCome,
 } from 'components';
 import React from 'react';
@@ -67,14 +67,15 @@ const BasicSample: React.FC<Props> = ({ data }) => {
       <Fade>
         {/* 갤러리 이미지 */}
         <div className="py-16 px-5">
-          <ImageGallery
+          <SwiperImage
             data={[
-              'https://picsum.photos/480/650',
-              'https://picsum.photos/480/650',
-              'https://picsum.photos/480/650',
-              'https://picsum.photos/480/650',
-              'https://picsum.photos/480/650',
-              'https://picsum.photos/480/650',
+              'https://i.picsum.photos/id/1004/5616/3744.jpg?hmac=Or7EJnz-ky5bsKa9_frdDcDCR9VhCP8kMnbZV6-WOrY',
+              'https://i.picsum.photos/id/365/5616/3744.jpg?hmac=m9Chefr19BelgN9G4ErJVFBbdvNmA_xlbd0CjATLwhM',
+              'https://i.picsum.photos/id/1047/3264/2448.jpg?hmac=ksy0K4uGgm79hAV7-KvsfHY2ZuPA0Oq1Kii9hqkOCfU',
+              'https://i.picsum.photos/id/106/2592/1728.jpg?hmac=E1-3Hac5ffuCVwYwexdHImxbMFRsv83exZ2EhlYxkgY',
+              'https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k',
+              'https://i.picsum.photos/id/1068/7117/4090.jpg?hmac=Y6xHXrzHsNlbRTbhzZ53Yk-Ux9lUECBLbbP4wb5a1qY',
+              'https://i.picsum.photos/id/129/4910/3252.jpg?hmac=g1KzJMIp75lG_scR48R1baC6TjhVmkEyygSyngKYRsg',
               'https://picsum.photos/480/650',
             ]}
           />
