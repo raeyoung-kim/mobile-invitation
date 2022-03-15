@@ -20,3 +20,4 @@ export { default as AccountNumberItem } from './AccountNumberItem';
 export { default as ImageGallery } from './ImageGallery';
 export { default as SwiperImage } from './SwiperImage';
 export { default as AddressLocation } from './AddressLocation';
+export { default as Portal } from './Portal';

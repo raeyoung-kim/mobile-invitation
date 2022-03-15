@@ -5,7 +5,7 @@ import {
   WayToCome,
   GreetingSample,
   AddressLocation,
-  ImageGallery,
+  SwiperImage,
 } from 'components';
 import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -92,7 +92,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
       <Fade>
         {/* 갤러리 이미지 */}
         <div className="pt-16 pb-32 px-5">
-          <ImageGallery
+          <SwiperImage
             data={[
               'https://i.picsum.photos/id/1004/5616/3744.jpg?hmac=Or7EJnz-ky5bsKa9_frdDcDCR9VhCP8kMnbZV6-WOrY',
               'https://i.picsum.photos/id/365/5616/3744.jpg?hmac=m9Chefr19BelgN9G4ErJVFBbdvNmA_xlbd0CjATLwhM',

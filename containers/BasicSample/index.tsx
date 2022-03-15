@@ -3,8 +3,8 @@ import {
   AddressLocation,
   Greetings,
   GreetingSample,
+  ImageGallery,
   Month,
-  SwiperImage,
   WayToCome,
 } from 'components';
 import React from 'react';
@@ -67,7 +67,7 @@ const BasicSample: React.FC<Props> = ({ data }) => {
       <Fade>
         {/* 갤러리 이미지 */}
         <div className="py-16 px-5">
-          <SwiperImage
+          <ImageGallery
             data={[
               'https://i.picsum.photos/id/1004/5616/3744.jpg?hmac=Or7EJnz-ky5bsKa9_frdDcDCR9VhCP8kMnbZV6-WOrY',
               'https://i.picsum.photos/id/365/5616/3744.jpg?hmac=m9Chefr19BelgN9G4ErJVFBbdvNmA_xlbd0CjATLwhM',
