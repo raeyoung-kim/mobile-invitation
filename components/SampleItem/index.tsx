@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import Image from 'next/image';
 
 interface Props {
   data: Sample;
@@ -10,11 +9,10 @@ const SampleItem: React.FC<Props> = ({ data }) => {
   return (
     <div className="p-3 rounded-lg shadow">
       <div className="relative w-full pb-[100%]">
-        <Image
+        <img
           alt="샘플 이미지"
-          src="https://i.picsum.photos/id/1013/4256/2832.jpg?hmac=UmYgZfqY_sNtHdug0Gd73bHFyf1VvzFWzPXSr5VTnDA"
+          src={data.src}
           className="absolute w-full h-full bg-gray-200 object-cover"
-          layout="fill"
         />
       </div>
 

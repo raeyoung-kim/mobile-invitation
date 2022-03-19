@@ -37,7 +37,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
         <div>
           <img
             alt="메인 이미지"
-            src="https://picsum.photos/480/350"
+            src={data.mainPhoto}
             className="w-full h-auto"
           />
         </div>

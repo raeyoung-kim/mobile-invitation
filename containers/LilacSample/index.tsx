@@ -23,7 +23,7 @@ const LilacSample: FC<Props> = ({ data }) => {
         <div className="px-12">
           <img
             alt="메인 이미지"
-            src="https://picsum.photos/480/550"
+            src={data.mainPhoto}
             className="w-full h-auto"
           />
         </div>

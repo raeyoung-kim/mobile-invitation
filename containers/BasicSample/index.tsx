@@ -25,7 +25,7 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         <div>
           <img
             alt="메인 이미지"
-            src="https://picsum.photos/480/650"
+            src={data.mainPhoto}
             className="w-full h-auto"
           />
           <Fade>

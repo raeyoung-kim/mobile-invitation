@@ -1,1 +1,13 @@
 export { default as KaKaoLogin } from './kakao_login_large_narrow.png';
+export { default as basic_main } from './sample/main/basic_main.jpg';
+export { default as white_main } from './sample/main/white_main.jpg';
+export { default as simple_main } from './sample/main/simple_main.jpg';
+export { default as lilac_main } from './sample/main/lilac_main.jpg';
+export { default as modern_main } from './sample/main/modern_main.jpg';
+export { default as myengjo_main } from './sample/main/myengjo_main.jpg';
+export { default as sample_basic } from './sample/main/sample_basic.png';
+export { default as sample_white } from './sample/main/sample_white.png';
+export { default as sample_modern } from './sample/main/sample_modern.png';
+export { default as sample_simple } from './sample/main/sample_simple.png';
+export { default as sample_lilac } from './sample/main/sample_lilac.png';
+export { default as sample_myengjo } from './sample/main/sample_myengjo.png';

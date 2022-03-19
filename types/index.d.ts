@@ -1,6 +1,7 @@
 type Sample = {
   id: number;
   title: string;
+  src: string;
 };
 
 type BasicInfo = {
