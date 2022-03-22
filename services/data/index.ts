@@ -11,6 +11,15 @@ import {
   basic_main,
   sample_basic,
   sample_myengjo,
+  gallery_1,
+  gallery_2,
+  gallery_3,
+  gallery_4,
+  gallery_5,
+  gallery_6,
+  gallery_7,
+  gallery_8,
+  gallery_9,
 } from 'public/images/assets';
 
 export const BASIC_SAMPLE = {
@@ -71,6 +80,18 @@ export const GREETING_SAMPLE: string[] = [
   '저희 아들과 딸이 한 가정을 이루고자\n혼인의 예를 올리게 되었습니다.\n\n 두사람이 행복한 가정을\n이룰 수 있도록 따뜻한 마음으로\n축복해주시면 감사하겠습니다.',
 ];
 
+export const GALLERY = [
+  gallery_1.src,
+  gallery_2.src,
+  gallery_3.src,
+  gallery_4.src,
+  gallery_5.src,
+  gallery_6.src,
+  gallery_7.src,
+  gallery_8.src,
+  gallery_9.src,
+];
+
 export const BASIC_SAMLE_DATA: ProductInfo = {
   mainPhoto: basic_main.src,
   male: {
@@ -110,7 +131,7 @@ export const BASIC_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
-  galleryPictures: [''],
+  galleryPictures: GALLERY,
   accountNumberList: [
     {
       target: '신랑',
@@ -218,7 +239,7 @@ export const WHITE_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
-  galleryPictures: [''],
+  galleryPictures: GALLERY,
   accountNumberList: [
     {
       target: '신랑',
@@ -326,7 +347,7 @@ export const MYENGJO_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
-  galleryPictures: [''],
+  galleryPictures: GALLERY,
   accountNumberList: [
     {
       target: '신랑',
@@ -434,7 +455,7 @@ export const SIMPLE_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
-  galleryPictures: [''],
+  galleryPictures: GALLERY,
   accountNumberList: [
     {
       target: '신랑',
@@ -542,7 +563,7 @@ export const MODERN_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
-  galleryPictures: [''],
+  galleryPictures: GALLERY,
   accountNumberList: [
     {
       target: '신랑',
@@ -650,7 +671,7 @@ export const LiLAC_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
-  galleryPictures: [''],
+  galleryPictures: GALLERY,
   accountNumberList: [
     {
       target: '신랑',
