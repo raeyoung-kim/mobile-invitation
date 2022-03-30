@@ -7,3 +7,4 @@ export { default as LilacSample } from './LilacSample';
 export { default as SimpleSample } from './SimpleSample';
 export { default as ModernSample } from './ModernSample';
 export { default as MyengjoSample } from './MyengjoSample';
+export { default as Layout } from './Layout';

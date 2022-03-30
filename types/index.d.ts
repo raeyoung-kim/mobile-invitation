@@ -1,3 +1,9 @@
+type User = {
+  id: number;
+  name: string;
+  image: string;
+};
+
 type Sample = {
   id: number;
   title: string;

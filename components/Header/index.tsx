@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import NavIcon from 'components/NavIcon';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+import { useUser } from 'services';
 
 const Header: React.FC = () => {
+  const token = Cookies.get('refreshToken');
+
+  const { user } = useUser();
   const [isNavBar, setIsNavBar] = useState(false);
+
   return (
     <>
       <Head>
@@ -36,14 +42,23 @@ const Header: React.FC = () => {
                     <a>제작내역</a>
                   </Link>
                 </li>
-                <li className="ml-[2px] xs:ml-5">
-                  <Link href="/login">
-                    <a>로그인</a>
-                  </Link>
-                </li>
+                {user.id && token ? (
+                  <li className="ml-[2px] xs:ml-5">
+                    <Link
+                      href={`https://kauth.kakao.com/oauth/logout?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&logout_redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`}
+                    >
+                      <a>로그아웃</a>
+                    </Link>
+                  </li>
+                ) : (
+                  <li className="ml-[2px] xs:ml-5">
+                    <Link href="/login">
+                      <a>로그인</a>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
-
             <NavIcon
               isNav={isNavBar}
               onClick={() => {
