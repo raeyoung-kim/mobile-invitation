@@ -11,11 +11,16 @@ import {
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import DaumPostcode from 'react-daum-postcode';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 const MakeSamplePage: NextPage = () => {
+  const { push } = useRouter();
+  const token = Cookies.get('refreshToken');
+
   const [data, setData] = useState<ProductInfo>({
     mainPhoto: '',
     male: {
@@ -198,6 +203,10 @@ const MakeSamplePage: NextPage = () => {
     onGreetingModal();
   };
 
+  useEffect(() => {
+    !token && push('/login');
+  }, [push, token]);
+
   return (
     <div className="max-w-[1200px] m-auto px-5 pb-[120px] lg:pt-[40px] lg:pb-[280px] lg:px-0">
       {/* 메인사진 */}
@@ -206,7 +215,7 @@ const MakeSamplePage: NextPage = () => {
           메인사진을 선택해주세요 📸
         </strong>
         <p className="description">가로, 세로에 상관 없이 추가 가능합니다.</p>
-        <FileInput />
+        <FileInput limit={1} />
       </section>
 
       {/* 신랑측 정보 */}
@@ -512,7 +521,7 @@ const MakeSamplePage: NextPage = () => {
         <CheckInfo title={'갤러리 사진 🖼 (최대 15장)'}>
           <div>
             <section className="mt-5">
-              <FileInput />
+              <FileInput limit={15} />
             </section>
           </div>
         </CheckInfo>
@@ -593,11 +602,7 @@ const MakeSamplePage: NextPage = () => {
           <div className="pt-2">
             <p className="description">카카오 썸네일 사진</p>
             <p className="description">(최적화 사이즈 400 * 550)</p>
-            <section className="mt-5">
-              <div className="cursor-pointer border-dashed text-[40px] w-[200px] h-[200px] border border-gray-200 mt-5 flex items-center justify-center font-jua text-gray-300">
-                +
-              </div>
-            </section>
+            <FileInput limit={1} />
             <InputTextarea
               inputValue={data.kakaoThumbnailTitle}
               inputPlaceholder="카카오톡 제목 (철수 💗 영희 결혼합니다)"
@@ -622,11 +627,7 @@ const MakeSamplePage: NextPage = () => {
           <div className="pt-2">
             <p className="description">URL 썸네일 사진</p>
             <p className="description">(최적화 사이즈 1200 * 630)</p>
-            <section className="mt-5">
-              <div className="cursor-pointer border-dashed text-[40px] w-[200px] h-[200px] border border-gray-200 mt-5 flex items-center justify-center font-jua text-gray-300">
-                +
-              </div>
-            </section>
+            <FileInput limit={1} />
             <InputTextarea
               inputValue={data.URLThumbnailTitle}
               inputPlaceholder="URL 제목 (철수 💗 영희 결혼합니다)"
