@@ -8,6 +8,7 @@ import {
   Textarea,
   ModalLayout,
   Map,
+  Loading,
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
@@ -17,7 +18,7 @@ import DaumPostcode from 'react-daum-postcode';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import request from 'services/api';
-import { useUser } from 'services';
+import { useData, useUser } from 'services';
 import axios from 'axios';
 
 const MakeSamplePage: NextPage = () => {
@@ -25,115 +26,9 @@ const MakeSamplePage: NextPage = () => {
   const token = Cookies.get('refreshToken');
 
   const { user } = useUser();
+  const { data, setData } = useData();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<ProductInfo>({
-    mainPhoto: '',
-    male: {
-      lastName: '',
-      firstName: '',
-      targetNumber: '',
-      rank: '',
-      fatherName: '',
-      isFather: true,
-      fatherNumber: '',
-      motherName: '',
-      isMother: true,
-      motherNumber: '',
-    },
-    female: {
-      lastName: '',
-      firstName: '',
-      targetNumber: '',
-      rank: '',
-      fatherName: '',
-      isFather: true,
-      fatherNumber: '',
-      motherName: '',
-      isMother: true,
-      motherNumber: '',
-    },
-    greetingMessage: '',
-    isMonth: false,
-    isD_day: false,
-    weddingDate: '',
-    weddingTime: '',
-    weddingAddress: '',
-    weddingAddressName: '',
-    DetailWeddingAddress: '',
-    weddingContact: '',
-    noticeTitle: '',
-    noticeDescription: '',
-    noticeURL: '',
-    noticeButtonName: '',
-    galleryPictures: [],
-    accountNumberList: [
-      {
-        target: '신랑',
-        isCheck: true,
-        targetBank: '',
-        targetAccountNumber: '',
-        accountHolder: '',
-      },
-      {
-        target: '신부',
-        isCheck: false,
-        targetBank: '',
-        targetAccountNumber: '',
-        accountHolder: '',
-      },
-      {
-        target: '신랑측 아버지',
-        isCheck: false,
-        targetBank: '',
-        targetAccountNumber: '',
-        accountHolder: '',
-      },
-      {
-        target: '신랑측 어머니',
-        isCheck: false,
-        targetBank: '',
-        targetAccountNumber: '',
-        accountHolder: '',
-      },
-      {
-        target: '신부측 아버지',
-        isCheck: false,
-        targetBank: '',
-        targetAccountNumber: '',
-        accountHolder: '',
-      },
-      {
-        target: '신부측 어머니',
-        isCheck: false,
-        targetBank: '',
-        targetAccountNumber: '',
-        accountHolder: '',
-      },
-    ],
-    wayToComeList: [
-      {
-        title: '',
-        description: '',
-      },
-      {
-        title: '',
-        description: '',
-      },
-      {
-        title: '',
-        description: '',
-      },
-    ],
-    isGuestBook: false,
-    videoUrl: '',
-    kakaoThumbnail: '',
-    kakaoThumbnailTitle: '',
-    kakaoThumbnailDescription: '',
-    URLThumbnail: '',
-    URLThumbnailTitle: '',
-    URLThumbnailDescription: '',
-  });
 
   const [imageFile, setImageFile] = useState<{
     mainPhoto: null | File;
@@ -205,6 +100,8 @@ const MakeSamplePage: NextPage = () => {
           )
           .map((el: any) => `${el.presigned.url}/${el.presigned.fields.key}`),
       };
+
+      console.log('-------??', result);
 
       /* 샘플 저장 */
       await request.post('/sample', {
@@ -291,6 +188,14 @@ const MakeSamplePage: NextPage = () => {
   useEffect(() => {
     !token && push('/login');
   }, [push, token]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1200px] m-auto px-5 pb-[120px] lg:pt-[40px] lg:pb-[280px] lg:px-0">
@@ -408,19 +313,6 @@ const MakeSamplePage: NextPage = () => {
           </div>
         </div>
         <div className="mt-4 flex items-center">
-          <div className="flex items-center">
-            <input
-              type={'checkbox'}
-              defaultChecked={data.isMonth}
-              onChange={(e) =>
-                setData({
-                  ...data,
-                  isMonth: e.target.checked,
-                })
-              }
-            />
-            <p className="ml-2 description">달력 표시</p>
-          </div>
           <div className="flex items-center ml-4">
             <input
               type={'checkbox'}

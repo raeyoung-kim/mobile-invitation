@@ -41,7 +41,6 @@ type ProductInfo = {
   male: BasicInfo;
   female: BasicInfo;
   greetingMessage: string;
-  isMonth: boolean;
   isD_day: boolean;
   weddingDate: string;
   weddingTime: string;

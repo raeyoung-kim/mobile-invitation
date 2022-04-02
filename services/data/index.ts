@@ -4,13 +4,7 @@ import {
   modern_main,
   myengjo_main,
   simple_main,
-  sample_white,
-  sample_simple,
-  sample_modern,
-  sample_lilac,
   basic_main,
-  sample_basic,
-  sample_myengjo,
   gallery_1,
   gallery_2,
   gallery_3,
@@ -21,51 +15,6 @@ import {
   gallery_8,
   gallery_9,
 } from 'public/images/assets';
-
-export const BASIC_SAMPLE = {
-  id: 1,
-  title: '프리미엄 스타일',
-  src: sample_basic.src,
-};
-
-export const WHITE_SAMPLE = {
-  id: 2,
-  title: '순백 스타일',
-  src: sample_white.src,
-};
-
-export const MYENGJO_SAMPLE = {
-  id: 3,
-  title: '명조 스타일',
-  src: sample_myengjo.src,
-};
-
-export const SIMPLE_SAMPLE = {
-  id: 4,
-  title: '심플 스타일',
-  src: sample_simple.src,
-};
-
-export const MODERN_SAMPLE = {
-  id: 5,
-  title: '모던 스타일',
-  src: sample_modern.src,
-};
-
-export const LILAC_SAMLE = {
-  id: 6,
-  title: '라일락 스타일',
-  src: sample_lilac.src,
-};
-
-export const MAIN_SAMPLE_LIST: Sample[] = [
-  BASIC_SAMPLE,
-  WHITE_SAMPLE,
-  MYENGJO_SAMPLE,
-  SIMPLE_SAMPLE,
-  MODERN_SAMPLE,
-  LILAC_SAMLE,
-];
 
 export const GREETING_SAMPLE: string[] = [
   '각자 서로 다른 길을\n걸어온 저희가 이제 부부의 연으로\n한 길을 걸어가고자 합니다.\n\n항상 처음을 생각하며,\n서로 아껴주고 사랑하며 살겠습니다.\n\n 부디 참석해 주시어 저희의 약속을\n따뜻한 결려로 축복해 주시기 바랍니다.',
@@ -119,7 +68,6 @@ export const BASIC_SAMLE_DATA: ProductInfo = {
     motherNumber: '010-5432-5432',
   },
   greetingMessage: GREETING_SAMPLE[0],
-  isMonth: false,
   isD_day: false,
   weddingDate: '2022-04-30',
   weddingTime: '14:30',
@@ -227,7 +175,6 @@ export const WHITE_SAMLE_DATA: ProductInfo = {
     motherNumber: '010-5432-5432',
   },
   greetingMessage: GREETING_SAMPLE[0],
-  isMonth: false,
   isD_day: false,
   weddingDate: '2022-04-30',
   weddingTime: '14:30',
@@ -335,7 +282,6 @@ export const MYENGJO_SAMLE_DATA: ProductInfo = {
     motherNumber: '010-5432-5432',
   },
   greetingMessage: GREETING_SAMPLE[0],
-  isMonth: false,
   isD_day: false,
   weddingDate: '2022-04-30',
   weddingTime: '14:30',
@@ -443,7 +389,6 @@ export const SIMPLE_SAMLE_DATA: ProductInfo = {
     motherNumber: '010-5432-5432',
   },
   greetingMessage: GREETING_SAMPLE[0],
-  isMonth: false,
   isD_day: false,
   weddingDate: '2022-04-30',
   weddingTime: '14:30',
@@ -551,7 +496,6 @@ export const MODERN_SAMLE_DATA: ProductInfo = {
     motherNumber: '010-5432-5432',
   },
   greetingMessage: GREETING_SAMPLE[0],
-  isMonth: false,
   isD_day: false,
   weddingDate: '2022-04-30',
   weddingTime: '14:30',
@@ -659,7 +603,6 @@ export const LiLAC_SAMLE_DATA: ProductInfo = {
     motherNumber: '010-5432-5432',
   },
   greetingMessage: GREETING_SAMPLE[0],
-  isMonth: false,
   isD_day: false,
   weddingDate: '2022-04-30',
   weddingTime: '14:30',

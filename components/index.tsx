@@ -20,3 +20,4 @@ export { default as ImageGallery } from './ImageGallery';
 export { default as SwiperImage } from './SwiperImage';
 export { default as AddressLocation } from './AddressLocation';
 export { default as Portal } from './Portal';
+export { default as Loading } from './Loading';
