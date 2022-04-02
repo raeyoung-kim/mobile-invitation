@@ -16,11 +16,17 @@ import classNames from 'classnames';
 import DaumPostcode from 'react-daum-postcode';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import request from 'services/api';
+import { useUser } from 'services';
+import axios from 'axios';
 
 const MakeSamplePage: NextPage = () => {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
   const token = Cookies.get('refreshToken');
 
+  const { user } = useUser();
+
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<ProductInfo>({
     mainPhoto: '',
     male: {
@@ -60,7 +66,7 @@ const MakeSamplePage: NextPage = () => {
     noticeDescription: '',
     noticeURL: '',
     noticeButtonName: '',
-    galleryPictures: [''],
+    galleryPictures: [],
     accountNumberList: [
       {
         target: '신랑',
@@ -129,10 +135,89 @@ const MakeSamplePage: NextPage = () => {
     URLThumbnailDescription: '',
   });
 
+  const [imageFile, setImageFile] = useState<{
+    mainPhoto: null | File;
+    kakaoThumbnail: null | File;
+    URLThumbnail: null | File;
+    galleryPictures: File[];
+  }>({
+    mainPhoto: null,
+    kakaoThumbnail: null,
+    URLThumbnail: null,
+    galleryPictures: [],
+  });
+
   const [modal, setModal] = useState({
     isGreetingSample: false,
     isPostcode: false,
   });
+
+  const handleCreateSample = async () => {
+    setIsLoading(true);
+    try {
+      const imgFile = [
+        imageFile.mainPhoto,
+        imageFile.kakaoThumbnail,
+        imageFile.URLThumbnail,
+        ...imageFile.galleryPictures,
+      ].filter((el) => el !== null);
+
+      const imgContentTypes = imgFile.map((el) => el?.type);
+
+      /* presignedUrl 생성하기 */
+      const res = await request.post('/upload/presigned', {
+        contentTypes: imgContentTypes,
+      });
+
+      /* s3 이미지 저장 */
+      await Promise.all(
+        imgFile.map((file, index) => {
+          const { presigned } = res.data[index]; // index ? ;
+          const formData = new FormData();
+          for (const key in presigned.fields) {
+            formData.append(key, presigned.fields[key]);
+          }
+          file && formData.append('Content-Type', file.type);
+          file && formData.append('file', file);
+          return axios.post(presigned.url, formData);
+        })
+      );
+
+      const result = {
+        ...data,
+        mainPhoto: imageFile.mainPhoto
+          ? `${res.data[0].presigned.url}/${res.data[0].presigned.fields.key}`
+          : '',
+        kakaoThumbnail: imageFile.kakaoThumbnail
+          ? `${res.data[1].presigned.url}/${res.data[1].presigned.fields.key}`
+          : '',
+        URLThumbnail: imageFile.URLThumbnail
+          ? `${res.data[2].presigned.url}/${res.data[2].presigned.fields.key}`
+          : '',
+        galleryPictures: res.data
+          ?.slice(
+            imageFile.kakaoThumbnail && imageFile.URLThumbnail
+              ? 3
+              : !imageFile.kakaoThumbnail && !imageFile.URLThumbnail
+              ? 1
+              : 2,
+            res.data.length
+          )
+          .map((el: any) => `${el.presigned.url}/${el.presigned.fields.key}`),
+      };
+
+      /* 샘플 저장 */
+      await request.post('/sample', {
+        userId: user.id,
+        sampleId: query.id,
+        data: result,
+      });
+    } catch {
+      console.error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onTargetClick = (i: number) => {
     const targetList = JSON.parse(JSON.stringify(data.accountNumberList));
@@ -215,7 +300,15 @@ const MakeSamplePage: NextPage = () => {
           메인사진을 선택해주세요 📸
         </strong>
         <p className="description">가로, 세로에 상관 없이 추가 가능합니다.</p>
-        <FileInput limit={1} />
+        <FileInput
+          limit={1}
+          handleFile={(val: File) => {
+            setImageFile({
+              ...imageFile,
+              mainPhoto: val,
+            });
+          }}
+        />
       </section>
 
       {/* 신랑측 정보 */}
@@ -521,7 +614,22 @@ const MakeSamplePage: NextPage = () => {
         <CheckInfo title={'갤러리 사진 🖼 (최대 15장)'}>
           <div>
             <section className="mt-5">
-              <FileInput limit={15} />
+              <FileInput
+                limit={15}
+                handleFile={(val: File) => {
+                  if (imageFile.galleryPictures) {
+                    setImageFile({
+                      ...imageFile,
+                      galleryPictures: [...imageFile.galleryPictures, val],
+                    });
+                  } else {
+                    setImageFile({
+                      ...imageFile,
+                      galleryPictures: [val],
+                    });
+                  }
+                }}
+              />
             </section>
           </div>
         </CheckInfo>
@@ -602,7 +710,15 @@ const MakeSamplePage: NextPage = () => {
           <div className="pt-2">
             <p className="description">카카오 썸네일 사진</p>
             <p className="description">(최적화 사이즈 400 * 550)</p>
-            <FileInput limit={1} />
+            <FileInput
+              limit={1}
+              handleFile={(val: File) => {
+                setImageFile({
+                  ...imageFile,
+                  kakaoThumbnail: val,
+                });
+              }}
+            />
             <InputTextarea
               inputValue={data.kakaoThumbnailTitle}
               inputPlaceholder="카카오톡 제목 (철수 💗 영희 결혼합니다)"
@@ -627,7 +743,15 @@ const MakeSamplePage: NextPage = () => {
           <div className="pt-2">
             <p className="description">URL 썸네일 사진</p>
             <p className="description">(최적화 사이즈 1200 * 630)</p>
-            <FileInput limit={1} />
+            <FileInput
+              limit={1}
+              handleFile={(val: File) => {
+                setImageFile({
+                  ...imageFile,
+                  URLThumbnail: val,
+                });
+              }}
+            />
             <InputTextarea
               inputValue={data.URLThumbnailTitle}
               inputPlaceholder="URL 제목 (철수 💗 영희 결혼합니다)"
@@ -648,7 +772,10 @@ const MakeSamplePage: NextPage = () => {
             />
           </div>
         </CheckInfo>
-        <button className="mt-16 block m-auto bg-black text-white text-center p-3 shadow rounded-md">
+        <button
+          onClick={handleCreateSample}
+          className="mt-16 block m-auto bg-black text-white text-center p-3 shadow rounded-md"
+        >
           샘플 제작하기
         </button>
       </section>

@@ -1,44 +1,29 @@
 import React, { useRef, useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 
-import request from 'services/api';
-
 interface Props {
   limit?: number;
+  handleFile: (val: File) => void;
 }
 
-const FileInput: React.FC<Props> = ({ limit }) => {
+const FileInput: React.FC<Props> = ({ limit, handleFile }) => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [imgSrcList, setImgSrcList] = useState<string[]>([]);
 
   const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filelist = e.target.files;
-    const formData = new FormData();
+    const file = e.target.files?.[0];
 
-    filelist && formData.append('image', filelist?.[0]);
+    const formData = new FormData();
+    file && formData.append('image', file);
+    file && handleFile(file);
 
     const fileReader = new FileReader();
-    filelist && fileReader.readAsDataURL(filelist?.[0]);
+    file && fileReader.readAsDataURL(file);
     fileReader.onload = (e) => {
       const result = e?.target?.result as string;
       setImgSrcList([...imgSrcList, result]);
     };
-
-    try {
-      // await request.post('/upload/image', formData, {
-      //   headers: {
-      //     'content-type': 'multipart/form-data',
-      //   },
-      // });
-      // if (filelist) {
-      //   await request.post('/upload/presigned', {
-      //     contentTypes: filelist[0].type,
-      //   });
-      // }
-    } catch {
-      console.error;
-    }
   };
 
   const handleRemoveImage = (index: number) => {
@@ -73,7 +58,7 @@ const FileInput: React.FC<Props> = ({ limit }) => {
       {limit !== imgSrcList?.length ? (
         <div>
           <input
-            accept="*"
+            accept="image/*"
             ref={fileRef}
             onChange={onFileChange}
             type="file"
