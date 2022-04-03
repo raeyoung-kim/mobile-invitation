@@ -57,12 +57,16 @@ type ProductInfo = {
   wayToComeList: WayToComeInfo[];
   isGuestBook: boolean;
   videoUrl: string;
-  kakaoThumbnail: string;
-  kakaoThumbnailTitle: string;
-  kakaoThumbnailDescription: string;
-  URLThumbnail: string;
-  URLThumbnailTitle: string;
-  URLThumbnailDescription: string;
+  kakao: {
+    thumbnail: string;
+    title: string;
+    description: string;
+  };
+  URL: {
+    thumbnail: string;
+    title: string;
+    description: string;
+  };
 };
 
 type AccountNumber = {
