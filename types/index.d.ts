@@ -37,6 +37,7 @@ type WayToComeInfo = {
 };
 
 type ProductInfo = {
+  id?: string;
   mainPhoto: string;
   male: BasicInfo;
   female: BasicInfo;

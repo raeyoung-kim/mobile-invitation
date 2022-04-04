@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { CgClose } from 'react-icons/cg';
 
 interface Props {
+  data?: string[];
   limit?: number;
   handleFile: (val: File) => void;
 }
 
-const FileInput: React.FC<Props> = ({ limit, handleFile }) => {
+const FileInput: React.FC<Props> = ({ data, limit, handleFile }) => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [imgSrcList, setImgSrcList] = useState<string[]>([]);
@@ -32,6 +34,10 @@ const FileInput: React.FC<Props> = ({ limit, handleFile }) => {
 
     setImgSrcList(result);
   };
+
+  useEffect(() => {
+    data?.length && setImgSrcList(data);
+  }, [data]);
 
   return (
     <div className="flex w-full overflow-auto scrollbar-hide">

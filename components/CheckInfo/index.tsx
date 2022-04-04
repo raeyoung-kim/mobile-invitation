@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
 
 interface Props {
+  isData?: boolean;
   title: string;
   children: JSX.Element;
 }
 
-const CheckInfo: React.FC<Props> = ({ title, children }) => {
+const CheckInfo: React.FC<Props> = ({ isData, title, children }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    isData && setIsChecked(isData);
+  }, [isData]);
 
   return (
     <div className="py-4">

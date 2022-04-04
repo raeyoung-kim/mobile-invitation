@@ -12,7 +12,7 @@ import {
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
-import React, { ChangeEvent, useState, useEffect } from 'react';
+import React, { ChangeEvent, useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import DaumPostcode from 'react-daum-postcode';
 import Cookies from 'js-cookie';
@@ -21,7 +21,7 @@ import request from 'services/api';
 import { useData, useUser } from 'services';
 import axios from 'axios';
 
-const MakeSamplePage: NextPage = () => {
+const HistoryModifyPage: NextPage = () => {
   const { push, query } = useRouter();
   const token = Cookies.get('refreshToken');
 
@@ -47,70 +47,18 @@ const MakeSamplePage: NextPage = () => {
     isPostcode: false,
   });
 
-  const handleCreateSample = async () => {
-    setIsLoading(true);
+  const handleModify = async () => {
     try {
-      const imgFile = [
-        imageFile.mainPhoto,
-        imageFile.kakaoThumbnail,
-        imageFile.URLThumbnail,
-        ...imageFile.galleryPictures,
-      ].filter((el) => el !== null);
+      setIsLoading(true);
+      /* 수정하기 */
 
-      const imgContentTypes = imgFile.map((el) => el?.type);
-
-      /* presignedUrl 생성하기 */
-      const res = await request.post('/upload/presigned', {
-        contentTypes: imgContentTypes,
-      });
-
-      /* s3 이미지 저장 */
-      await Promise.all(
-        imgFile.map((file, index) => {
-          const { presigned } = res.data[index]; // index ? ;
-          const formData = new FormData();
-          for (const key in presigned.fields) {
-            formData.append(key, presigned.fields[key]);
-          }
-          file && formData.append('Content-Type', file.type);
-          file && formData.append('file', file);
-          return axios.post(presigned.url, formData);
-        })
-      );
-
-      const result = {
-        ...data,
-        mainPhoto: imageFile.mainPhoto
-          ? `${res.data[0].presigned.url}/${res.data[0].presigned.fields.key}`
-          : '',
-        kakaoThumbnail: imageFile.kakaoThumbnail
-          ? `${res.data[1].presigned.url}/${res.data[1].presigned.fields.key}`
-          : '',
-        URLThumbnail: imageFile.URLThumbnail
-          ? `${res.data[2].presigned.url}/${res.data[2].presigned.fields.key}`
-          : '',
-        galleryPictures: res.data
-          ?.slice(
-            imageFile.kakaoThumbnail && imageFile.URLThumbnail
-              ? 3
-              : !imageFile.kakaoThumbnail && !imageFile.URLThumbnail
-              ? 1
-              : 2,
-            res.data.length
-          )
-          .map((el: any) => `${el.presigned.url}/${el.presigned.fields.key}`),
-      };
-
-      /* 샘플 저장 */
-      await request.post('/sample', {
-        userId: user.id,
-        sampleId: query.id,
-        ...result,
-      });
-      push('/history');
+      // await request.put('/sample', {
+      //   id: query.id,
+      //   data,
+      // });
+      // push('/history');
     } catch {
       console.error;
-      alert('제작하는데 실패했습니다 :(');
     } finally {
       setIsLoading(false);
     }
@@ -185,9 +133,27 @@ const MakeSamplePage: NextPage = () => {
     onGreetingModal();
   };
 
+  const load = useCallback(async () => {
+    try {
+      const { data } = await request.get('/sample', {
+        params: {
+          id: query.id,
+        },
+      });
+
+      setData(data);
+    } catch {
+      console.error;
+    }
+  }, [query.id, setData]);
+
   useEffect(() => {
     !token && push('/login');
   }, [push, token]);
+
+  useEffect(() => {
+    query.id && load();
+  }, [load, query.id]);
 
   if (isLoading) {
     return (
@@ -206,6 +172,7 @@ const MakeSamplePage: NextPage = () => {
         </strong>
         <p className="description">가로, 세로에 상관 없이 추가 가능합니다.</p>
         <FileInput
+          data={[data.mainPhoto]}
           limit={1}
           handleFile={(val: File) => {
             setImageFile({
@@ -410,7 +377,12 @@ const MakeSamplePage: NextPage = () => {
       </section>
 
       <section className=" mt-6 lg:w-[40%]">
-        <CheckInfo title={'오시는길 🚶 🏃'}>
+        <CheckInfo
+          isData={
+            data.wayToComeList.find((el) => el.title !== '') ? true : false
+          }
+          title={'오시는길 🚶 🏃'}
+        >
           <div>
             {data?.wayToComeList.map((el, i) => {
               return (
@@ -447,7 +419,10 @@ const MakeSamplePage: NextPage = () => {
             })}
           </div>
         </CheckInfo>
-        <CheckInfo title={'공지사항 📃'}>
+        <CheckInfo
+          isData={data.noticeTitle || data.noticeURL ? true : false}
+          title={'공지사항 📃'}
+        >
           <>
             <p className="mt-2 description">
               코로나 안내, 전세버스 안내, 라이브 안내 등 필요하신 공지사항을
@@ -503,11 +478,15 @@ const MakeSamplePage: NextPage = () => {
             </div>
           </>
         </CheckInfo>
-        <CheckInfo title={'갤러리 사진 🖼 (최대 15장)'}>
+        <CheckInfo
+          isData={data.galleryPictures?.length ? true : false}
+          title={'갤러리 사진 🖼 (최대 15장)'}
+        >
           <div>
             <section className="mt-5">
               <FileInput
                 limit={15}
+                data={data.galleryPictures}
                 handleFile={(val: File) => {
                   if (imageFile.galleryPictures) {
                     setImageFile({
@@ -525,7 +504,12 @@ const MakeSamplePage: NextPage = () => {
             </section>
           </div>
         </CheckInfo>
-        <CheckInfo title={'계좌번호 🎀'}>
+        <CheckInfo
+          isData={
+            data.accountNumberList?.find((el) => el.isCheck) ? true : false
+          }
+          title={'계좌번호 🎀'}
+        >
           <>
             <div>
               <div className="grid grid-cols-2 gap-4 py-5">
@@ -578,7 +562,7 @@ const MakeSamplePage: NextPage = () => {
         <CheckInfo title={'방명록 추가 📖'}>
           <></>
         </CheckInfo>
-        <CheckInfo title={'식전 영상 📽'}>
+        <CheckInfo isData={data.videoUrl ? true : false} title={'식전 영상 📽'}>
           <div className="pt-2">
             <p className="description">
               식전영상은 유투브에 업로드 후 <br /> URL을 복사하여 추가해주시면
@@ -598,7 +582,10 @@ const MakeSamplePage: NextPage = () => {
             </div>
           </div>
         </CheckInfo>
-        <CheckInfo title={'카카오톡 공유 시'}>
+        <CheckInfo
+          isData={data.kakao.thumbnail ? true : false}
+          title={'카카오톡 공유 시'}
+        >
           <div className="pt-2">
             <p className="description">카카오 썸네일 사진</p>
             <p className="description">(최적화 사이즈 400 * 550)</p>
@@ -637,7 +624,10 @@ const MakeSamplePage: NextPage = () => {
             />
           </div>
         </CheckInfo>
-        <CheckInfo title={'URL 공유 시'}>
+        <CheckInfo
+          isData={data.URL.thumbnail ? true : false}
+          title={'URL 공유 시'}
+        >
           <div className="pt-2">
             <p className="description">URL 썸네일 사진</p>
             <p className="description">(최적화 사이즈 1200 * 630)</p>
@@ -677,14 +667,14 @@ const MakeSamplePage: NextPage = () => {
           </div>
         </CheckInfo>
         <button
-          onClick={handleCreateSample}
+          onClick={handleModify}
           className="mt-16 block m-auto bg-black text-white text-center p-3 shadow rounded-md"
         >
-          샘플 제작하기
+          수정하기
         </button>
       </section>
     </div>
   );
 };
 
-export default MakeSamplePage;
+export default HistoryModifyPage;
