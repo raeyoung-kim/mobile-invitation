@@ -9,11 +9,22 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }) => {
   const { pathname } = useRouter();
 
+  const get = (children: JSX.Element) => {
+    switch (pathname) {
+      case '/sample/[id]':
+        return null;
+      case '/history/[id]':
+        return null;
+      default:
+        return children;
+    }
+  };
+
   return (
     <>
-      {pathname !== '/sample/[id]' && <Header />}
+      {get(<Header />)}
       {children}
-      {pathname !== '/sample/[id]' && <Footer />}
+      {get(<Footer />)}
     </>
   );
 };
