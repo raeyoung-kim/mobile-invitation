@@ -31,6 +31,7 @@ const HistoryModifyPage: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [imageFile, setImageFile] = useState<{
+    [k: string]: null | File | File[];
     mainPhoto: null | File;
     kakaoThumbnail: null | File;
     URLThumbnail: null | File;
@@ -42,15 +43,63 @@ const HistoryModifyPage: NextPage = () => {
     galleryPictures: [],
   });
 
+  const [imgSrcList, setImgSrcList] = useState<{ [k: string]: string[] }>({
+    mainPhoto: [],
+    kakaoThumbnail: [],
+    URLThumbnail: [],
+    galleryPictures: [],
+  });
+
   const [modal, setModal] = useState({
     isGreetingSample: false,
     isPostcode: false,
   });
 
+  const handleImageModify = (
+    key: string,
+    deleteImage: string | string[],
+    addImage: null | File | File[]
+  ): string | string[] => {
+    console.log(key, deleteImage, addImage);
+    /*
+      - data에서 없어진 이미지 url 삭제하기
+      - imageFile에 있는 이미지 저장
+     */
+    return '';
+  };
+
   const handleModify = async () => {
     try {
       setIsLoading(true);
       /* 수정하기 */
+
+      Object.keys(imgSrcList).forEach((key) => {
+        const value = imgSrcList[key];
+
+        const resultData = data[key]! as string | string[];
+        if (typeof resultData === 'string') {
+          if (resultData !== value[0]) {
+            const result = handleImageModify(key, resultData, imageFile[key]);
+            /*
+            - 변경된 이미지 data 수정
+            */
+          }
+        } else if (resultData?.length) {
+          const deleteList = resultData.filter((el) => !value.includes(el));
+
+          console.log(value);
+
+          const result = handleImageModify(key, deleteList, imageFile[key]);
+
+          /*
+          - 변경된 이미지 data 수정
+          */
+        }
+      });
+
+      /* 
+      - data 정보 수정하기
+      */
 
       // await request.put('/sample', {
       //   id: query.id,
@@ -172,11 +221,17 @@ const HistoryModifyPage: NextPage = () => {
         </strong>
         <p className="description">가로, 세로에 상관 없이 추가 가능합니다.</p>
         <FileInput
-          data={[data.mainPhoto]}
+          data={data.mainPhoto ? [data.mainPhoto] : []}
           limit={1}
           handleFile={(val: File) => {
             setImageFile({
               ...imageFile,
+              mainPhoto: val,
+            });
+          }}
+          handleImgSrcList={(val: string[]) => {
+            setImgSrcList({
+              ...imgSrcList,
               mainPhoto: val,
             });
           }}
@@ -500,6 +555,12 @@ const HistoryModifyPage: NextPage = () => {
                     });
                   }
                 }}
+                handleImgSrcList={(val: string[]) => {
+                  setImgSrcList({
+                    ...imgSrcList,
+                    galleryPictures: val,
+                  });
+                }}
               />
             </section>
           </div>
@@ -591,9 +652,16 @@ const HistoryModifyPage: NextPage = () => {
             <p className="description">(최적화 사이즈 400 * 550)</p>
             <FileInput
               limit={1}
+              data={data.kakao.thumbnail ? [data.kakao.thumbnail] : []}
               handleFile={(val: File) => {
                 setImageFile({
                   ...imageFile,
+                  kakaoThumbnail: val,
+                });
+              }}
+              handleImgSrcList={(val: string[]) => {
+                setImgSrcList({
+                  ...imgSrcList,
                   kakaoThumbnail: val,
                 });
               }}
@@ -633,9 +701,16 @@ const HistoryModifyPage: NextPage = () => {
             <p className="description">(최적화 사이즈 1200 * 630)</p>
             <FileInput
               limit={1}
+              data={data.URL.thumbnail ? [data.URL.thumbnail] : []}
               handleFile={(val: File) => {
                 setImageFile({
                   ...imageFile,
+                  URLThumbnail: val,
+                });
+              }}
+              handleImgSrcList={(val: string[]) => {
+                setImgSrcList({
+                  ...imgSrcList,
                   URLThumbnail: val,
                 });
               }}

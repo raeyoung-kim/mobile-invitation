@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { CgClose } from 'react-icons/cg';
@@ -6,9 +7,15 @@ interface Props {
   data?: string[];
   limit?: number;
   handleFile: (val: File) => void;
+  handleImgSrcList?: (val: string[]) => void;
 }
 
-const FileInput: React.FC<Props> = ({ data, limit, handleFile }) => {
+const FileInput: React.FC<Props> = ({
+  data,
+  limit,
+  handleFile,
+  handleImgSrcList,
+}) => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [imgSrcList, setImgSrcList] = useState<string[]>([]);
@@ -25,19 +32,23 @@ const FileInput: React.FC<Props> = ({ data, limit, handleFile }) => {
     fileReader.onload = (e) => {
       const result = e?.target?.result as string;
       setImgSrcList([...imgSrcList, result]);
+      handleImgSrcList && handleImgSrcList([...imgSrcList, result]);
     };
   };
 
   const handleRemoveImage = (index: number) => {
     const result = JSON.parse(JSON.stringify(imgSrcList));
     result.splice(index, 1);
-
     setImgSrcList(result);
+    handleImgSrcList && handleImgSrcList(result);
   };
 
   useEffect(() => {
-    data?.length && setImgSrcList(data);
-  }, [data]);
+    if (data?.length) {
+      setImgSrcList(data);
+      handleImgSrcList && handleImgSrcList(data);
+    }
+  }, [data?.length]);
 
   return (
     <div className="flex w-full overflow-auto scrollbar-hide">

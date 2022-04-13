@@ -37,6 +37,7 @@ type WayToComeInfo = {
 };
 
 type ProductInfo = {
+  [k: string]: unknown;
   id?: string;
   sampleId?: string;
   mainPhoto: string;

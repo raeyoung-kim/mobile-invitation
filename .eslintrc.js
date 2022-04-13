@@ -26,5 +26,6 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.tsx', '.ts'] },
     ],
     '@next/next/no-img-element': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
 };
