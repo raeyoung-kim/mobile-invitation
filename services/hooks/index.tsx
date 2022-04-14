@@ -140,16 +140,12 @@ export const useData = () => {
     ],
     isGuestBook: false,
     videoUrl: '',
-    kakao: {
-      thumbnail: '',
-      title: '',
-      description: '',
-    },
-    URL: {
-      thumbnail: '',
-      title: '',
-      description: '',
-    },
+    kakaoThumbnail: '',
+    kakaoTitle: '',
+    kakaoDescription: '',
+    URLThumbnail: '',
+    URLTitle: '',
+    URLDescription: '',
   });
 
   return {

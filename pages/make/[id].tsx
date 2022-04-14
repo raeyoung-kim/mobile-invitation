@@ -67,7 +67,7 @@ const MakeSamplePage: NextPage = () => {
       /* s3 이미지 저장 */
       await Promise.all(
         imgFile.map((file, index) => {
-          const { presigned } = res.data[index]; // index ? ;
+          const { presigned } = res.data[index];
           const formData = new FormData();
           for (const key in presigned.fields) {
             formData.append(key, presigned.fields[key]);
@@ -612,26 +612,20 @@ const MakeSamplePage: NextPage = () => {
               }}
             />
             <InputTextarea
-              inputValue={data.kakao.title}
+              inputValue={data.kakaoTitle}
               inputPlaceholder="카카오톡 제목 (철수 💗 영희 결혼합니다)"
-              textareaValue={data.kakao.description}
+              textareaValue={data.kakaoDescription}
               textareaPlaceholder="카카오톡 내용 (ex. 식장명, 예식일자)"
               onChageInput={(e) =>
                 setData({
                   ...data,
-                  kakao: {
-                    ...data.kakao,
-                    title: e.target.value,
-                  },
+                  kakaoTitle: e.target.value,
                 })
               }
               onChangeTextarea={(e) =>
                 setData({
                   ...data,
-                  kakao: {
-                    ...data.kakao,
-                    description: e.target.value,
-                  },
+                  kakaoDescription: e.target.value,
                 })
               }
             />
@@ -651,26 +645,20 @@ const MakeSamplePage: NextPage = () => {
               }}
             />
             <InputTextarea
-              inputValue={data.URL.title}
+              inputValue={data.URLTitle}
               inputPlaceholder="URL 제목 (철수 💗 영희 결혼합니다)"
-              textareaValue={data.URL.description}
+              textareaValue={data.URLDescription}
               textareaPlaceholder="URL 내용 (ex. 식장명, 예식일자)"
               onChageInput={(e) =>
                 setData({
                   ...data,
-                  URL: {
-                    ...data.URL,
-                    title: e.target.value,
-                  },
+                  URLTitle: e.target.value,
                 })
               }
               onChangeTextarea={(e) =>
                 setData({
                   ...data,
-                  URL: {
-                    ...data.URL,
-                    description: e.target.value,
-                  },
+                  URLDescription: e.target.value,
                 })
               }
             />

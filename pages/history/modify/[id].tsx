@@ -55,57 +55,132 @@ const HistoryModifyPage: NextPage = () => {
     isPostcode: false,
   });
 
-  const handleImageModify = (
+  const handleImageModify = async (
     key: string,
     deleteImage: string | string[],
     addImage: null | File | File[]
-  ): string | string[] => {
-    console.log(key, deleteImage, addImage);
-    /*
-      - data에서 없어진 이미지 url 삭제하기
-      - imageFile에 있는 이미지 저장
-     */
-    return '';
+  ) => {
+    if (Array.isArray(deleteImage)) {
+      if (deleteImage.length) {
+        deleteImage.forEach(async (image) => {
+          const id = image.split('/').slice(-1)[0];
+          await request.delete(`/upload/image/${id}`);
+        });
+      }
+    } else if (Array.isArray(addImage)) {
+      if (addImage.length) {
+        const imgContentTypes = addImage.map((el) => el?.type);
+        const res = await request.post('/upload/presigned', {
+          contentTypes: imgContentTypes,
+        });
+        await Promise.all(
+          addImage.map((file, index) => {
+            const { presigned } = res.data[index];
+            const formData = new FormData();
+            for (const key in presigned.fields) {
+              formData.append(key, presigned.fields[key]);
+            }
+            file && formData.append('Content-Type', file.type);
+            file && formData.append('file', file);
+            return axios.post(presigned.url, formData);
+          })
+        );
+        return res.data;
+      }
+    } else if (deleteImage) {
+      const id = deleteImage.split('/').slice(-1)[0];
+      await request.delete(`/upload/image/${id}`);
+    } else if (addImage) {
+      const imgContentTypes = addImage.type;
+      const res = await request.post('/upload/presigned', {
+        contentTypes: imgContentTypes,
+      });
+      const { presigned } = res.data[0];
+      const formData = new FormData();
+      for (const key in presigned.fields) {
+        formData.append(key, presigned.fields[key]);
+      }
+      formData.append('Content-Type', addImage.type);
+      formData.append('file', addImage);
+      await axios.post(presigned.url, formData);
+
+      return res.data[0];
+    }
   };
 
   const handleModify = async () => {
     try {
       setIsLoading(true);
-      /* 수정하기 */
 
-      Object.keys(imgSrcList).forEach((key) => {
-        const value = imgSrcList[key];
+      const result: {
+        [k: string]: string | string[];
+      } = {
+        mainPhoto: data.mainPhoto,
+        galleryPictures: data.galleryPictures,
+        kakaoThumbnail: data.kakaoThumbnail,
+        URLThumbnail: data.URLThumbnail,
+      };
 
-        const resultData = data[key]! as string | string[];
-        if (typeof resultData === 'string') {
-          if (resultData !== value[0]) {
-            const result = handleImageModify(key, resultData, imageFile[key]);
-            /*
-            - 변경된 이미지 data 수정
-            */
+      if (!imgSrcList.mainPhoto.length && !imageFile.mainPhoto) {
+        return alert('메인사진을 선택해주세요 📸');
+      }
+
+      const keyList = Object.keys(imgSrcList);
+
+      await Promise.all(
+        keyList.map(async (key) => {
+          const chageValue = imgSrcList[key];
+          const currentData = data[key]! as string | string[];
+
+          if (typeof currentData === 'string') {
+            if (currentData !== chageValue[0]) {
+              const addImageUrl = await handleImageModify(
+                key,
+                currentData,
+                imageFile[key]
+              );
+              result[key] = '';
+              if (addImageUrl) {
+                result[key] = addImageUrl;
+              }
+            }
+          } else if (currentData?.length) {
+            const deleteImgList = currentData.filter(
+              (el) => !chageValue.includes(el)
+            );
+
+            const addImgList = await handleImageModify(
+              key,
+              deleteImgList,
+              imageFile[key]
+            );
+
+            if (deleteImgList) {
+              const filterList = currentData.filter((el) =>
+                chageValue.includes(el)
+              );
+              result[key] = filterList;
+            }
+
+            if (addImgList?.length) {
+              result[key] = [
+                ...(result[key]! as string[]),
+                ...(addImgList! as string[]),
+              ];
+            }
           }
-        } else if (resultData?.length) {
-          const deleteList = resultData.filter((el) => !value.includes(el));
+        })
+      );
 
-          console.log(value);
-
-          const result = handleImageModify(key, deleteList, imageFile[key]);
-
-          /*
-          - 변경된 이미지 data 수정
-          */
-        }
+      await request.put('/sample', {
+        id: query.id,
+        data: {
+          ...data,
+          ...result,
+        },
       });
 
-      /* 
-      - data 정보 수정하기
-      */
-
-      // await request.put('/sample', {
-      //   id: query.id,
-      //   data,
-      // });
-      // push('/history');
+      push('/history');
     } catch {
       console.error;
     } finally {
@@ -644,7 +719,7 @@ const HistoryModifyPage: NextPage = () => {
           </div>
         </CheckInfo>
         <CheckInfo
-          isData={data.kakao.thumbnail ? true : false}
+          isData={data.kakaoThumbnail ? true : false}
           title={'카카오톡 공유 시'}
         >
           <div className="pt-2">
@@ -652,7 +727,7 @@ const HistoryModifyPage: NextPage = () => {
             <p className="description">(최적화 사이즈 400 * 550)</p>
             <FileInput
               limit={1}
-              data={data.kakao.thumbnail ? [data.kakao.thumbnail] : []}
+              data={data.kakaoThumbnail ? [data.kakaoThumbnail] : []}
               handleFile={(val: File) => {
                 setImageFile({
                   ...imageFile,
@@ -667,33 +742,27 @@ const HistoryModifyPage: NextPage = () => {
               }}
             />
             <InputTextarea
-              inputValue={data.kakao.title}
+              inputValue={data.kakaoTitle}
               inputPlaceholder="카카오톡 제목 (철수 💗 영희 결혼합니다)"
-              textareaValue={data.kakao.description}
+              textareaValue={data.kakaoDescription}
               textareaPlaceholder="카카오톡 내용 (ex. 식장명, 예식일자)"
               onChageInput={(e) =>
                 setData({
                   ...data,
-                  kakao: {
-                    ...data.kakao,
-                    title: e.target.value,
-                  },
+                  kakaoTitle: e.target.value,
                 })
               }
               onChangeTextarea={(e) =>
                 setData({
                   ...data,
-                  kakao: {
-                    ...data.kakao,
-                    description: e.target.value,
-                  },
+                  kakaoDescription: e.target.value,
                 })
               }
             />
           </div>
         </CheckInfo>
         <CheckInfo
-          isData={data.URL.thumbnail ? true : false}
+          isData={data.URLThumbnail ? true : false}
           title={'URL 공유 시'}
         >
           <div className="pt-2">
@@ -701,7 +770,7 @@ const HistoryModifyPage: NextPage = () => {
             <p className="description">(최적화 사이즈 1200 * 630)</p>
             <FileInput
               limit={1}
-              data={data.URL.thumbnail ? [data.URL.thumbnail] : []}
+              data={data.URLThumbnail ? [data.URLThumbnail] : []}
               handleFile={(val: File) => {
                 setImageFile({
                   ...imageFile,
@@ -716,26 +785,20 @@ const HistoryModifyPage: NextPage = () => {
               }}
             />
             <InputTextarea
-              inputValue={data.URL.title}
+              inputValue={data.URLTitle}
               inputPlaceholder="URL 제목 (철수 💗 영희 결혼합니다)"
-              textareaValue={data.URL.description}
+              textareaValue={data.URLDescription}
               textareaPlaceholder="URL 내용 (ex. 식장명, 예식일자)"
               onChageInput={(e) =>
                 setData({
                   ...data,
-                  URL: {
-                    ...data.URL,
-                    title: e.target.value,
-                  },
+                  URLTitle: e.target.value,
                 })
               }
               onChangeTextarea={(e) =>
                 setData({
                   ...data,
-                  URL: {
-                    ...data.URL,
-                    description: e.target.value,
-                  },
+                  URLDescription: e.target.value,
                 })
               }
             />
