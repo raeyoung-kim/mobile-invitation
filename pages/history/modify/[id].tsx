@@ -62,17 +62,21 @@ const HistoryModifyPage: NextPage = () => {
   ) => {
     if (Array.isArray(deleteImage)) {
       if (deleteImage.length) {
-        deleteImage.forEach(async (image) => {
-          const id = image.split('/').slice(-1)[0];
-          await request.delete(`/upload/image/${id}`);
-        });
+        await Promise.all(
+          deleteImage.map(async (image) => {
+            const id = image.split('/').slice(-1)[0];
+            await request.delete(`/upload/image/${id}`);
+          })
+        );
       }
-    } else if (Array.isArray(addImage)) {
+    }
+    if (Array.isArray(addImage)) {
       if (addImage.length) {
         const imgContentTypes = addImage.map((el) => el?.type);
         const res = await request.post('/upload/presigned', {
           contentTypes: imgContentTypes,
         });
+
         await Promise.all(
           addImage.map((file, index) => {
             const { presigned } = res.data[index];
@@ -85,26 +89,34 @@ const HistoryModifyPage: NextPage = () => {
             return axios.post(presigned.url, formData);
           })
         );
-        return res.data;
+
+        const result = res.data.map((el: any) => {
+          return `${el.presigned.url}/${el.presigned.fields.key}`;
+        });
+
+        return result;
       }
-    } else if (deleteImage) {
+    }
+    if (typeof deleteImage === 'string' && deleteImage) {
       const id = deleteImage.split('/').slice(-1)[0];
       await request.delete(`/upload/image/${id}`);
-    } else if (addImage) {
-      const imgContentTypes = addImage.type;
+    }
+    if (!Array.isArray(addImage) && addImage) {
+      const addImg = addImage! as File;
+      const imgContentTypes = addImg.type;
       const res = await request.post('/upload/presigned', {
-        contentTypes: imgContentTypes,
+        contentTypes: [imgContentTypes],
       });
       const { presigned } = res.data[0];
       const formData = new FormData();
       for (const key in presigned.fields) {
         formData.append(key, presigned.fields[key]);
       }
-      formData.append('Content-Type', addImage.type);
-      formData.append('file', addImage);
+      formData.append('Content-Type', addImg.type);
+      formData.append('file', addImg);
       await axios.post(presigned.url, formData);
 
-      return res.data[0];
+      return `${res.data[0].presigned.url}/${res.data[0].presigned.fields.key}`;
     }
   };
 
