@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import { BsTrash } from 'react-icons/bs';
+import request from 'services/api';
+import { useRouter } from 'next/router';
 
 interface Props {
   data: {
@@ -10,13 +12,18 @@ interface Props {
 }
 
 const HistoryItem: FC<Props> = ({ data }) => {
-  const onDelete = () => {
+  const { reload } = useRouter();
+  const onDelete = async () => {
     try {
-      // 이미지 삭제 및 데이터 삭제
+      if (confirm('제작 샘플을 삭제하시겠습니까?')) {
+        await request.delete(`/sample/${data.id}`);
+        reload();
+      }
     } catch {
       console.error;
     }
   };
+
   return (
     <div className="p-3 rounded-lg shadow">
       <Link href={`/history/${data.id}`}>
