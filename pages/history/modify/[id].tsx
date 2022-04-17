@@ -304,7 +304,7 @@ const HistoryModifyPage: NextPage = () => {
       {/* 메인사진 */}
       <section className="mt-10">
         <strong className="font-jua text-[19px]">
-          메인사진을 선택해주세요 📸
+          메인 사진을 선택해 주세요 📸
         </strong>
         <p className="description">가로, 세로에 상관 없이 추가 가능합니다.</p>
         <FileInput

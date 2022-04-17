@@ -31,3 +31,38 @@ export const getTime = (time: string): string => {
   }:${timeArr[1]}${Number(timeArr[0]) > 12 ? 'PM' : 'AM'}`;
   return result;
 };
+
+export const handleCheckSample = (
+  mainPhoto: null | File,
+  data: ProductInfo
+): boolean => {
+  if (!mainPhoto) {
+    alert('메인 사진을 선택해 주세요 📸');
+    return true;
+  }
+  if (!data.male.lastName && !data.male.firstName) {
+    alert('신랑 성함을 입력해 주세요 :)');
+    return true;
+  }
+  if (!data.female.lastName && !data.female.firstName) {
+    alert('신부 성함을 입력해 주세요 :)');
+    return true;
+  }
+  if (!data.weddingDate || !data.weddingTime) {
+    alert('예식 일자를 입력해 주세요 :)');
+    return true;
+  }
+  if (!data.weddingAddress || !data.weddingAddressName) {
+    alert('예식장 위치와 예식장명을 입력해 주세요 :)');
+    return true;
+  }
+  if (!data.weddingContact) {
+    alert('예식장 연락처를 입력해 주세요 :)');
+    return true;
+  }
+  if (!data.greetingMessage) {
+    alert('인사말을 입력해 주세요 :)');
+    return true;
+  }
+  return false;
+};

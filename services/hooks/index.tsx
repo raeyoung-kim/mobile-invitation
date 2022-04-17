@@ -83,7 +83,7 @@ export const useData = () => {
     accountNumberList: [
       {
         target: '신랑',
-        isCheck: true,
+        isCheck: false,
         targetBank: '',
         targetAccountNumber: '',
         accountHolder: '',

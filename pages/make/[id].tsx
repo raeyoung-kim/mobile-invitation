@@ -18,7 +18,7 @@ import DaumPostcode from 'react-daum-postcode';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import request from 'services/api';
-import { useData, useUser } from 'services';
+import { handleCheckSample, useData, useUser } from 'services';
 import axios from 'axios';
 
 const MakeSamplePage: NextPage = () => {
@@ -50,6 +50,10 @@ const MakeSamplePage: NextPage = () => {
   const handleCreateSample = async () => {
     setIsLoading(true);
     try {
+      if (handleCheckSample(imageFile.mainPhoto, data)) {
+        return;
+      }
+
       const imgFile = [
         imageFile.mainPhoto,
         imageFile.kakaoThumbnail,
@@ -202,7 +206,7 @@ const MakeSamplePage: NextPage = () => {
       {/* 메인사진 */}
       <section className="mt-10">
         <strong className="font-jua text-[19px]">
-          메인사진을 선택해주세요 📸
+          메인 사진을 선택해 주세요 📸
         </strong>
         <p className="description">가로, 세로에 상관 없이 추가 가능합니다.</p>
         <FileInput
