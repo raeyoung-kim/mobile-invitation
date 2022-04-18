@@ -88,7 +88,17 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
         </div>
 
         <div className="mt-2 flex">
-          <input className="border rounded py-2 px-3" type={'checkbox'} />
+          <input
+            className="border rounded py-2 px-3"
+            type={'checkbox'}
+            checked={!data.isFather}
+            onChange={(e) => {
+              setData({
+                ...data,
+                isFather: !e.target.checked,
+              });
+            }}
+          />
           <p className="font-sanspro text-gray-500 text-xs px-2">
             고인이시면 체크하여주세요
           </p>
@@ -120,7 +130,16 @@ const TargetInfo: React.FC<Props> = ({ target, data, setData }) => {
           />
         </div>
         <div className="mt-2 flex">
-          <input type={'checkbox'} />
+          <input
+            type={'checkbox'}
+            checked={!data.isMother}
+            onChange={(e) => {
+              setData({
+                ...data,
+                isMother: !e.target.checked,
+              });
+            }}
+          />
           <p className="font-sanspro text-gray-500 text-xs px-2">
             고인이시면 체크하여주세요
           </p>

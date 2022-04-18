@@ -75,13 +75,17 @@ const SimpleSample: FC<Props> = ({ data }) => {
             className={'font-thin text-sm'}
             male={{
               fatheName: data.male.fatherName,
+              isFather: data.male.isFather,
               motherName: data.male.motherName,
+              isMother: data.male.isMother,
               rank: data.male.rank,
               name: data.male.lastName + data.male.firstName,
             }}
             female={{
               fatheName: data.female.fatherName,
+              isFather: data.female.isFather,
               motherName: data.female.motherName,
+              isMother: data.female.isMother,
               rank: data.female.rank,
               name: data.female.lastName + data.female.firstName,
             }}
@@ -134,6 +138,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>{/* 방명록 */}</Fade>
       <Fade>
+        {/* 식전 영상 */}
         {data?.videoUrl ? (
           <iframe
             className="w-full h-80 mt-[100px]"

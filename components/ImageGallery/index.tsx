@@ -23,9 +23,11 @@ const ImageGallery: FC<Props> = ({ data }) => {
       {data?.length ? (
         <div>
           <div
-            className={classNames('grid grid-cols-2 gap-1 transition-all', {
-              'overflow-hidden min-h-[280px] h-[calc(100vw*1.1)] max-h-[540px]':
+            className={classNames('transition-all ', {
+              'overflow-hidden min-h-[calc(100vw*0.1] h-[calc(100vw*0.3)] max-h-[calc(100vw*0.1]':
                 !isMore,
+              'w-full': data.length === 1,
+              'grid grid-cols-2 gap-1': data.length > 1,
             })}
           >
             {data.map((src, i) => {
@@ -43,12 +45,15 @@ const ImageGallery: FC<Props> = ({ data }) => {
               );
             })}
           </div>
-          <button
-            className="block mx-auto my-4 text-xs"
-            onClick={() => setIsMore(!isMore)}
-          >
-            {isMore ? '사진 보기 닫기' : '더 많은 사진 보기 click'}
-          </button>
+
+          {data?.length > 4 ? (
+            <button
+              className="block mx-auto my-4 text-xs"
+              onClick={() => setIsMore(!isMore)}
+            >
+              {isMore ? '사진 보기 닫기' : '더 많은 사진 보기 click'}
+            </button>
+          ) : null}
           {isModal && (
             <ImageSliderModal
               data={data}
