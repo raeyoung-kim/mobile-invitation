@@ -35,7 +35,7 @@ const AccountNumbers: FC<Props> = ({ data, male, female, fontFamily }) => {
           >
             마음 전하실 곳
           </p>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="flex justify-around">
             {/* 신랑, 신부 */}
             {main.map((el) => {
               return (
@@ -92,7 +92,7 @@ const AccountNumbers: FC<Props> = ({ data, male, female, fontFamily }) => {
                 </p>
                 {maleList.map((el, i) => {
                   return (
-                    <div key={i} className="pb-8">
+                    <div key={i}>
                       <AccountNumberItem
                         fontSize="text-sm"
                         fontFamily={fontFamily}
@@ -133,7 +133,7 @@ const AccountNumbers: FC<Props> = ({ data, male, female, fontFamily }) => {
                 </p>
                 {femaleList.map((el, i) => {
                   return (
-                    <div key={i} className="pb-8">
+                    <div key={i}>
                       <AccountNumberItem
                         fontSize="text-sm"
                         fontFamily={fontFamily}

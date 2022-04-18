@@ -28,7 +28,7 @@ const AccountNumberItem: FC<Props> = ({ data, fontSize, fontFamily }) => {
         <div className={'flex justify-center'}>
           <div>
             <div
-              className={classnames('text-base mt-9', {
+              className={classnames('text-base mt-9 text-center', {
                 'text-sm': fontSize === 'text-sm',
                 'font-myeongjo': fontFamily === 'font-myeongjo',
                 'font-thin': fontFamily === 'font-thin',
@@ -47,10 +47,10 @@ const AccountNumberItem: FC<Props> = ({ data, fontSize, fontFamily }) => {
                 })}
               >
                 <a href={`tel:${data.number}`}>
-                  <IoCall />
+                  <IoCall className="mx-1" />
                 </a>
                 <a href={`sms:${data.number}`}>
-                  <IoMail />
+                  <IoMail className="mx-1" />
                 </a>
               </div>
             ) : null}
