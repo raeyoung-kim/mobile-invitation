@@ -9,7 +9,7 @@ import {
 } from 'components';
 import React from 'react';
 import { Fade } from 'react-awesome-reveal';
-import { getTime, getWeek } from 'services';
+import { getContvertToEmbeddedURL, getTime, getWeek } from 'services';
 
 interface Props {
   data: ProductInfo;
@@ -117,6 +117,15 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         </div>
       </Fade>
       <Fade>{/* 방명록 */}</Fade>
+      <Fade>
+        {/* 식전 영상 */}
+        {data?.videoUrl ? (
+          <iframe
+            className="w-full h-80 mt-[100px]"
+            src={getContvertToEmbeddedURL(data.videoUrl)}
+          />
+        ) : null}
+      </Fade>
       <Fade>
         <div className="px-5 pt-14 pb-32">
           <AccountNumbers
