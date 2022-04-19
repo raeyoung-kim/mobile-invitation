@@ -48,6 +48,9 @@ const WhiteSample: FC<Props> = ({ data }) => {
         {/* 달력 */}
         <div className="flex justify-center px-5">
           <Month.BlackStyle
+            isD_day={data.isD_day}
+            male={data.male.firstName}
+            female={data.female.firstName}
             isTitle={false}
             date={data.weddingDate}
             time={data.weddingTime}

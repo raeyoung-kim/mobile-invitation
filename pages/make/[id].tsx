@@ -107,7 +107,7 @@ const MakeSamplePage: NextPage = () => {
 
       /* 샘플 저장 */
       await request.post('/sample', {
-        userId: user.id,
+        userId: String(user.id),
         sampleId: query.id,
         ...result,
       });

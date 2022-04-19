@@ -78,6 +78,9 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         {/* 달력 */}
         <div className="py-16 px-5 flex justify-center">
           <Month
+            male={data.male.firstName}
+            female={data.female.firstName}
+            isD_day={data.isD_day}
             date={data.weddingDate}
             time={data.weddingTime}
             fontFamily={'font-thin'}

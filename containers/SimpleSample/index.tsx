@@ -61,6 +61,9 @@ const SimpleSample: FC<Props> = ({ data }) => {
         {/* 달력 */}
         <div className="px-5 flex justify-center">
           <Month
+            isD_day={data.isD_day}
+            male={data.male.firstName}
+            female={data.female.firstName}
             isTitle={false}
             date={data.weddingDate}
             time={data.weddingTime}

@@ -76,6 +76,9 @@ const MyengjoSample: FC<Props> = ({ data }) => {
         {/* 달력 */}
         <div className="px-5">
           <Month.BlackStyle
+            isD_day={data.isD_day}
+            male={data.male.firstName}
+            female={data.female.firstName}
             date={data.weddingDate}
             time={data.weddingTime}
             fontFamily={'font-myeongjo'}

@@ -51,12 +51,12 @@ const HistoryPage: NextPage = () => {
   }
 
   return (
-    <div>
+    <div className="flex justify-center">
       {data?.length ? (
-        <div className="min-h-screen max-w-[1200px] m-auto px-5 pb-[120px] md:grid md:grid-cols-3 md:gap-4 lg:pt-[40px] lg:pb-[280px] lg:px-0">
+        <div className="min-h-screen max-w-[1200px] px-5 pb-[120px] w-full md:max-w-[450px] lg:pt-[40px] lg:pb-[280px] lg:px-0">
           {data.map((el) => {
             return (
-              <div key={el.id} className="max-h-52 mt-8">
+              <div key={el.id} className="mt-8">
                 <HistoryItem
                   data={{
                     id: el.id || '',

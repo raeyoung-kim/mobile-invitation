@@ -77,3 +77,19 @@ export const getContvertToEmbeddedURL = (url: string) => {
   }
   return url;
 };
+
+export const getD_day = (date: string) => {
+  const today = new Date();
+  const dday = new Date(date);
+  const gap = dday.getTime() - today.getTime();
+  const result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+  if (result < 0) {
+    return `${Math.abs(result)}일 지났습니다.`;
+  } else if (result === 0) {
+    return '오늘입니다';
+  } else if (result > 0) {
+    return `${result}일 남았습니다.`;
+  }
+
+  return result;
+};

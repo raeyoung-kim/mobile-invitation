@@ -1,10 +1,13 @@
 import classNames from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import { useCallback } from 'react';
-import { getWeek } from 'services';
+import { getD_day, getWeek } from 'services';
 import BlackStyle from './BlackStyle';
 
 interface Props {
+  isD_day?: boolean;
+  male?: string;
+  female?: string;
   isTitle?: boolean;
   date: string;
   time: string;
@@ -15,7 +18,15 @@ interface IMonth extends FC<Props> {
   BlackStyle: typeof BlackStyle;
 }
 
-const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
+const Month: IMonth = ({
+  isD_day,
+  male,
+  female,
+  isTitle = true,
+  date,
+  time,
+  fontFamily,
+}) => {
   const title = date.split('-');
   const timeArr = time.split(':');
   const [dates, setDates] = useState<null | string[]>(null);
@@ -47,57 +58,70 @@ const Month: IMonth = ({ isTitle = true, date, time, fontFamily }) => {
 
   return (
     <div>
-      {isTitle ? (
+      <div>
+        {isTitle ? (
+          <div
+            className={classNames('py-3 text-[#d69191]', {
+              'font-myeongjo': fontFamily === 'font-myeongjo',
+              'font-thin': fontFamily === 'font-thin',
+              'font-stylish': fontFamily === 'font-stylish',
+            })}
+          >
+            <p className="text-center text-2xl">{`${title[1]}월 ${title[2]}일`}</p>
+            <p className="text-center">{`${getWeek(date)}요일 ${
+              Number(timeArr[0]) > 12 ? '오후' : '오전'
+            } ${
+              Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : timeArr[0]
+            }시 ${timeArr[1]}분`}</p>
+          </div>
+        ) : null}
+
         <div
-          className={classNames('py-3 text-[#d69191]', {
+          className={classNames('grid grid-cols-7 text-xs', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
             'font-stylish': fontFamily === 'font-stylish',
           })}
         >
-          <p className="text-center text-2xl">{`${title[1]}월 ${title[2]}일`}</p>
-          <p className="text-center">{`${getWeek(date)}요일 ${
-            Number(timeArr[0]) > 12 ? '오후' : '오전'
-          } ${
-            Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : timeArr[0]
-          }시 ${timeArr[1]}분`}</p>
-        </div>
-      ) : null}
-
-      <div
-        className={classNames('grid grid-cols-7 text-xs', {
-          'font-myeongjo': fontFamily === 'font-myeongjo',
-          'font-thin': fontFamily === 'font-thin',
-          'font-stylish': fontFamily === 'font-stylish',
-        })}
-      >
-        <div className="date text-[#d69191] w-full">SUN</div>
-        <div className="date w-full">MON</div>
-        <div className="date w-full">TUE</div>
-        <div className="date w-full">WEN</div>
-        <div className="date w-full">THU</div>
-        <div className="date w-full">FRI</div>
-        <div className="date w-full">SAT</div>
-        {dates?.map((el, i) => {
-          return (
-            <div
-              key={i}
-              className={classNames('w-full', {
-                'text-[#d69191] text-xs': i % 7 === 0,
-              })}
-            >
-              <p
-                className={classNames('date text-xs', {
-                  'border border-[#d69191] rounded-[50px] bg-[#d69191] text-white':
-                    el === title[2],
+          <div className="date text-[#d69191] w-full">SUN</div>
+          <div className="date w-full">MON</div>
+          <div className="date w-full">TUE</div>
+          <div className="date w-full">WEN</div>
+          <div className="date w-full">THU</div>
+          <div className="date w-full">FRI</div>
+          <div className="date w-full">SAT</div>
+          {dates?.map((el, i) => {
+            return (
+              <div
+                key={i}
+                className={classNames('w-full', {
+                  'text-[#d69191] text-xs': i % 7 === 0,
                 })}
               >
-                {el}
-              </p>
-            </div>
-          );
-        })}
+                <p
+                  className={classNames('date text-xs', {
+                    'border border-[#d69191] rounded-[50px] bg-[#d69191] text-white':
+                      el === title[2],
+                  })}
+                >
+                  {el}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
+      {isD_day && (
+        <p
+          className={classNames('text-center mt-7 text-[13px]', {
+            'font-myeongjo': fontFamily === 'font-myeongjo',
+            'font-thin': fontFamily === 'font-thin',
+            'font-stylish': fontFamily === 'font-stylish',
+          })}
+        >
+          {male || ''} ♥ {female || ''} 결혼식이 {getD_day(date)}
+        </p>
+      )}
     </div>
   );
 };
