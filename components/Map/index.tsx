@@ -19,6 +19,7 @@ const Map: React.FC<Props> = ({ address }) => {
       level: 3,
     };
     const map = new window.kakao.maps.Map(container, options);
+
     const geocoder = new window.kakao.maps.services.Geocoder();
 
     geocoder.addressSearch(address, function (result: any, status: any) {
@@ -32,6 +33,7 @@ const Map: React.FC<Props> = ({ address }) => {
           position: coords,
         });
         map.setCenter(coords);
+        map.setZoomable(false);
       }
     });
   }, [address]);

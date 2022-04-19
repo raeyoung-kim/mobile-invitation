@@ -5,6 +5,7 @@ import {
   GreetingSample,
   ImageGallery,
   Month,
+  Share,
   WayToCome,
 } from 'components';
 import React from 'react';
@@ -143,6 +144,11 @@ const BasicSample: React.FC<Props> = ({ data }) => {
           />
         </div>
       </Fade>
+      <Share
+        imgUrl={data.kakaoThumbnail || data.mainPhoto}
+        date={data.weddingDate}
+        time={data.weddingTime}
+      />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   GreetingSample,
   AddressLocation,
   SwiperImage,
+  Share,
 } from 'components';
 import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -159,6 +160,11 @@ const SimpleSample: FC<Props> = ({ data }) => {
           />
         </div>
       </Fade>
+      <Share
+        imgUrl={data.kakaoThumbnail || data.mainPhoto}
+        date={data.weddingDate}
+        time={data.weddingTime}
+      />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   GreetingSample,
   ImageGallery,
   Month,
+  Share,
   WayToCome,
 } from 'components';
 import React, { FC } from 'react';
@@ -142,6 +143,11 @@ const MyengjoSample: FC<Props> = ({ data }) => {
           />
         </div>
       </Fade>
+      <Share
+        imgUrl={data.kakaoThumbnail || data.mainPhoto}
+        date={data.weddingDate}
+        time={data.weddingTime}
+      />
     </div>
   );
 };

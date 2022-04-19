@@ -17,6 +17,10 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <script
+            type="text/JavaScript"
+            src="https://developers.kakao.com/sdk/js/kakao.min.js"
+          ></script>
+          <script
             type="text/javascript"
             src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&libraries=services`}
           ></script>
