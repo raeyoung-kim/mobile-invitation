@@ -135,7 +135,7 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 pt-14 pb-32">
+        <div className="px-5 py-[160px]">
           <AccountNumbers
             male={data.male}
             female={data.female}

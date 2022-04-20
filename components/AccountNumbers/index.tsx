@@ -25,7 +25,7 @@ const AccountNumbers: FC<Props> = ({ data, male, female, fontFamily }) => {
   return (
     <div>
       {male.targetNumber || female.targetNumber ? (
-        <>
+        <div className="pb-12">
           <p
             className={classNames('text-center text-base', {
               'font-myeongjo': fontFamily === 'font-myeongjo',
@@ -59,13 +59,13 @@ const AccountNumbers: FC<Props> = ({ data, male, female, fontFamily }) => {
               );
             })}
           </div>
-        </>
+        </div>
       ) : null}
       {male.fatherNumber ||
       male.motherNumber ||
       female.fatherNumber ||
       female.motherNumber ? (
-        <div className="pt-48 pb-12">
+        <div className="pt-36 pb-12">
           <p
             className={classNames('text-center pb-9 text-base', {
               'font-myeongjo': fontFamily === 'font-myeongjo',

@@ -44,12 +44,6 @@ const SimpleSample: FC<Props> = ({ data }) => {
         </div>
       </div>
       <div className=" pt-2 pb-8">
-        {/* <div className="mx-auto flex justify-around max-w-[200px] text-2xl font-thin">
-          <p>{data.male.lastName + data.male.firstName}</p>
-          {'&'}
-          <p>{data.female.lastName + data.female.firstName}</p>
-        </div> */}
-
         <p className="text-center font-thin text-sm mt-8">
           {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
           요일 {getTime(data.weddingTime)}
@@ -73,7 +67,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
         </div>
       </Fade>
       <Fade>
-        <div className="pt-8 pb-16">
+        <div className="py-20">
           <Greetings
             data={data.greetingMessage}
             className={'font-thin text-sm'}
@@ -99,10 +93,13 @@ const SimpleSample: FC<Props> = ({ data }) => {
 
       <Fade>
         {/* 갤러리 이미지 */}
-        <div className="pt-16 pb-32 px-5">
-          <SwiperImage data={data.galleryPictures} />
-        </div>
+        {data.galleryPictures?.length ? (
+          <div className="pt-16 pb-44 px-5">
+            <SwiperImage data={data.galleryPictures} />
+          </div>
+        ) : null}
       </Fade>
+
       <Fade>
         {/* 예식 장소 및 지도 */}
         <div className="px-5 pt-8 pb-8">
@@ -132,7 +129,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 드리는 말씀 */}
-        <div className="px-5">
+        <div className="px-5 pt-20">
           <GreetingSample
             isTitle={true}
             data={data.greetingMessage}
@@ -151,7 +148,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 py-[100px]">
+        <div className="px-5 py-[160px]">
           <AccountNumbers
             male={data.male}
             female={data.female}

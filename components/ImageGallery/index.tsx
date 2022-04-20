@@ -23,11 +23,15 @@ const ImageGallery: FC<Props> = ({ data }) => {
       {data?.length ? (
         <div>
           <div
-            className={classNames('transition-all ', {
-              'overflow-hidden min-h-[calc(100vw*0.1] h-[calc(100vw*0.3)] max-h-[calc(100vw*0.1]':
+            className={classNames('transition-all', {
+              'overflow-hidden min-h-[calc(100vw*0.1] max-h-[calc(100vw*0.1]':
                 !isMore,
               'w-full': data.length === 1,
               'grid grid-cols-2 gap-1': data.length > 1,
+              'h-[calc(100vw)]':
+                data.length > 4 && !isMore && window.innerWidth <= 480,
+              'h-[480px]':
+                data.length > 4 && !isMore && window.innerWidth > 480,
             })}
           >
             {data.map((src, i) => {

@@ -61,7 +61,7 @@ const WhiteSample: FC<Props> = ({ data }) => {
       </Fade>
 
       <Fade>
-        <div className="pt-10 pb-16">
+        <div className="py-20">
           <Greetings
             data={data.greetingMessage}
             className={'font-myeongjo text-xs'}
@@ -87,13 +87,15 @@ const WhiteSample: FC<Props> = ({ data }) => {
 
       <Fade>
         {/* 갤러리 이미지 */}
-        <div className="pt-16 pb-32 px-5 z-[100]">
-          <SwiperImage data={data.galleryPictures} />
-        </div>
+        {data.galleryPictures?.length ? (
+          <div className="pt-12 pb-28 px-5 z-[100]">
+            <SwiperImage data={data.galleryPictures} />
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 드리는 말씀 */}
-        <div className="px-5 pb-32">
+        <div className="px-5 py-20 pb-44">
           <GreetingSample
             isTitle={true}
             data={data.greetingMessage}
@@ -136,7 +138,7 @@ const WhiteSample: FC<Props> = ({ data }) => {
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 py-32">
+        <div className="px-5 py-[160px]">
           <AccountNumbers
             male={data.male}
             female={data.female}

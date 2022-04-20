@@ -44,7 +44,7 @@ const MyengjoSample: FC<Props> = ({ data }) => {
         </div>
       </div>
       <Fade>
-        <div className="pt-28 pb-16">
+        <div className="py-20">
           <Greetings
             data={data.greetingMessage}
             className={'font-myeongjo text-xs'}
@@ -69,13 +69,15 @@ const MyengjoSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 갤러리 이미지 */}
-        <div className="pt-16 pb-32 px-5">
-          <ImageGallery data={data.galleryPictures} />
-        </div>
+        {data.galleryPictures?.length ? (
+          <div className="pt-16 pb-44 px-5">
+            <ImageGallery data={data.galleryPictures} />
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 달력 */}
-        <div className="px-5">
+        <div className="p-5">
           <Month.BlackStyle
             isD_day={data.isD_day}
             male={data.male.firstName}
@@ -88,7 +90,7 @@ const MyengjoSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="px-5 pt-32 pb-8">
+        <div className="px-5 pt-40 pb-28">
           <AddressLocation
             addressName={data.weddingAddressName}
             address={data.weddingAddress}
@@ -128,13 +130,13 @@ const MyengjoSample: FC<Props> = ({ data }) => {
         {/* 식전 영상 */}
         {data?.videoUrl ? (
           <iframe
-            className="w-full h-80 mt-[100px]"
+            className="w-full h-80 mt-[180px]"
             src={getContvertToEmbeddedURL(data.videoUrl)}
           />
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 py-[100px]">
+        <div className="px-5 py-[160px]">
           <AccountNumbers
             male={data.male}
             female={data.female}
