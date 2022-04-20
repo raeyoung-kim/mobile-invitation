@@ -1,3 +1,4 @@
+import { SEO } from 'components';
 import {
   BasicSample,
   LilacSample,
@@ -39,6 +40,7 @@ const DetailSamplePage: NextPage = () => {
 
   return (
     <div className="bg-black">
+      <SEO />
       {query.id === '1' && <BasicSample data={data.basic} />}
       {query.id === '2' && <WhiteSample data={data.white} />}
       {query.id === '3' && <MyengjoSample data={data.myengjo} />}

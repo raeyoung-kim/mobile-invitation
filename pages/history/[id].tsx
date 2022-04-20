@@ -12,6 +12,7 @@ import {
   WhiteSample,
   ModernSample,
 } from 'containers';
+import { SEO } from 'components';
 
 const DetailHistoryPage: NextPage = () => {
   const { query } = useRouter();
@@ -36,6 +37,7 @@ const DetailHistoryPage: NextPage = () => {
 
   return (
     <div className="bg-black">
+      <SEO />
       {data?.sampleId === '1' && <BasicSample data={data} />}
       {data?.sampleId === '2' && <WhiteSample data={data} />}
       {data?.sampleId === '3' && <MyengjoSample data={data} />}
