@@ -75,7 +75,7 @@ const LilacSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 달력 */}
-        <div className="pt-16 flex justify-center">
+        <div className="pt-16 px-5 flex justify-center">
           <Month
             isD_day={data.isD_day}
             male={data.male.firstName}

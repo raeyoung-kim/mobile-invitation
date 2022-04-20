@@ -52,7 +52,7 @@ const ModernSample: FC<Props> = ({ data }) => {
         </div>
       </div>
       <Fade>
-        <div className="mx-auto text-center mt-8 py-4 border-t border-b border-[#999] w-[300px] font-myeongjo text-sm">
+        <div className="w-full mx-auto text-center mt-8 py-4 border-t border-b border-[#999] font-myeongjo text-sm">
           <p>
             {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
             요일 {getTime(data.weddingTime)}
