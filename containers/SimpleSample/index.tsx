@@ -8,6 +8,7 @@ import {
   SwiperImage,
   Share,
   Notice,
+  ImageGallery,
 } from 'components';
 import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -91,16 +92,18 @@ const SimpleSample: FC<Props> = ({ data }) => {
           />
         </div>
       </Fade>
-
       <Fade>
         {/* 갤러리 이미지 */}
         {data.galleryPictures?.length ? (
           <div className="pb-40 px-5">
-            <SwiperImage data={data.galleryPictures} />
+            {data.galleryType === 'slider' ? (
+              <SwiperImage data={data.galleryPictures} />
+            ) : (
+              <ImageGallery data={data.galleryPictures} />
+            )}
           </div>
         ) : null}
       </Fade>
-
       <Fade>
         {/* 예식 장소 및 지도 */}
         <div className="px-5 pb-40">

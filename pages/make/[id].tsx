@@ -9,6 +9,7 @@ import {
   ModalLayout,
   Map,
   Loading,
+  Radio,
 } from 'components';
 import { GreetingSampleModal } from 'containers';
 import { NextPage } from 'next';
@@ -320,7 +321,7 @@ const MakeSamplePage: NextPage = () => {
           <div className="flex items-center ml-4">
             <input
               type={'checkbox'}
-              defaultChecked={data.isD_day}
+              checked={data.isD_day}
               onChange={(e) =>
                 setData({
                   ...data,
@@ -509,7 +510,33 @@ const MakeSamplePage: NextPage = () => {
         </CheckInfo>
         <CheckInfo title={'갤러리 사진 🖼 (최대 15장)'}>
           <div>
-            <section className="mt-5">
+            <div className="mt-5">
+              <Radio
+                isChecked={data.galleryType === 'slider'}
+                text={'슬라이드형'}
+                onClick={() => {
+                  setData({
+                    ...data,
+                    galleryType:
+                      data.galleryType === 'slider' ? 'album' : 'slider',
+                  });
+                }}
+              />
+              <div className="mt-2">
+                <Radio
+                  isChecked={data.galleryType === 'album'}
+                  text={'앨범형'}
+                  onClick={() => {
+                    setData({
+                      ...data,
+                      galleryType:
+                        data.galleryType === 'album' ? 'slider' : 'album',
+                    });
+                  }}
+                />
+              </div>
+            </div>
+            <section className="mt-2">
               <FileInput
                 limit={15}
                 handleFile={(val: File) => {

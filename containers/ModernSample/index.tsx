@@ -6,6 +6,7 @@ import {
   ImageGallery,
   Month,
   Share,
+  SwiperImage,
   WayToCome,
 } from 'components';
 import React, { FC } from 'react';
@@ -88,7 +89,11 @@ const ModernSample: FC<Props> = ({ data }) => {
         {/* 갤러리 이미지 */}
         {data.galleryPictures?.length ? (
           <div className="pb-40 px-5">
-            <ImageGallery data={data.galleryPictures} />
+            {data.galleryType === 'slider' ? (
+              <SwiperImage data={data.galleryPictures} />
+            ) : (
+              <ImageGallery data={data.galleryPictures} />
+            )}
           </div>
         ) : null}
       </Fade>

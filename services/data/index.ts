@@ -62,6 +62,7 @@ export const BASIC_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
+  galleryType: 'album',
   galleryPictures: GALLERY,
   accountNumberList: [
     {
@@ -123,16 +124,12 @@ export const BASIC_SAMLE_DATA: ProductInfo = {
   ],
   isGuestBook: false,
   videoUrl: '',
-  kakao: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
-  URL: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
+  kakaoThumbnail: '',
+  kakaoTitle: '',
+  kakaoDescription: '',
+  URLThumbnail: '',
+  URLTitle: '',
+  URLDescription: '',
 };
 
 export const WHITE_SAMLE_DATA: ProductInfo = {
@@ -174,6 +171,7 @@ export const WHITE_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
+  galleryType: 'slider',
   galleryPictures: GALLERY,
   accountNumberList: [
     {
@@ -235,16 +233,12 @@ export const WHITE_SAMLE_DATA: ProductInfo = {
   ],
   isGuestBook: false,
   videoUrl: '',
-  kakao: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
-  URL: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
+  kakaoThumbnail: '',
+  kakaoTitle: '',
+  kakaoDescription: '',
+  URLThumbnail: '',
+  URLTitle: '',
+  URLDescription: '',
 };
 
 export const MYENGJO_SAMLE_DATA: ProductInfo = {
@@ -286,6 +280,7 @@ export const MYENGJO_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
+  galleryType: 'slider',
   galleryPictures: GALLERY,
   accountNumberList: [
     {
@@ -347,16 +342,12 @@ export const MYENGJO_SAMLE_DATA: ProductInfo = {
   ],
   isGuestBook: false,
   videoUrl: '',
-  kakao: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
-  URL: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
+  kakaoThumbnail: '',
+  kakaoTitle: '',
+  kakaoDescription: '',
+  URLThumbnail: '',
+  URLTitle: '',
+  URLDescription: '',
 };
 
 export const SIMPLE_SAMLE_DATA: ProductInfo = {
@@ -398,6 +389,7 @@ export const SIMPLE_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
+  galleryType: 'album',
   galleryPictures: GALLERY,
   accountNumberList: [
     {
@@ -459,16 +451,12 @@ export const SIMPLE_SAMLE_DATA: ProductInfo = {
   ],
   isGuestBook: false,
   videoUrl: '',
-  kakao: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
-  URL: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
+  kakaoThumbnail: '',
+  kakaoTitle: '',
+  kakaoDescription: '',
+  URLThumbnail: '',
+  URLTitle: '',
+  URLDescription: '',
 };
 
 export const MODERN_SAMLE_DATA: ProductInfo = {
@@ -510,6 +498,7 @@ export const MODERN_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
+  galleryType: 'slider',
   galleryPictures: GALLERY,
   accountNumberList: [
     {
@@ -571,16 +560,12 @@ export const MODERN_SAMLE_DATA: ProductInfo = {
   ],
   isGuestBook: false,
   videoUrl: '',
-  kakao: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
-  URL: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
+  kakaoThumbnail: '',
+  kakaoTitle: '',
+  kakaoDescription: '',
+  URLThumbnail: '',
+  URLTitle: '',
+  URLDescription: '',
 };
 
 export const LiLAC_SAMLE_DATA: ProductInfo = {
@@ -622,6 +607,7 @@ export const LiLAC_SAMLE_DATA: ProductInfo = {
   noticeDescription: '',
   noticeURL: '',
   noticeButtonName: '',
+  galleryType: 'album',
   galleryPictures: GALLERY,
   accountNumberList: [
     {
@@ -683,14 +669,10 @@ export const LiLAC_SAMLE_DATA: ProductInfo = {
   ],
   isGuestBook: false,
   videoUrl: '',
-  kakao: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
-  URL: {
-    thumbnail: '',
-    title: '',
-    description: '',
-  },
+  kakaoThumbnail: '',
+  kakaoTitle: '',
+  kakaoDescription: '',
+  URLThumbnail: '',
+  URLTitle: '',
+  URLDescription: '',
 };

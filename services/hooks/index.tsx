@@ -79,6 +79,7 @@ export const useData = () => {
     noticeDescription: '',
     noticeURL: '',
     noticeButtonName: '',
+    galleryType: 'slider',
     galleryPictures: [],
     accountNumberList: [
       {

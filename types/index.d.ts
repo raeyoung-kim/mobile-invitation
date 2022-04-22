@@ -55,6 +55,7 @@ type ProductInfo = {
   noticeDescription: string;
   noticeURL: string;
   noticeButtonName: string;
+  galleryType: string;
   galleryPictures: string[];
   accountNumberList: AccountNumberInfo[];
   wayToComeList: WayToComeInfo[];

@@ -25,3 +25,4 @@ export { default as HistoryItem } from './HistoryItem';
 export { default as Share } from './Share';
 export { default as SEO } from './SEO';
 export { default as Notice } from './Notice';
+export { default as Radio } from './Radio';

@@ -7,6 +7,7 @@ import {
   AddressLocation,
   SwiperImage,
   Share,
+  ImageGallery,
 } from 'components';
 import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -75,7 +76,11 @@ const LilacSample: FC<Props> = ({ data }) => {
         {/* 갤러리 이미지 */}
         {data.galleryPictures?.length ? (
           <div className="pb-40 px-5">
-            <SwiperImage data={data.galleryPictures} />
+            {data.galleryType === 'slider' ? (
+              <SwiperImage data={data.galleryPictures} />
+            ) : (
+              <ImageGallery data={data.galleryPictures} />
+            )}
           </div>
         ) : null}
       </Fade>
