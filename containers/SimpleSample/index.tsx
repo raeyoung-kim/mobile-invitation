@@ -7,6 +7,7 @@ import {
   AddressLocation,
   SwiperImage,
   Share,
+  Notice,
 } from 'components';
 import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -43,7 +44,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
           />
         </div>
       </div>
-      <div className=" pt-2 pb-8">
+      <div className="pt-2 pb-8">
         <p className="text-center font-thin text-sm mt-8">
           {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
           요일 {getTime(data.weddingTime)}
@@ -94,7 +95,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
       <Fade>
         {/* 갤러리 이미지 */}
         {data.galleryPictures?.length ? (
-          <div className="pt-16 pb-44 px-5">
+          <div className="pb-40 px-5">
             <SwiperImage data={data.galleryPictures} />
           </div>
         ) : null}
@@ -102,7 +103,7 @@ const SimpleSample: FC<Props> = ({ data }) => {
 
       <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="px-5 pt-8 pb-8">
+        <div className="px-5 pb-40">
           <AddressLocation
             addressName={data.weddingAddressName}
             address={data.weddingAddress}
@@ -114,22 +115,41 @@ const SimpleSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 오시는 길 */}
-        <div className="pb-12">
-          {data.wayToComeList?.map((el, i) => {
-            return (
-              <WayToCome
-                key={i}
-                title={el.title}
-                description={el.description}
-                fontFamily={'font-thin'}
-              />
-            );
-          })}
-        </div>
+        {data.wayToComeList.filter((el) => el.title !== '')?.length ? (
+          <div className="-mt-32 pb-40">
+            {data.wayToComeList
+              .filter((el) => el.title !== '')
+              .map((el, i) => {
+                return (
+                  <WayToCome
+                    key={i}
+                    title={el.title}
+                    description={el.description}
+                  />
+                );
+              })}
+          </div>
+        ) : null}
+      </Fade>
+      <Fade>
+        {/* 공지사항 */}
+        {data.noticeDescription || data.noticeTitle || data.noticeURL ? (
+          <div className="px-5 pb-40">
+            <Notice
+              fontFamily={'font-thin'}
+              data={{
+                noticeTitle: data.noticeTitle,
+                noticeDescription: data.noticeDescription,
+                noticeURL: data.noticeURL,
+                noticeButtonName: data.noticeButtonName,
+              }}
+            />
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 드리는 말씀 */}
-        <div className="px-5 pt-20">
+        <div className="px-5 pb-40">
           <GreetingSample
             isTitle={true}
             data={data.greetingMessage}
@@ -142,13 +162,13 @@ const SimpleSample: FC<Props> = ({ data }) => {
         {/* 식전 영상 */}
         {data?.videoUrl ? (
           <iframe
-            className="w-full h-80 mt-[100px]"
+            className="w-full h-80 mb-40"
             src={getContvertToEmbeddedURL(data.videoUrl)}
           />
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 py-[160px]">
+        <div className="px-5 pb-40">
           <AccountNumbers
             male={data.male}
             female={data.female}

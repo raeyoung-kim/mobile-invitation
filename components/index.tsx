@@ -24,3 +24,4 @@ export { default as Loading } from './Loading';
 export { default as HistoryItem } from './HistoryItem';
 export { default as Share } from './Share';
 export { default as SEO } from './SEO';
+export { default as Notice } from './Notice';

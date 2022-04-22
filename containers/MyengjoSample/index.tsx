@@ -5,6 +5,7 @@ import {
   GreetingSample,
   ImageGallery,
   Month,
+  Notice,
   Share,
   WayToCome,
 } from 'components';
@@ -44,10 +45,10 @@ const MyengjoSample: FC<Props> = ({ data }) => {
         </div>
       </div>
       <Fade>
-        <div className="py-20">
+        <div className="pt-20 pb-32">
           <Greetings
             data={data.greetingMessage}
-            className={'font-myeongjo text-xs'}
+            className={'font-myeongjo text-sm'}
             male={{
               fatheName: data.male.fatherName,
               isFather: data.male.isFather,
@@ -70,14 +71,14 @@ const MyengjoSample: FC<Props> = ({ data }) => {
       <Fade>
         {/* 갤러리 이미지 */}
         {data.galleryPictures?.length ? (
-          <div className="pt-16 pb-44 px-5">
+          <div className="pb-48 px-5">
             <ImageGallery data={data.galleryPictures} />
           </div>
         ) : null}
       </Fade>
       <Fade>
         {/* 달력 */}
-        <div className="p-5">
+        <div className="px-5 pb-40">
           <Month.BlackStyle
             isD_day={data.isD_day}
             male={data.male.firstName}
@@ -89,8 +90,24 @@ const MyengjoSample: FC<Props> = ({ data }) => {
         </div>
       </Fade>
       <Fade>
+        {/* 공지사항 */}
+        {data.noticeDescription || data.noticeTitle || data.noticeURL ? (
+          <div className="px-5 pb-40">
+            <Notice
+              fontFamily={'font-myeongjo'}
+              data={{
+                noticeTitle: data.noticeTitle,
+                noticeDescription: data.noticeDescription,
+                noticeURL: data.noticeURL,
+                noticeButtonName: data.noticeButtonName,
+              }}
+            />
+          </div>
+        ) : null}
+      </Fade>
+      <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="px-5 pt-40 pb-28">
+        <div className="px-5 pb-40">
           <AddressLocation
             addressName={data.weddingAddressName}
             address={data.weddingAddress}
@@ -102,22 +119,25 @@ const MyengjoSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 오시는 길 */}
-        <div className="pb-12">
-          {data.wayToComeList?.map((el, i) => {
-            return (
-              <WayToCome
-                key={i}
-                title={el.title}
-                description={el.description}
-                fontFamily={'font-myeongjo'}
-              />
-            );
-          })}
-        </div>
+        {data.wayToComeList.filter((el) => el.title !== '')?.length ? (
+          <div className="-mt-32 pb-40">
+            {data.wayToComeList
+              .filter((el) => el.title !== '')
+              ?.map((el, i) => {
+                return (
+                  <WayToCome
+                    key={i}
+                    title={el.title}
+                    description={el.description}
+                  />
+                );
+              })}
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 드리는 말씀 */}
-        <div className="px-5">
+        <div className="px-5 pb-40">
           <GreetingSample
             isTitle={true}
             data={data.greetingMessage}
@@ -130,13 +150,13 @@ const MyengjoSample: FC<Props> = ({ data }) => {
         {/* 식전 영상 */}
         {data?.videoUrl ? (
           <iframe
-            className="w-full h-80 mt-[180px]"
+            className="w-full h-80 mb-40"
             src={getContvertToEmbeddedURL(data.videoUrl)}
           />
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 py-[160px]">
+        <div className="px-5 pb-40">
           <AccountNumbers
             male={data.male}
             female={data.female}

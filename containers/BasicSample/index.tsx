@@ -5,6 +5,7 @@ import {
   GreetingSample,
   ImageGallery,
   Month,
+  Notice,
   Share,
   WayToCome,
 } from 'components';
@@ -46,7 +47,7 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         </div>
       </div>
       <Fade>
-        <div className="pt-28 pb-16">
+        <div className="pt-28 pb-20">
           <Greetings
             data={data.greetingMessage}
             className={'font-thin text-sm'}
@@ -71,13 +72,15 @@ const BasicSample: React.FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 갤러리 이미지 */}
-        <div className="py-16 px-5">
-          <ImageGallery data={data.galleryPictures} />
-        </div>
+        {data.galleryPictures?.length ? (
+          <div className="pb-40 px-5">
+            <ImageGallery data={data.galleryPictures} />
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 달력 */}
-        <div className="py-16 px-5 flex justify-center">
+        <div className="pb-40 px-5 flex justify-center">
           <Month
             male={data.male.firstName}
             female={data.female.firstName}
@@ -89,8 +92,24 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         </div>
       </Fade>
       <Fade>
+        {/* 공지사항 */}
+        {data.noticeDescription || data.noticeTitle || data.noticeURL ? (
+          <div className="px-5 pb-40">
+            <Notice
+              fontFamily={'font-thin'}
+              data={{
+                noticeTitle: data.noticeTitle,
+                noticeDescription: data.noticeDescription,
+                noticeURL: data.noticeURL,
+                noticeButtonName: data.noticeButtonName,
+              }}
+            />
+          </div>
+        ) : null}
+      </Fade>
+      <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="px-5 pt-32 pb-8">
+        <div className="px-5 pb-40">
           <AddressLocation
             addressName={data.weddingAddressName}
             address={data.weddingAddress}
@@ -102,21 +121,25 @@ const BasicSample: React.FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 오시는 길 */}
-        <div className="pb-32">
-          {data.wayToComeList?.map((el, i) => {
-            return (
-              <WayToCome
-                key={i}
-                title={el.title}
-                description={el.description}
-              />
-            );
-          })}
-        </div>
+        {data.wayToComeList.filter((el) => el.title !== '')?.length ? (
+          <div className="-mt-32 pb-40">
+            {data.wayToComeList
+              .filter((el) => el.title !== '')
+              .map((el, i) => {
+                return (
+                  <WayToCome
+                    key={i}
+                    title={el.title}
+                    description={el.description}
+                  />
+                );
+              })}
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 드리는 말씀 */}
-        <div className="px-5 pb-32">
+        <div className="px-5 pb-40">
           <GreetingSample
             isTitle={true}
             data={data.greetingMessage}
@@ -129,13 +152,13 @@ const BasicSample: React.FC<Props> = ({ data }) => {
         {/* 식전 영상 */}
         {data?.videoUrl ? (
           <iframe
-            className="w-full h-80 mt-[100px]"
+            className="w-full h-80 mb-40"
             src={getContvertToEmbeddedURL(data.videoUrl)}
           />
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 py-[160px]">
+        <div className="px-5 pb-40">
           <AccountNumbers
             male={data.male}
             female={data.female}

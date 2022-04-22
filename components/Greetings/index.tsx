@@ -45,21 +45,25 @@ const Greetings: FC<Props> = ({
       ((female.fatheName || female.motherName) && female.rank) ? (
         <div className={`${className} mt-16`}>
           {(male.fatheName || male.motherName) && male.rank ? (
-            <div className="text-center flex justify-center items-center text-base">
-              <p>{`${!male.isFather ? '(故)' : ''}${male.fatheName} ${
-                male.fatheName && male.motherName ? '·' : ''
-              } ${!male.isMother ? '(故)' : ''}${male.motherName}`}</p>
+            <div className="text-center flex justify-center items-center">
+              <p className={className}>{`${!male.isFather ? '(故)' : ''}${
+                male.fatheName
+              } ${male.fatheName && male.motherName ? '·' : ''} ${
+                !male.isMother ? '(故)' : ''
+              }${male.motherName}`}</p>
               <p className="text-xs mx-1">{` ${male.rank} `}</p>
-              <p>{male.name}</p>
+              <p className={className}>{male.name}</p>
             </div>
           ) : null}
           {(female.fatheName || female.motherName) && female.rank ? (
-            <div className="text-center flex justify-center items-center text-base mt-2">
-              <p>{`${!female.isFather ? '(故)' : ''}${female.fatheName} ${
-                female.fatheName && female.motherName ? '·' : ''
-              } ${!female.isMother ? '(故)' : ''}${female.motherName}`}</p>
+            <div className="text-center flex justify-center items-center mt-2">
+              <p className={className}>{`${!female.isFather ? '(故)' : ''}${
+                female.fatheName
+              } ${female.fatheName && female.motherName ? '·' : ''} ${
+                !female.isMother ? '(故)' : ''
+              }${female.motherName}`}</p>
               <p className="text-xs mx-1">{` ${female.rank} `}</p>
-              <p>{female.name}</p>
+              <p className={className}>{female.name}</p>
             </div>
           ) : null}
         </div>

@@ -106,7 +106,7 @@ const BlackStyle: FC<Props> = ({
       </div>
       {isD_day && (
         <p
-          className={classNames('text-center mt-7 text-[13px]', {
+          className={classNames('text-center mt-7 text-sm', {
             'font-myeongjo': fontFamily === 'font-myeongjo',
             'font-thin': fontFamily === 'font-thin',
             'font-stylish': fontFamily === 'font-stylish',

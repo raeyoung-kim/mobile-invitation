@@ -35,7 +35,7 @@ const LilacSample: FC<Props> = ({ data }) => {
         <p>{data.female.lastName + data.female.firstName}</p>
       </div>
       <Fade>
-        <div className="pt-8 pb-10">
+        <div className=" pb-12">
           <Greetings
             data={data.greetingMessage}
             className={'font-stylish text-sm'}
@@ -59,23 +59,8 @@ const LilacSample: FC<Props> = ({ data }) => {
         </div>
       </Fade>
       <Fade>
-        <p className="text-center font-stylish">
-          {data.weddingDate.split('-').join('.')} {getWeek(data.weddingDate)}
-          요일 {getTime(data.weddingTime)}
-        </p>
-        <p className="text-center font-stylish">{data.weddingAddressName}</p>
-      </Fade>
-      <Fade>
-        {/* 갤러리 이미지 */}
-        {data.galleryPictures?.length ? (
-          <div className="pt-36 pb-16 px-5">
-            <SwiperImage data={data.galleryPictures} />
-          </div>
-        ) : null}
-      </Fade>
-      <Fade>
         {/* 달력 */}
-        <div className="pt-16 px-5 flex justify-center">
+        <div className="pb-40 px-5 flex justify-center">
           <Month
             isD_day={data.isD_day}
             male={data.male.firstName}
@@ -87,8 +72,16 @@ const LilacSample: FC<Props> = ({ data }) => {
         </div>
       </Fade>
       <Fade>
+        {/* 갤러리 이미지 */}
+        {data.galleryPictures?.length ? (
+          <div className="pb-40 px-5">
+            <SwiperImage data={data.galleryPictures} />
+          </div>
+        ) : null}
+      </Fade>
+      <Fade>
         {/* 예식 장소 및 지도 */}
-        <div className="px-5 pt-40 pb-8">
+        <div className="px-5 pb-40">
           <AddressLocation
             addressName={data.weddingAddressName}
             address={data.weddingAddress}
@@ -100,22 +93,25 @@ const LilacSample: FC<Props> = ({ data }) => {
       </Fade>
       <Fade>
         {/* 오시는 길 */}
-        <div className="pb-12">
-          {data.wayToComeList?.map((el, i) => {
-            return (
-              <WayToCome
-                key={i}
-                title={el.title}
-                description={el.description}
-                fontFamily={'font-stylish'}
-              />
-            );
-          })}
-        </div>
+        {data.wayToComeList.filter((el) => el.title !== '')?.length ? (
+          <div className="-mt-32 pb-40">
+            {data.wayToComeList
+              .filter((el) => el.title !== '')
+              .map((el, i) => {
+                return (
+                  <WayToCome
+                    key={i}
+                    title={el.title}
+                    description={el.description}
+                  />
+                );
+              })}
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 드리는 말씀 */}
-        <div className="px-5">
+        <div className="px-5 pb-40">
           <GreetingSample
             isTitle={true}
             data={data.greetingMessage}
@@ -128,13 +124,13 @@ const LilacSample: FC<Props> = ({ data }) => {
         {/* 식전 영상 */}
         {data?.videoUrl ? (
           <iframe
-            className="w-full h-80 mt-[180px]"
+            className="w-full h-80 mb-40"
             src={getContvertToEmbeddedURL(data.videoUrl)}
           />
         ) : null}
       </Fade>
       <Fade>
-        <div className="px-5 py-[160px]">
+        <div className="px-5 pb-40">
           <AccountNumbers
             male={data.male}
             female={data.female}

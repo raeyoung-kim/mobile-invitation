@@ -12,6 +12,7 @@ const WayToCome: FC<Props> = ({
   description,
   fontFamily = 'font-thin',
 }) => {
+  const result = description.split('\n');
   return (
     <div
       className={classNames('px-5 py-2', {
@@ -21,7 +22,14 @@ const WayToCome: FC<Props> = ({
       })}
     >
       <p className="text-lg font-semibold text-[#d69191]">{title}</p>
-      <p className="text-base">{description}</p>
+      {result.map((value, i) => {
+        return (
+          <div key={i}>
+            <span className="text-base">{value}</span>
+            <br />
+          </div>
+        );
+      })}
     </div>
   );
 };
