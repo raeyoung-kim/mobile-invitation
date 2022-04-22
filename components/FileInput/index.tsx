@@ -2,6 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { CgClose } from 'react-icons/cg';
+import imageCompression from 'browser-image-compression';
 
 interface Props {
   data?: string[];
@@ -23,17 +24,25 @@ const FileInput: React.FC<Props> = ({
   const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
-    const formData = new FormData();
-    file && formData.append('image', file);
-    file && handleFile(file);
-
-    const fileReader = new FileReader();
-    file && fileReader.readAsDataURL(file);
-    fileReader.onload = (e) => {
-      const result = e?.target?.result as string;
-      setImgSrcList([...imgSrcList, result]);
-      handleImgSrcList && handleImgSrcList([...imgSrcList, result]);
+    const options = {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 1920,
     };
+
+    if (file) {
+      const compressedFile = await imageCompression(file, options);
+      const formData = new FormData();
+      formData.append('image', compressedFile);
+      handleFile(compressedFile);
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(compressedFile);
+      fileReader.onload = (e) => {
+        const result = e?.target?.result as string;
+        setImgSrcList([...imgSrcList, result]);
+        handleImgSrcList && handleImgSrcList([...imgSrcList, result]);
+      };
+    }
   };
 
   const handleRemoveImage = (index: number) => {
