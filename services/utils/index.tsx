@@ -93,3 +93,22 @@ export const getD_day = (date: string) => {
 
   return result;
 };
+
+export const getSampleTitle = (sampleId: string): string => {
+  switch (sampleId) {
+    case '1':
+      return '프리미엄 스타일';
+    case '2':
+      return '순백 스타일';
+    case '3':
+      return '명조 스타일';
+    case '4':
+      return '심플 스타일';
+    case '5':
+      return '모던 스타일';
+    case '6':
+      return '라일락 스타일';
+    default:
+      return '';
+  }
+};

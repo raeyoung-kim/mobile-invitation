@@ -3,11 +3,13 @@ import Link from 'next/link';
 import { BsTrash } from 'react-icons/bs';
 import request from 'services/api';
 import { useRouter } from 'next/router';
+import { getSampleTitle } from 'services';
 
 interface Props {
   data: {
     id: string;
     src: string;
+    sampleId?: string;
   };
 }
 
@@ -37,7 +39,11 @@ const HistoryItem: FC<Props> = ({ data }) => {
           </div>
         </a>
       </Link>
-
+      {data.sampleId ? (
+        <p className="font-sanspro font-bold pt-3">
+          {getSampleTitle(data.sampleId)}
+        </p>
+      ) : null}
       <div className="grid grid-cols-2 gap-3 py-3">
         <Link href={`/history/modify/${data.id}`}>
           <a className="bg-black text-white text-center py-2 rounded-md">

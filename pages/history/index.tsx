@@ -61,6 +61,7 @@ const HistoryPage: NextPage = () => {
                   data={{
                     id: el.id || '',
                     src: el.mainPhoto,
+                    sampleId: el.sampleId,
                   }}
                 />
               </div>
