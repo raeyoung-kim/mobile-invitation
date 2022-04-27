@@ -177,6 +177,8 @@ const WhiteSample: FC<Props> = ({ data }) => {
         imgUrl={data.kakaoThumbnail || data.mainPhoto}
         date={data.weddingDate}
         time={data.weddingTime}
+        kakaoTitle={data.kakaoTitle}
+        kakaoDescription={data.kakaoDescription}
       />
     </div>
   );

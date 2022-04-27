@@ -10,6 +10,8 @@ interface Props {
   imgUrl: string;
   date: string;
   time: string;
+  kakaoTitle?: string;
+  kakaoDescription?: string;
 }
 
 declare global {
@@ -17,7 +19,14 @@ declare global {
     Kakao: any;
   }
 }
-const ShareModal: FC<Props> = ({ imgUrl, date, time, onClose }) => {
+const ShareModal: FC<Props> = ({
+  imgUrl,
+  date,
+  time,
+  kakaoTitle,
+  kakaoDescription,
+  onClose,
+}) => {
   const title = date.split('-');
   const timeArr = time.split(':');
   const onLinkCopy = () => {
@@ -41,11 +50,14 @@ const ShareModal: FC<Props> = ({ imgUrl, date, time, onClose }) => {
     window.Kakao.Link.sendDefault({
       objectType: 'feed',
       content: {
-        title: `${title[1]}월 ${title[2]}일 ${getWeek(date)}요일 ${
-          Number(timeArr[0]) > 12 ? '오후' : '오전'
-        } ${Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : timeArr[0]}시 ${
-          timeArr[1]
-        }분`,
+        title:
+          kakaoTitle ||
+          `${title[1]}월 ${title[2]}일 ${getWeek(date)}요일 ${
+            Number(timeArr[0]) > 12 ? '오후' : '오전'
+          } ${
+            Number(timeArr[0]) > 12 ? Number(timeArr[0]) - 12 : timeArr[0]
+          }시 ${timeArr[1]}분`,
+        description: kakaoDescription || '',
         imageUrl: `${imgUrl}`,
         link: {
           mobileWebUrl: window.location.href,

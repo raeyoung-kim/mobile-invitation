@@ -6,9 +6,17 @@ interface Props {
   imgUrl: string;
   date: string;
   time: string;
+  kakaoTitle?: string;
+  kakaoDescription?: string;
 }
 
-const Share: FC<Props> = ({ imgUrl, date, time }) => {
+const Share: FC<Props> = ({
+  imgUrl,
+  date,
+  time,
+  kakaoTitle,
+  kakaoDescription,
+}) => {
   const [isModal, setIsModal] = useState(false);
   const onShareModal = () => {
     setIsModal(!isModal);
@@ -37,6 +45,8 @@ const Share: FC<Props> = ({ imgUrl, date, time }) => {
           date={date}
           time={time}
           onClose={onShareModal}
+          kakaoTitle={kakaoTitle}
+          kakaoDescription={kakaoDescription}
         />
       )}
     </>
