@@ -26,7 +26,7 @@ const Textarea: React.FC<Props> = ({
       </div>
       <div className="focus-within:border-2 focus-within:rounded focus-within:border-black ">
         <textarea
-          className="w-full lg:w-[40%] min-h-[200px] max-h-[200px] border rounded py-2 px-3 focus:outline-none focus:border-none focus:placeholder-white"
+          className="w-full min-h-[200px] max-h-[200px] border rounded py-2 px-3 focus:outline-none focus:border-none focus:placeholder-white"
           value={value}
           placeholder={placeholder}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {

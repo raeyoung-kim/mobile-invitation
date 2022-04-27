@@ -359,7 +359,7 @@ const HistoryModifyPage: NextPage = () => {
       </section>
 
       {/* 인사말 정보 */}
-      <section className="mt-10">
+      <section className="mt-10 lg:w-[40%]">
         <strong className="font-jua text-[19px]">인사말을 알려주세요 📝</strong>
         <p className="description">
           원하시는 인사말으로 직접 추가도 가능합니다.
@@ -829,7 +829,7 @@ const HistoryModifyPage: NextPage = () => {
             />
             <InputTextarea
               inputValue={data.URLTitle}
-              inputPlaceholder="URL 제목 (철수 💗 영희 결혼합니다)"
+              inputPlaceholder="URL 제목 (철수 ♥ 영희 결혼합니다)"
               textareaValue={data.URLDescription}
               textareaPlaceholder="URL 내용 (ex. 식장명, 예식일자)"
               onChageInput={(e) =>
