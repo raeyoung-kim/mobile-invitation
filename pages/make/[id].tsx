@@ -19,7 +19,13 @@ import DaumPostcode from 'react-daum-postcode';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import request from 'services/api';
-import { handleCheckSample, useData, useUser } from 'services';
+import {
+  handleCheckSample,
+  initialAccountNumberList,
+  initialWayToComeList,
+  useData,
+  useUser,
+} from 'services';
 import axios from 'axios';
 
 const MakeSamplePage: NextPage = () => {
@@ -415,7 +421,17 @@ const MakeSamplePage: NextPage = () => {
       </section>
 
       <section className=" mt-6 lg:w-[40%]">
-        <CheckInfo title={'오시는길 🚶 🏃'}>
+        <CheckInfo
+          title={'오시는길 🚶 🏃'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                wayToComeList: initialWayToComeList,
+              });
+            }
+          }}
+        >
           <div>
             {data?.wayToComeList.map((el, i) => {
               return (
@@ -452,7 +468,20 @@ const MakeSamplePage: NextPage = () => {
             })}
           </div>
         </CheckInfo>
-        <CheckInfo title={'공지사항 📃'}>
+        <CheckInfo
+          title={'공지사항 📃'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                noticeTitle: '',
+                noticeDescription: '',
+                noticeURL: '',
+                noticeButtonName: '',
+              });
+            }
+          }}
+        >
           <>
             <p className="mt-2 description">
               코로나 안내, 전세버스 안내, 라이브 안내 등 필요하신 공지사항을
@@ -508,7 +537,21 @@ const MakeSamplePage: NextPage = () => {
             </div>
           </>
         </CheckInfo>
-        <CheckInfo title={'갤러리 사진 🖼 (최대 15장)'}>
+        <CheckInfo
+          title={'갤러리 사진 🖼 (최대 15장)'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                galleryType: 'slider',
+              });
+              setImageFile({
+                ...imageFile,
+                galleryPictures: [],
+              });
+            }
+          }}
+        >
           <div>
             <div className="mt-5">
               <Radio
@@ -556,7 +599,17 @@ const MakeSamplePage: NextPage = () => {
             </section>
           </div>
         </CheckInfo>
-        <CheckInfo title={'계좌번호 🎀'}>
+        <CheckInfo
+          title={'계좌번호 🎀'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                accountNumberList: initialAccountNumberList,
+              });
+            }
+          }}
+        >
           <>
             <div>
               <div className="grid grid-cols-2 gap-4 py-5">
@@ -606,10 +659,27 @@ const MakeSamplePage: NextPage = () => {
             </div>
           </>
         </CheckInfo>
-        <CheckInfo title={'방명록 추가 📖'}>
-          <></>
-        </CheckInfo>
-        <CheckInfo title={'식전 영상 📽'}>
+        <CheckInfo
+          title={'방명록 추가 📖'}
+          isData={data.isGuestBook}
+          onChange={(isChecked) => {
+            setData({
+              ...data,
+              isGuestBook: !isChecked,
+            });
+          }}
+        />
+        <CheckInfo
+          title={'식전 영상 📽'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                videoUrl: '',
+              });
+            }
+          }}
+        >
           <div className="pt-2">
             <p className="description">
               식전영상은 유투브에 업로드 후 <br /> URL을 복사하여 추가해주시면
@@ -629,7 +699,19 @@ const MakeSamplePage: NextPage = () => {
             </div>
           </div>
         </CheckInfo>
-        <CheckInfo title={'카카오톡 공유 시'}>
+        <CheckInfo
+          title={'카카오톡 공유 시'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                kakaoTitle: '',
+                kakaoThumbnail: '',
+                kakaoDescription: '',
+              });
+            }
+          }}
+        >
           <div className="pt-2">
             <p className="description">카카오 썸네일 사진</p>
             <p className="description">(최적화 사이즈 400 * 550)</p>
@@ -662,7 +744,19 @@ const MakeSamplePage: NextPage = () => {
             />
           </div>
         </CheckInfo>
-        <CheckInfo title={'URL 공유 시'}>
+        <CheckInfo
+          title={'URL 공유 시'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                URLTitle: '',
+                URLThumbnail: '',
+                URLDescription: '',
+              });
+            }
+          }}
+        >
           <div className="pt-2">
             <p className="description">URL 썸네일 사진</p>
             <p className="description">(최적화 사이즈 1200 * 630)</p>

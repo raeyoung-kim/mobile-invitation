@@ -19,7 +19,12 @@ import DaumPostcode from 'react-daum-postcode';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import request from 'services/api';
-import { useData, useUser } from 'services';
+import {
+  initialAccountNumberList,
+  initialWayToComeList,
+  useData,
+  useUser,
+} from 'services';
 import axios from 'axios';
 
 const HistoryModifyPage: NextPage = () => {
@@ -529,6 +534,14 @@ const HistoryModifyPage: NextPage = () => {
             data.wayToComeList.find((el) => el.title !== '') ? true : false
           }
           title={'오시는길 🚶 🏃'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                wayToComeList: initialWayToComeList,
+              });
+            }
+          }}
         >
           <div>
             {data?.wayToComeList.map((el, i) => {
@@ -569,6 +582,17 @@ const HistoryModifyPage: NextPage = () => {
         <CheckInfo
           isData={data.noticeTitle || data.noticeURL ? true : false}
           title={'공지사항 📃'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                noticeTitle: '',
+                noticeDescription: '',
+                noticeURL: '',
+                noticeButtonName: '',
+              });
+            }
+          }}
         >
           <>
             <p className="mt-2 description">
@@ -628,6 +652,22 @@ const HistoryModifyPage: NextPage = () => {
         <CheckInfo
           isData={data.galleryPictures?.length ? true : false}
           title={'갤러리 사진 🖼 (최대 15장)'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                galleryType: 'slider',
+              });
+              setImageFile({
+                ...imageFile,
+                galleryPictures: [],
+              });
+              setImgSrcList({
+                ...imgSrcList,
+                galleryPictures: [],
+              });
+            }
+          }}
         >
           <div>
             <div className="mt-5">
@@ -688,6 +728,14 @@ const HistoryModifyPage: NextPage = () => {
             data.accountNumberList?.find((el) => el.isCheck) ? true : false
           }
           title={'계좌번호 🎀'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                accountNumberList: initialAccountNumberList,
+              });
+            }
+          }}
         >
           <>
             <div>
@@ -738,10 +786,28 @@ const HistoryModifyPage: NextPage = () => {
             </div>
           </>
         </CheckInfo>
-        <CheckInfo title={'방명록 추가 📖'}>
-          <></>
-        </CheckInfo>
-        <CheckInfo isData={data.videoUrl ? true : false} title={'식전 영상 📽'}>
+        <CheckInfo
+          title={'방명록 추가 📖'}
+          isData={data.isGuestBook}
+          onChange={(isChecked) => {
+            setData({
+              ...data,
+              isGuestBook: !isChecked,
+            });
+          }}
+        />
+        <CheckInfo
+          isData={data.videoUrl ? true : false}
+          title={'식전 영상 📽'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                videoUrl: '',
+              });
+            }
+          }}
+        >
           <div className="pt-2">
             <p className="description">
               식전영상은 유투브에 업로드 후 <br /> URL을 복사하여 추가해주시면
@@ -762,8 +828,22 @@ const HistoryModifyPage: NextPage = () => {
           </div>
         </CheckInfo>
         <CheckInfo
-          isData={data.kakaoThumbnail ? true : false}
+          isData={
+            data.kakaoThumbnail || data.kakaoTitle || data.kakaoDescription
+              ? true
+              : false
+          }
           title={'카카오톡 공유 시'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                kakaoTitle: '',
+                kakaoThumbnail: '',
+                kakaoDescription: '',
+              });
+            }
+          }}
         >
           <div className="pt-2">
             <p className="description">카카오 썸네일 사진</p>
@@ -805,8 +885,22 @@ const HistoryModifyPage: NextPage = () => {
           </div>
         </CheckInfo>
         <CheckInfo
-          isData={data.URLThumbnail ? true : false}
+          isData={
+            data.URLThumbnail || data.URLTitle || data.URLDescription
+              ? true
+              : false
+          }
           title={'URL 공유 시'}
+          onChange={(isChecked) => {
+            if (isChecked) {
+              setData({
+                ...data,
+                URLTitle: '',
+                URLThumbnail: '',
+                URLDescription: '',
+              });
+            }
+          }}
         >
           <div className="pt-2">
             <p className="description">URL 썸네일 사진</p>

@@ -25,6 +25,57 @@ export const GALLERY = [
   'https://mobile-invitation.s3.ap-northeast-2.amazonaws.com/image/gallery9.jpg',
 ];
 
+export const initialWayToComeList = [
+  { title: '', description: '' },
+  { title: '', description: '' },
+  { title: '', description: '' },
+];
+
+export const initialAccountNumberList = [
+  {
+    target: '신랑',
+    isCheck: false,
+    targetBank: '',
+    targetAccountNumber: '',
+    accountHolder: '',
+  },
+  {
+    target: '신부',
+    isCheck: false,
+    targetBank: '',
+    targetAccountNumber: '',
+    accountHolder: '',
+  },
+  {
+    target: '신랑측 아버지',
+    isCheck: false,
+    targetBank: '',
+    targetAccountNumber: '',
+    accountHolder: '',
+  },
+  {
+    target: '신랑측 어머니',
+    isCheck: false,
+    targetBank: '',
+    targetAccountNumber: '',
+    accountHolder: '',
+  },
+  {
+    target: '신부측 아버지',
+    isCheck: false,
+    targetBank: '',
+    targetAccountNumber: '',
+    accountHolder: '',
+  },
+  {
+    target: '신부측 어머니',
+    isCheck: false,
+    targetBank: '',
+    targetAccountNumber: '',
+    accountHolder: '',
+  },
+];
+
 export const BASIC_SAMLE_DATA: ProductInfo = {
   mainPhoto:
     'https://mobile-invitation.s3.ap-northeast-2.amazonaws.com/image/basic_main.jpg',
