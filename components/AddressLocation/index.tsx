@@ -34,7 +34,17 @@ const AddressLocation: FC<Props> = ({
         {addressName}
       </p>
       <p
-        className={classNames('text-center text-xs', {
+        onClick={() => {
+          navigator.clipboard
+            .writeText(`${address} ${detailAddress}`)
+            .then(() => {
+              alert('주소가 복사되었습니다.');
+            })
+            .catch(() => {
+              alert('주소 복사가 실패되었습니다.');
+            });
+        }}
+        className={classNames('text-center text-xs cursor-pointer', {
           'font-myeongjo': fontFamily === 'font-myeongjo',
           'font-thin': fontFamily === 'font-thin',
           'font-stylish': fontFamily === 'font-stylish',
