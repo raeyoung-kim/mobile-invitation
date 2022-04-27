@@ -112,3 +112,10 @@ export const getSampleTitle = (sampleId: string): string => {
       return '';
   }
 };
+
+export const sampleDate = () => {
+  const today = new Date();
+  const resultDate = new Date();
+  resultDate.setDate(today.getDate() + 23);
+  return resultDate.toISOString().slice(0, 10);
+};
