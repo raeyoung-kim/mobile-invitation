@@ -59,6 +59,8 @@ const ShareModal: FC<Props> = ({
           }시 ${timeArr[1]}분`,
         description: kakaoDescription || '',
         imageUrl: `${imgUrl}`,
+        imageWidth: 400,
+        imageHeight: 550,
         link: {
           mobileWebUrl: window.location.href,
           webUrl: window.location.href,

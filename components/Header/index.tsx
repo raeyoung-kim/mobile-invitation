@@ -16,6 +16,7 @@ const Header: React.FC = () => {
       <Head>
         <title>모바일 청첩장</title>
         <meta name="description" content="모바일 초대장" />
+        <meta property="og:url" content="https://www.mobileinvitation.site/" />
         <meta
           property="og:image"
           content={
@@ -25,7 +26,7 @@ const Header: React.FC = () => {
         <meta property="og:title" content={'모바일 청첩장'} />
         <meta
           property="og:description"
-          content={'셀프로 모바일 청첩장을 제작해 보세요 :)'}
+          content={'셀프 모바일 청첩장 제작 :)'}
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
