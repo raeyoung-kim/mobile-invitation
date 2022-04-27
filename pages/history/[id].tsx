@@ -1,9 +1,9 @@
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import React, { useCallback } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import request from 'services/api';
+import {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
+import React from 'react';
 import {
   BasicSample,
   LilacSample,
@@ -13,31 +13,14 @@ import {
   ModernSample,
 } from 'containers';
 import { SEO } from 'components';
+import { getSampleDetail } from 'pages/api';
 
-const DetailHistoryPage: NextPage = () => {
-  const { query } = useRouter();
-  const [data, setData] = useState<ProductInfo | null>(null);
-
-  const load = useCallback(async () => {
-    try {
-      const { data: sample } = await request.get(`sample`, {
-        params: {
-          id: query.id,
-        },
-      });
-      setData(sample);
-    } catch {
-      console.error;
-    }
-  }, [query.id]);
-
-  useEffect(() => {
-    query.id && load();
-  }, [load, query.id]);
-
+const DetailHistoryPage: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ data }) => {
   return (
     <div className="bg-black">
-      <SEO />
+      <SEO data={data} />
       {data?.sampleId === '1' && <BasicSample data={data} />}
       {data?.sampleId === '2' && <WhiteSample data={data} />}
       {data?.sampleId === '3' && <MyengjoSample data={data} />}
@@ -49,3 +32,15 @@ const DetailHistoryPage: NextPage = () => {
 };
 
 export default DetailHistoryPage;
+
+export const getServerSideProps: GetServerSideProps<{
+  data: ProductInfo;
+}> = async (context) => {
+  const data = await getSampleDetail(context.query.id! as string);
+
+  return {
+    props: {
+      data,
+    },
+  };
+};

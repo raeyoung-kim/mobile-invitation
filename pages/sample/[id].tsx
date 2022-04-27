@@ -38,9 +38,28 @@ const DetailSamplePage: NextPage = () => {
     lilac: LiLAC_SAMLE_DATA,
   });
 
+  const getSEOdata = (id: string) => {
+    switch (id) {
+      case '1':
+        return data.basic;
+      case '2':
+        return data.white;
+      case '3':
+        return data.myengjo;
+      case '4':
+        return data.simple;
+      case '5':
+        return data.simple;
+      case '6':
+        return data.lilac;
+      default:
+        return data.basic;
+    }
+  };
+
   return (
     <div className="bg-black">
-      <SEO />
+      <SEO data={getSEOdata(query.id! as string)} />
       {query.id === '1' && <BasicSample data={data.basic} />}
       {query.id === '2' && <WhiteSample data={data.white} />}
       {query.id === '3' && <MyengjoSample data={data.myengjo} />}
