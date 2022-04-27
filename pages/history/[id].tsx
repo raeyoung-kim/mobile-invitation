@@ -38,6 +38,15 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async (context) => {
   const data = await getSampleDetail(context.query.id! as string);
 
+  if (!data) {
+    return {
+      redirect: {
+        destination: `/404`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       data,

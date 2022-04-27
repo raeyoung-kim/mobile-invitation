@@ -49,7 +49,7 @@ const DetailSamplePage: NextPage = () => {
       case '4':
         return data.simple;
       case '5':
-        return data.simple;
+        return data.modern;
       case '6':
         return data.lilac;
       default:

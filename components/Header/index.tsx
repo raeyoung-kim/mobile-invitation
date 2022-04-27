@@ -16,6 +16,17 @@ const Header: React.FC = () => {
       <Head>
         <title>모바일 청첩장</title>
         <meta name="description" content="모바일 초대장" />
+        <meta
+          property="og:image"
+          content={
+            'https://mobile-invitation.s3.ap-northeast-2.amazonaws.com/image/main.png'
+          }
+        />
+        <meta property="og:title" content={'모바일 청첩장'} />
+        <meta
+          property="og:description"
+          content={'셀프로 모바일 청첩장을 제작해 보세요 :)'}
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="sticky top-0 px-5 lg:px-0 bg-white h-[70px] border-b border-[#e5e7eb] z-50">
@@ -32,7 +43,7 @@ const Header: React.FC = () => {
             <nav
               className={`whitespace-nowrap px-2 xs:px-5 transition-all ${
                 isNavBar
-                  ? 'opacity-1 translate-x-[0px]'
+                  ? 'opacity-1 translate-x-[5px]'
                   : 'opacity-0 translate-x-[30px]'
               }`}
             >
