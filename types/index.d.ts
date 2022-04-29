@@ -40,6 +40,7 @@ type ProductInfo = {
   [k: string]: unknown;
   id?: string;
   sampleId?: string;
+  userId?: string;
   mainPhoto: string;
   male: BasicInfo;
   female: BasicInfo;
@@ -75,4 +76,12 @@ type AccountNumber = {
   targetBank: string;
   targetAccountNumber: string;
   accountHolder: string;
+};
+
+type GuestBook = {
+  _id: string;
+  id: string;
+  name: string;
+  password: string;
+  message: string;
 };

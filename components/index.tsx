@@ -26,3 +26,5 @@ export { default as Share } from './Share';
 export { default as SEO } from './SEO';
 export { default as Notice } from './Notice';
 export { default as Radio } from './Radio';
+export { default as GuestBook } from './GuestBook';
+export { default as GuestMessage } from './GuestMessage';

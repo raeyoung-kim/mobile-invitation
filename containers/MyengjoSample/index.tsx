@@ -3,6 +3,7 @@ import {
   AddressLocation,
   Greetings,
   GreetingSample,
+  GuestBook,
   ImageGallery,
   Month,
   Notice,
@@ -150,7 +151,18 @@ const MyengjoSample: FC<Props> = ({ data }) => {
           />
         </div>
       </Fade>
-      <Fade>{/* 방명록 */}</Fade>
+      <Fade>
+        {/* 방명록 */}
+        {data.isGuestBook && data?.id ? (
+          <div className="px-5 pb-40">
+            <GuestBook
+              id={data.id}
+              userId={data?.userId || ''}
+              fontFamily={'font-thin'}
+            />
+          </div>
+        ) : null}
+      </Fade>
       <Fade>
         {/* 식전 영상 */}
         {data?.videoUrl ? (

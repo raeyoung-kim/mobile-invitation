@@ -154,3 +154,24 @@ export const useData = () => {
     setData,
   };
 };
+
+export const useGuestBook = (id: string) => {
+  const [data, setData] = useState([]);
+
+  const load = useCallback(async () => {
+    try {
+      const { data: resData } = await request.get(`/guestbook/${id}`);
+      setData(resData);
+    } catch {
+      console.error;
+    }
+  }, [id]);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+  return {
+    data,
+    load,
+  };
+};

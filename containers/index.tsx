@@ -9,3 +9,5 @@ export { default as ModernSample } from './ModernSample';
 export { default as MyengjoSample } from './MyengjoSample';
 export { default as Layout } from './Layout';
 export { default as ShareModal } from './ShareModal';
+export { default as GuestbookWritingModal } from './GuestbookWritingModal';
+export { default as PasswordModal } from './PasswordModal';
