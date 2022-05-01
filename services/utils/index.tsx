@@ -119,3 +119,11 @@ export const sampleDate = () => {
   resultDate.setDate(today.getDate() + 23);
   return resultDate.toISOString().slice(0, 10);
 };
+
+export const getPages = (
+  totalPages: number[],
+  pageSize: number,
+  pageIndex: number
+) => {
+  return totalPages.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
+};

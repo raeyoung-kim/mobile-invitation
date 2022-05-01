@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { GuestMessage } from 'components';
+import { GuestMessage, Pagination } from 'components';
 import { GuestbookWritingModal } from 'containers';
 import React, { FC, useState } from 'react';
 import { BiBookOpen } from 'react-icons/bi';
@@ -14,7 +14,7 @@ interface Props {
 const GuestBook: FC<Props> = ({ id, userId, fontFamily }) => {
   const [isWriteModal, setIsWriteModal] = useState(false);
 
-  const { data, load } = useGuestBook(id);
+  const { data, load, totalPage } = useGuestBook(id);
   const { user } = useUser();
 
   return (
@@ -62,7 +62,11 @@ const GuestBook: FC<Props> = ({ id, userId, fontFamily }) => {
         )}
 
         <div className={'flex justify-between items-center'}>
-          <div className="w-[60%]">{/* <p>pagenation</p> */}</div>
+          <div className="w-[60%]">
+            {totalPage > 1 ? (
+              <Pagination load={load} totalPage={totalPage} />
+            ) : null}
+          </div>
           <button
             className={classNames(
               'px-3 py-2 bg-gray-400 rounded-[25px] text-white text-sm',

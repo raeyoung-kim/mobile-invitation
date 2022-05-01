@@ -28,3 +28,4 @@ export { default as Notice } from './Notice';
 export { default as Radio } from './Radio';
 export { default as GuestBook } from './GuestBook';
 export { default as GuestMessage } from './GuestMessage';
+export { default as Pagination } from './Pagination';

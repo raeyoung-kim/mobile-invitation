@@ -157,21 +157,31 @@ export const useData = () => {
 
 export const useGuestBook = (id: string) => {
   const [data, setData] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
 
-  const load = useCallback(async () => {
-    try {
-      const { data: resData } = await request.get(`/guestbook/${id}`);
-      setData(resData);
-    } catch {
-      console.error;
-    }
-  }, [id]);
+  const load = useCallback(
+    async (page?: string) => {
+      try {
+        const { data: resData } = await request.get(`/guestbook/${id}`, {
+          params: {
+            page,
+          },
+        });
+        setData(resData.data);
+        setTotalPage(resData.totalPage);
+      } catch {
+        console.error;
+      }
+    },
+    [id]
+  );
 
   useEffect(() => {
     load();
   }, [load]);
   return {
     data,
+    totalPage,
     load,
   };
 };

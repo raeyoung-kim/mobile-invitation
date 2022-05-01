@@ -66,7 +66,7 @@ const SwiperImage: FC<Props> = ({ data, initialImgIndex }) => {
   return (
     <div className="relative">
       <div
-        className="overflow-hidden max-w-[480px] min-w-[280px] w-full bg-black"
+        className="overflow-hidden max-w-[480px] w-full bg-black"
         onTouchStart={(e) => {
           setTouch({
             ...touch,
