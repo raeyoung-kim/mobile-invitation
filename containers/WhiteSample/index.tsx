@@ -9,6 +9,7 @@ import {
   Share,
   Notice,
   ImageGallery,
+  GuestBook,
 } from 'components';
 import React, { FC } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -153,6 +154,18 @@ const WhiteSample: FC<Props> = ({ data }) => {
             fontFamily={'font-myeongjo'}
           />
         </div>
+      </Fade>
+      <Fade>
+        {/* 방명록 */}
+        {data.isGuestBook && data?.id ? (
+          <div className="px-5 pb-40">
+            <GuestBook
+              id={data.id}
+              userId={data?.userId || ''}
+              fontFamily={'font-thin'}
+            />
+          </div>
+        ) : null}
       </Fade>
       <Fade>
         {/* 식전 영상 */}
