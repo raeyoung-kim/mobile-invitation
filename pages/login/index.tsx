@@ -1,9 +1,18 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { KaKaoLogin } from 'public/images/assets';
-import React from 'react';
+import React, { useEffect } from 'react';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 const LoginPage: NextPage = () => {
+  const { push } = useRouter();
+  const token = Cookies.get('refreshToken');
+
+  useEffect(() => {
+    token && push('/');
+  }, [push, token]);
+
   return (
     <div className="min-h-[80vh] flex justify-center items-center">
       <div>
