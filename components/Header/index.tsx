@@ -42,7 +42,7 @@ const Header: React.FC = () => {
 
           <div className="flex items-center">
             <nav
-              className={`whitespace-nowrap px-2 xs:px-5 transition-all ${
+              className={`whitespace-nowrap pr-1 xs:px-5 transition-all ${
                 isNavBar
                   ? 'opacity-1 translate-x-[5px]'
                   : 'opacity-0 translate-x-[30px]'
